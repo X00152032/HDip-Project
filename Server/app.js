@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // Define Host name and TCP Port for the server
-const HOST = '127.0.0.1';
+const HOST = 'localhost';
 const PORT = 8080;
 
 // app is a new instance of express (the web app framework)
