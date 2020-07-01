@@ -1,0 +1,18 @@
+{
+    "connection": {
+        "user" : "X00152032",
+        "password": "Password2020!",
+        "server" : "x00152032.database.windows.net",
+        "database" : "X00152032_Project_DB",
+        "parseJSON": true,
+        "options": {
+            "encrypt" : true
+        },
+        "pool": {
+            "min": 2,
+            "max": 4,
+            "idleTimeoutMillis": 30000
+        }
+    }
+}
+

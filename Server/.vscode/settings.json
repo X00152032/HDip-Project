@@ -1,4 +1,3 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/a21ff90e-da32-4349-938c-fdc2ad89fff1/resourceGroups/X00152032ProjectSite/providers/Microsoft.Web/sites/X00152032",
-    "appService.deploySubpath": "."
+    "python.pythonPath": "C:\\Users\\Teacher\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
 }
