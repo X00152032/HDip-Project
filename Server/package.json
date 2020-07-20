@@ -8,7 +8,7 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "start": "node ./server.js",
+    "start": "node ./bin/www",
     "dev": "nodemon ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "stop": "node server.stop.js"

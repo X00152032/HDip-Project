@@ -1,7 +1,7 @@
 const serverDetails = {
-    url: `http://localhost:3000/`,
-   // url: `https://x00152032-server.azurewebsites.net:443/`,
-   params: {
+    //url: `http://localhost:3000/`,
+    url: `https://x00152032-server.azurewebsites.net:443/`,
+    params: {
         origin: "*"
     },
 }
