@@ -4,22 +4,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 // my server on azure address (not working yet - problem with deployment)
-//const HOST = 'https://x00152032.azurewebsites.net/';
-//const PORT = 443;
-
 const HOST = 'localhost';
 const PORT = 3000;
 
 // server is a new instance of express (web app framework)
 let server = express();
-
-
 var origin = [
-  // my server on azure address (not working yet - problem with deployment)
-    // 'https://x00152032-server.azurewebsites.net:443',
-    //   'localhost:8080',
     'localhost:8080',
-
 ];
 
 // Application settings
@@ -27,8 +18,7 @@ server.use((req, res, next) => {
     // Globally set Content-Type header for the application
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "localhost:8080");
-    // my server on azure address (not working yet - problem with deployment)
-   // res.setHeader("Access-Control-Allow-Origin", "https://x00152032-server.azurewebsites.net:443");
+    //res.setHeader("Access-Control-Allow-Origin", "https://x00152032-server.azurewebsites.net:443");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.setHeader("Access-Control-Allow-Methods", "*");
     next();

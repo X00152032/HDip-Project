@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\Teacher\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
+    "python.pythonPath": "C:\\Users\\Teacher\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe",
+    "appService.showBuildDuringDeployPrompt": false
 }

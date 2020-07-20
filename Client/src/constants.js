@@ -5,5 +5,4 @@ const serverDetails = {
         origin: "*"
     },
 }
-
 export default serverDetails;
