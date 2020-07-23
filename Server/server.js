@@ -2,10 +2,15 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
+const passport = require('passport');
 
 // my server on azure address (not working yet - problem with deployment)
 const HOST = 'localhost';
 const PORT = 3000;
+
+// load passport miidleware Config
+require('./auth');
 
 // server is a new instance of express (web app framework)
 let server = express();
@@ -18,7 +23,6 @@ server.use((req, res, next) => {
     // Globally set Content-Type header for the application
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "localhost:8080");
-    //res.setHeader("Access-Control-Allow-Origin", "https://x00152032-server.azurewebsites.net:443");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.setHeader("Access-Control-Allow-Methods", "*");
     next();
@@ -42,6 +46,8 @@ server.use('/', require('./routes/index'));
 server.use('/content', require('./routes/content'));
 server.use('/subject', require('./routes/subject'));
 server.use('/picture', require('./routes/picture'));
+// route to /login
+server.use('/login', require('./routes/login'));
 
 
 // catch 404 and forward to error handler

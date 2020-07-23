@@ -21,6 +21,20 @@ let models = {
         picture: null,
         subjectId: null
     },
+    userModel: {
+        // used for validation
+        isNew: true,
+        isValid: false,
+        // used for display
+        isAdmin: false,
+        // model
+        id: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        password: null,
+        role: null,
+    }
 }
 
 export default models;

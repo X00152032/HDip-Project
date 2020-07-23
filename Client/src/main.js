@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import 'bootstrap'
 import './assets/app.scss'
+import Login from './components/Login.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
@@ -21,6 +22,7 @@ Vue.config.debug = true // turn on debugging mode
 
 new Vue({
   components: {
+    Login,
   },
   router,
   render: h => h(App)
