@@ -112,7 +112,8 @@ export default {
                 sessionStorage.token = undefined;
                 // display message and force reload of page
                 alert('Logout Successful')
-                location.reload(true);
+                //This below reloads homepage..
+                window.location.replace('/')
             }).catch((err) => {
                 console.log(err.message);
                 alert('Logout Unsuccessful - Please try again or close browser')

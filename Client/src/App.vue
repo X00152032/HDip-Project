@@ -7,10 +7,12 @@
         <div class="col">
             <div id="nav">
                 <router-link to="/">Home</router-link> |
-                <router-link to="/syllabus">Subjects</router-link> <!-- router has index.js with details-->
+                <router-link to="/about">About</router-link> |
+                <router-link to="/admissions">Admissions</router-link>
+
                 <span v-show="loggedIn">
-                    | <router-link to="/about">About</router-link>
-                    | <router-link to="/user">Users</router-link>
+                    |   <router-link to="/syllabus">Edit Subjects</router-link> <!-- router has index.js with details-->
+                    |   <router-link to="/user">Users</router-link>
                 </span>
             </div>
         </div>
