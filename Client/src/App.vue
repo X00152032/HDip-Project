@@ -7,8 +7,9 @@
         <div class="col">
             <div id="nav">
                 <router-link to="/">Home</router-link> |
-                <router-link to="/about">About</router-link> |
-                <router-link to="/admissions">Admissions</router-link>
+                <router-link to="/admissions">Admissions</router-link> |
+                <router-link to="/subject">Subjects</router-link> | <!-- router has index.js with details-->
+                <router-link to="/calendar">Calendar</router-link> 
 
                 <span v-show="loggedIn">
                     |   <router-link to="/syllabus">Edit Subjects</router-link> <!-- router has index.js with details-->
@@ -20,7 +21,7 @@
             <Login />
         </div>
     </div>
-        <div><img alt="School logo" src="./assets/school-crest-header.png"><hr></div> <!--school header-->
+        <div class="logo"><img alt="School logo" src="./assets/school-crest-header.png"><hr></div> <!--school header-->
     <router-view />
 </div>
 </template>

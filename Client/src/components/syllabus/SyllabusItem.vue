@@ -1,4 +1,4 @@
-<template> <!--to add a picture in form-->
+<template> <!--to add a picture in table-->
 <article>
     <h4>{{ contentModel.contentName }}</h4>
     <div class="gallery">

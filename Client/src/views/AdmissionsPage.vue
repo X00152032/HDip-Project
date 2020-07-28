@@ -1,7 +1,11 @@
 <template>
   <div class="admissions">
     <h1>Admissions</h1> <hr>
-    <h3> IMPORTANT INFORMATION FOR PARENTS/GUARDIANS </h3><br>
+    <h4> IMPORTANT INFORMATION FOR PARENTS/GUARDIANS </h4><hr>
+
+<div class="image">
+            <img alt="School Entrance" src="../assets/welcome.jpg" style="width:350px;height:420px;">
+</div>
 
 <p>
 <br>
@@ -18,9 +22,34 @@ Please note that the Act does not allow for the formulation of a waiting list in
 
 Limited exemptions to the above are in place  for students for the school year 2021/22 to whom places have already been offered, and applications from 2022/23 until the 2025/26 school year, where parents had already applied before 1st February 2020, and where the student in question had been placed on a waiting list before this date.  
 
-A new Admissions’ Policy is being drafted under the terms of the Act and will be in place by September 2020.  The selection criteria for the allocation of places in the school will be set down in the policy.
+A new Admissions’ Policy is being drafted under the terms of the Act and will be in place by September 2020.  Selection criteria for the allocation of places in the school will be set down in the policy.
 
-For further clarification in relation to admission to the school, please contact the Principal at principal@straphaelas.ie 
+<br><br>
+For further clarification in relation to admission to the school, please contact the Principal at principal@straphaelas.ie. 
 </p>
   </div>
 </template>
+
+<style>
+
+.admissions {
+  text-align:justify;
+    margin-top:20px; /*to have the space above the image*/
+    margin-bottom:20px; /*to have the space under the image*/
+    margin-left:30px; /*to have the space under the image*/
+    margin-right:30px; /*to have the space under the image*/
+
+}
+
+
+.image img{
+    image-rendering: optimizeSpeed;
+    float:right;
+    border-radius: 15%;
+    margin-top:20px; /*to have the space above the image*/
+    margin-bottom:20px; /*to have the space under the image*/
+    margin-left:30px; /*to have the space under the image*/
+    margin-right:30px; /*to have the space under the image*/
+}
+
+</style>

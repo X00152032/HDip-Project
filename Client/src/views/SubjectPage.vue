@@ -1,24 +1,19 @@
 <!-- Home Page -->
 <template>
-<div class="home container">
-   <!-- <img alt="School Crest" src="../assets/raphs-header.jpg"> -->
-    <Welcome msg="Welcome to our School" leader=""/> <!-- / is important-->
-      <div class="images">
-            <img alt="School aerial picture" src="../assets/aerial.jpg">
-            <img alt="girls with books" src="../assets/books.jpg">
-            <img alt="students as heores" src="../assets/heroes.jpg">
+<div class="subjects container">
+   <!-- Header Image in App.vue -->
+    <Welcome msg="Subjects" leader=""/> <!-- / is important-->
+      <div class="subjectimages">
+            <img alt="Results day" src="../assets/science.jpg">
+            <img alt="Results day" src="../assets/exams.jpg">
+            <img alt="Results day" src="../assets/results.jpg">
+
+
       </div>
     <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
         <ol class="ordered-list">
             <SyllabusItem :id="item.id" v-for="item in contents" :contentModel="item" :key="item.id" />
         </ol>
-    </div>
-    <div class="footer">
-            <a href="https://straphaelas.app.vsware.ie/" target="_blank"><img src="../assets/vsware.png" alt="vsware link" style="width:175px;height:175px;"></a>
-            <a href="https://pay.easypaymentsplus.com/feepay1v2.aspx?id=447" target="_blank"><img src="../assets/easypayments.jpg" alt="easypayments" style="width:175px;height:175px;"></a>
-            <a href="https://eu.caremonkey.com/users/sign_in?no_redirect" target="_blank"><img src="../assets/caremonkey.png" alt="Care monnkey link" style="width:175px;height:175px;"></a>
-            <a href="https://www.surveymonkey.com/r/BJPMK3C" target="_blank"><img src="../assets/shield_my_school.jpg" alt="Report bullying link" style="width:175px;height:175px;"></a>
-
     </div>
 </div>
 </template>
@@ -69,31 +64,26 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.subjects {
     text-align: center;
 }
 .ordered-list {
     padding: 1em;
 }
 
-.images img{
+.subjectimages img{
+    width:275px;
+    height:200px;
+    border-radius: 15%;
     image-rendering: optimizeSpeed;
-        border-radius: 15%;
+    margin-top:20px;
+    margin-bottom:20px;
 }
 
 .ordered-list{
 text-align:justify 
 }
 
-.footer a>img
-{
-    border-radius: 25%;
-    margin-top:20px; /*to have the space above the image*/
-    margin-bottom:20px; /*to have the space under the image*/
-    margin-left:20px; /*to have the space under the image*/
-    margin-right:20px; /*to have the space under the image*/
-
-}
 
 .footer{
 text-align: center;}

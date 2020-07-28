@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
+import SubjectPage from '../views/SubjectPage.vue'
 import AdmissionsPage from '../views/AdmissionsPage.vue'
 import contentModel from '../models';
 
@@ -31,6 +32,12 @@ const routes = [
     props: { models: contentModel }
   },
 
+  {
+    path: '/Subject',
+    name: 'Subject',
+    component: SubjectPage
+  },
+   
 ]
 
 //look in routes folder
