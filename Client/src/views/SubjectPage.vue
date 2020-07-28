@@ -78,6 +78,8 @@ export default {
     image-rendering: optimizeSpeed;
     margin-top:20px;
     margin-bottom:20px;
+    margin-left:20px; /*to have the space under the image*/
+    margin-right:20px; /*to have the space under the image*/
 }
 
 .ordered-list{

@@ -78,7 +78,12 @@ export default {
 
 .images img{
     image-rendering: optimizeSpeed;
-        border-radius: 15%;
+     border-radius: 15%;
+    margin-top:20px; /*to have the space above the image*/
+    margin-bottom:20px; /*to have the space under the image*/
+    margin-left:20px; /*to have the space under the image*/
+    margin-right:20px; /*to have the space under the image*/
+        
 }
 
 .ordered-list{
@@ -87,7 +92,7 @@ text-align:justify
 
 .footer a>img
 {
-    border-radius: 25%;
+    border-radius: 15%;
     margin-top:20px; /*to have the space above the image*/
     margin-bottom:20px; /*to have the space under the image*/
     margin-left:20px; /*to have the space under the image*/

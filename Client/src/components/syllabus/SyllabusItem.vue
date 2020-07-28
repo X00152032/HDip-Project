@@ -1,6 +1,6 @@
 <template> <!--to add a picture in table-->
 <article>
-    <h4>{{ contentModel.contentName }}</h4>
+    <h4><b>{{ contentModel.contentName }}</b></h4>
     <div class="gallery">
         <div class="picture" v-for='item in pictures' :key='item.id'>
             <img v-bind:src='item.picture' :alt='item.pictureName'>

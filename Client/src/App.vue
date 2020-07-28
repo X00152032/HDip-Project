@@ -21,7 +21,7 @@
             <Login />
         </div>
     </div>
-        <div class="logo"><img alt="School logo" src="./assets/school-crest-header.png"><hr></div> <!--school header-->
+        <div class="logo"><img alt="School logo" src="./assets/school-crest-header-new.png"></div> <!--school header-->
     <router-view />
 </div>
 </template>
