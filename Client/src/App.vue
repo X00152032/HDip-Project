@@ -7,10 +7,12 @@
         <div class="col">
             <div id="nav">
                 <router-link to="/">Home</router-link> |
-                <router-link to="/syllabus">Subjects</router-link> <!-- router has index.js with details-->
+                <router-link to="/about">About</router-link> |
+                <router-link to="/admissions">Admissions</router-link>
+
                 <span v-show="loggedIn">
-                    | <router-link to="/about">About</router-link>
-                    | <router-link to="/user">Users</router-link>
+                    |   <router-link to="/syllabus">Edit Subjects</router-link> <!-- router has index.js with details-->
+                    |   <router-link to="/user">Users</router-link>
                 </span>
             </div>
         </div>
@@ -26,7 +28,6 @@
 <script>
 // @ is an alias to /src
 import Login from '@/components/Login.vue'
-
 //login has been imported and export it
 export default {
     components: {
@@ -54,20 +55,16 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
 }
-
 #nav {
     text-align: left;
     padding-top: 1.3em;
 }
-
 #nav a {
     font-weight: bold;
     color: #2c3e50;
     font-size: 1.3em;
 }
-
 #nav a.router-link-exact-active {
     color: #1c3bc4;
 }
-
 </style>

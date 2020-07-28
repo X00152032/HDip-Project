@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
+import AdmissionsPage from '../views/AdmissionsPage.vue'
 import contentModel from '../models';
 
 Vue.use(VueRouter)
@@ -15,6 +16,12 @@ const routes = [
   },
 
   {
+    path: '/Admissions',
+    name: 'AdmissionsPage',
+    component: AdmissionsPage
+  },
+
+  {
     path: '/syllabus',
     name: 'Syllabus',
     // route level code-splitting
@@ -23,6 +30,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "subjects" */ '../views/SyllabusPage.vue'),
     props: { models: contentModel }
   },
+
 ]
 
 //look in routes folder
