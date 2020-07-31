@@ -1,12 +1,12 @@
 <!-- Home Page -->
 <template>
-<div class="home container">
+<div class="home container-fluid">
    <!-- <img alt="School Crest" src="../assets/raphs-header.jpg"> -->
-    <Welcome msg="Welcome to our School" leader=""/> <!-- / is important-->
+    <Welcome msg="Welcome to our School" leader=""/><hr>
       <div class="images">
             <img alt="School aerial picture" src="../assets/aerial.jpg">
-            <img alt="girls with books" src="../assets/books.jpg">
-            <img alt="students as heores" src="../assets/heroes.jpg">
+            <img alt="Girls with books" src="../assets/books.jpg">
+            <img alt="Students as heores" src="../assets/heroes.jpg">
       </div>
     <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
         <ol class="ordered-list">

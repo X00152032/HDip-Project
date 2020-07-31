@@ -1,14 +1,15 @@
+<!--Admissions Page -->
 <template>
-  <div class="admissions">
-    <h1>Admissions</h1> <hr>
-    <h4> IMPORTANT INFORMATION FOR PARENTS/GUARDIANS </h4><hr>
+  <div class="admissions container-fluid">
+    <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
+        <ol class="ordered-list">
+        <h2>Admissions</h2> <hr>
+        <h3> IMPORTANT INFORMATION FOR PARENTS/GUARDIANS </h3>
+  <div class="image">
+            <img alt="School Entrance" src="../assets/welcome.jpg">
+  </div>
 
-<div class="image">
-            <img alt="School Entrance" src="../assets/welcome.jpg" style="width:350px;height:420px;">
-</div>
-
-<p>
-<br>
+<p><br>
 Due to the commencement of the Education (Admission to Schools) Act 2018, some changes are currently underway in relation to application procedures in Irish schools, for the years from 2021/22 onwards.
 
 The attached form is an ‘Expression of Interest’ form rather than an ‘Application’ form.
@@ -27,22 +28,33 @@ A new Admissions’ Policy is being drafted under the terms of the Act and will 
 <br><br>
 For further clarification in relation to admission to the school, please contact the Principal at principal@straphaelas.ie. 
 </p>
-  </div>
+</ol>
+</div>
+</div>
+
 </template>
 
 <style>
-
 .admissions {
   text-align:justify;
-    margin-top:20px; /*to have the space above the image*/
+    margin-top:0px; /*to have the space above the image*/
     margin-bottom:20px; /*to have the space under the image*/
     margin-left:30px; /*to have the space under the image*/
     margin-right:30px; /*to have the space under the image*/
+}
 
+p{
+  text-align:justify
+}
+
+h2{
+  text-align:center
 }
 
 
 .image img{
+    width:350px;
+    height:420px;
     image-rendering: optimizeSpeed;
     float:right;
     border-radius: 15%;

@@ -59,6 +59,7 @@ export default {
 #nav {
     text-align: left;
     padding-top: 1.3em;
+    padding-left: 1.3em
 }
 #nav a {
     font-weight: bold;
@@ -68,4 +69,16 @@ export default {
 #nav a.router-link-exact-active {
     color: #1c3bc4;
 }
+
+.logo{
+    width:100%
+}
+
+.logo img{
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
 </style>

@@ -1,22 +1,22 @@
-<!-- Home Page -->
+<!-- Subject Page -->
 <template>
-<div class="subjects container">
+<div class="subject container-fluid">
    <!-- Header Image in App.vue -->
     <Welcome msg="Subjects" leader=""/> <!-- / is important-->
-      <div class="subjectimages">
+    <hr><div class="subjectimages">
             <img alt="Results day" src="../assets/science.jpg">
             <img alt="Results day" src="../assets/exams.jpg">
             <img alt="Results day" src="../assets/results.jpg">
-
-
       </div>
-    <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
+
+  <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
         <ol class="ordered-list">
             <SyllabusItem :id="item.id" v-for="item in contents" :contentModel="item" :key="item.id" />
         </ol>
     </div>
 </div>
 </template>
+
 
 <script>
 // @ is an alias to /src
@@ -63,8 +63,9 @@ export default {
 }
 </script>
 
+
 <style scoped>
-.subjects {
+.subject {
     text-align: center;
 }
 .ordered-list {
@@ -85,7 +86,6 @@ export default {
 .ordered-list{
 text-align:justify 
 }
-
 
 .footer{
 text-align: center;}
