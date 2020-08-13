@@ -33,10 +33,6 @@
                     <font-awesome-icon icon="minus-square" /></button>
             </span>
         </div>
-         <div class="form-group">
-        <input type="checkbox" id="HomepageArticle" v-model="model.isForHomePage">
-        <label for="HomepageArticle">Select if this arcticle is for the Homepage Only</label>
-        </div>
         <div class="form-group"> <!-- upload picture option -->
             <label for="files">Picture</label> &nbsp; &nbsp;
             <input type="file" id="files" name="files" multiple @change="onFileSelected">
@@ -56,7 +52,7 @@
 import SubjectDialog from '../SubjectDialog'; //call in subject dialog to add/edit/remove etc 
 
 export default {
-    name: 'SyllabusForm',
+    name: 'SubjectForm',
     props: ['contents', 'subjects', 'contentModel'],
     components: {
         SubjectDialog,
@@ -115,18 +111,11 @@ export default {
             if (!this.validate()) {
                 return; // Not valid no more processing
             }
-             if (this.model.isForHomePage) {
-                this.model.HomepageArticle = 1;
-            } else {
-                this.model.HomepageArticle = 0;
-            }
             let newContent = {
                 subjectId: this.model.subjectId,
                 contentName: this.model.contentName,
                 description: this.model.description,
                 text: this.model.text,
-                HomepageArticle : this.model.HomepageArticle,
-
             };
             this.$parent.addContent(newContent, this.files);
             this.resetContent();
@@ -139,18 +128,12 @@ export default {
             if (!this.validate()) {
                 return; // Not valid no more processing
             }
-            if (this.model.isForHomePage) {
-                this.model.HomepageArticle = 1;
-            } else {
-                this.model.HomepageArticle = 0;
-            }
             let currentContent = {
                 id: this.model.id,
                 subjectId: this.model.subjectId,
                 contentName: this.model.contentName,
                 description: this.model.description,
                 text: this.model.text,
-                HomepageArticle: this.model.HomepageArticle,
             };
             this.$parent.updateContent(currentContent, this.files);
             this.resetContent();
@@ -158,13 +141,11 @@ export default {
         resetContent() {
             this.model.isNew = true;
             this.model.isValid = false;
-            this.model.isForHomePage = false;
             this.model.id = null;
             this.model.subjectId = null;
             this.model.contentName = null;
             this.model.description = null;
             this.model.text = null;
-            this.model.HomepageArticle = false;
             this.files = [];
         },
     },

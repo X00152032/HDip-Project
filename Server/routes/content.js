@@ -17,9 +17,9 @@ const SQL_SELECT_ALL = 'SELECT * FROM dbo.Content';
 const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Content WHERE id = @id for json path, without_array_wrapper;';
 
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
-const SQL_INSERT = 'INSERT INTO dbo.Content (subjectId, contentName, description, text) VALUES (@subjectId, @contentName, @description, @text); SELECT * from dbo.Content WHERE id = SCOPE_IDENTITY();';
+const SQL_INSERT = 'INSERT INTO dbo.Content (subjectId, contentName, description, text, HomepageArticle,) VALUES (@subjectId, @contentName, @description, @text, @HomepageArticle); SELECT * from dbo.Content WHERE id = SCOPE_IDENTITY();';
 
-const SQL_UPDATE = 'UPDATE dbo.Content SET subjectId = @subjectId, contentName = @contentName, description = @description, text = @text WHERE id = @id; SELECT * FROM dbo.Content WHERE id = @id;';
+const SQL_UPDATE = 'UPDATE dbo.Content SET subjectId = @subjectId, contentName = @contentName, description = @description, text = @text, HomepageArticle = @HomepageArticle WHERE id = @id; SELECT * FROM dbo.Content WHERE id = @id;';
 
 const SQL_DELETE = 'DELETE FROM dbo.Content WHERE id = @id;';
 
@@ -156,6 +156,7 @@ router.post('/', async (req, res) => {
             .input('contentName', sql.NVarChar(50), validator.escape(req.body.contentName))
             .input('description', sql.NVarChar(50), validator.escape(req.body.description || ''))
             .input('text', sql.NVarChar(MAX), req.body.text)
+            .input('HomepageArticle', sql.Bit, req.body.HomepageArticle)
             // Execute Query
             .query(SQL_INSERT);
     
@@ -195,6 +196,7 @@ router.put('/', async (req, res) => {
             .input('contentName', sql.NVarChar(50), validator.escape(req.body.contentName))
             .input('description', sql.NVarChar(50), validator.escape(req.body.description))
             .input('text', sql.NVarChar(MAX), req.body.text)
+            .input('HomepageArticle', sql.Bit, req.body.HomepageArticle)
             .input('id', sql.Int, req.body.id)
             // Execute Query
             .query(SQL_UPDATE);

@@ -13,11 +13,14 @@ let models = {
         // used for validation
         isNew: true,
         isValid: false,
+        // used for display
+        isForHomePage: false,
         // model
         id: null,
         contentName: null,
         description: null,
         text: null,
+        HomepageArticle: false,
         picture: null,
         subjectId: null
     },

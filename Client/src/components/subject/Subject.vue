@@ -1,30 +1,23 @@
 <template> 
-<!--sets uo the inventory page with the form and the table and this is called by the Syllabuspage.vue-->
+<!--sets uo the subject page with the form and the table and this is called by the Subjectpage.vue-->
 <div>
-    <div class="row bg-light text-dark">
-        <div class="col-sm-4">
-            <SyllabusForm :contents="contents" :subjects="subjects" :contentModel="contentModel" />
-        </div>
         <div class="col-sm-8 bg-secondary">
             <div class="row row-table">
-                <SyllabusTable :contents="contents" :subjects="subjects" />
+                <SubjectTable :contents="contents" :subjects="subjects" />
             </div>
         </div>
-    </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
 import serverDetails from '../../constants';
-import SyllabusForm from './SyllabusForm';
-import SyllabusTable from './SyllabusTable';
+import SubjectTable from './SubjectTable';
 
 export default {
-    name: 'Syllabus',
+    name: 'Subject',
     components: {
-        SyllabusForm,
-        SyllabusTable,
+        SubjectTable,
     },
     computed: {
         contentCount() {
