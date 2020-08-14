@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import SubjectPage from '../views/SubjectPage.vue'
 import AdmissionsPage from '../views/AdmissionsPage.vue'
+import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
 
 Vue.use(VueRouter)
@@ -38,6 +39,12 @@ const routes = [
     component: SubjectPage
   },
    
+  {
+    path: '/Calendar',
+    name: 'CalendarPage',
+    component: CalendarPage
+  }
+
 ]
 
 //look in routes folder
