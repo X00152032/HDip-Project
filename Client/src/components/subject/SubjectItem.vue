@@ -1,6 +1,8 @@
 <template>
-<article>
-    <div v-if="HomepageArticle = '1'"> <!--wrapper for v-if --> 
+<article v-if="contentModel.HomepageArticle">
+</article>
+<article v-else>
+    <div>
         <h4><b>{{ contentModel.contentName }}</b></h4>
             <div class="gallery">
             <div class="picture" v-for='item in pictures' :key='item.id'>
@@ -8,20 +10,8 @@
             <p><strong>{{ }}</strong></p>
             </div>
             </div>
-        <p>{{ contentModel.name }}</p>
-        <p>{{ contentModel.text }}</p>
-    </div> 
-
-    <div v-else> <!--wrapper for v-if --> 
-        <h4><b>{{ contentModel.contentName }}</b></h4>
-            <div class="gallery">
-            <div class="picture" v-for='item in pictures' :key='item.id'>
-                <img v-bind:src='item.picture' :alt='item.pictureName'>
-            <p><strong>{{ }}</strong></p>
-            </div>
-            </div>
-        <p>{{ contentModel.name }}</p>
-        <p>{{ contentModel.text }}</p>
+        <p> {{ contentModel.name }}</p>
+        <p> {{ contentModel.text }}</p>
     </div>
 </article>
 </template>
@@ -103,7 +93,7 @@ export default {
 <style scoped>
 article {
     padding-top: 10px;
-    border-bottom: 3px solid rgb(33, 54, 240);
+   /* border-bottom: 3px solid rgb(33, 54, 240); */
 }
 
 .delete-icon {

@@ -11,7 +11,7 @@
 
   <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
         <ol class="ordered-list">
-            <SyllabusItem :id="item.id" v-for="item in contents" :contentModel="item" :key="item.id" />
+            <SubjectItem :id="item.id" v-for="item in contents" :contentModel="item" :key="item.id" />
         </ol>
     </div>
 </div>
@@ -20,16 +20,16 @@
 
 <script>
 // @ is an alias to /src
-import SyllabusItem from '@/components/syllabus/SyllabusItem.vue';
+import SubjectItem from '@/components/subject/SubjectItem.vue';
 import Welcome from '@/components/Welcome.vue';
 import axios from 'axios';
 import serverDetails from '../constants';
 
 export default {
-    name: 'HomePage',
+    name: 'SubjectPage',
     components: {
         Welcome, //load message 
-        SyllabusItem //load table of subjects
+        SubjectItem //load table of subjects
     },
     created() {
       this.getContents();

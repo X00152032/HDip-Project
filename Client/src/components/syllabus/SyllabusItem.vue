@@ -1,5 +1,5 @@
 <template> <!--to add a picture in table-->
-<article>
+<article v-if="contentModel.HomepageArticle">
     <h4><b>{{ contentModel.contentName }}</b></h4>
     <div class="gallery">
         <div class="picture" v-for='item in pictures' :key='item.id'>
@@ -88,7 +88,7 @@ export default {
 <style scoped>
 article {
     padding-top: 10px;
-    border-bottom: 3px solid rgb(33, 54, 240);
+    border-bottom: 1px solid rgb(33, 54, 240);
 }
 
 .delete-icon {
@@ -112,4 +112,5 @@ img {
 p {
     margin: 8px;
 }
+
 </style>
