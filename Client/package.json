@@ -17,7 +17,7 @@
     "axios-cookiejar-support": "^0.5.1",
     "bootstrap": "^4.4.1",
     "core-js": "^3.6.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "node-sass": "^4.13.1",
     "popper.js": "^1.16.1",
     "sass-loader": "^8.0.2",

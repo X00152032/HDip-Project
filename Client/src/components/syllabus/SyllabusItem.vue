@@ -25,6 +25,11 @@ export default {
         }
     },
     
+    computed: {
+        loggedIn() {
+            return sessionStorage.loggedIn === "true";
+        }},
+
     methods: {
         deletePicture(id) {
             if (confirm(`Are you sure you want to do delete the picture?`)) {

@@ -7,7 +7,7 @@ let models = {
         // model
         id: null,
         subjectName: null,
-        description: null
+        description: null,
     },
     contentModel: {
         // used for validation
@@ -22,7 +22,7 @@ let models = {
         text: null,
         HomepageArticle: false,
         picture: null,
-        subjectId: null
+        subjectId: null,
     },
     userModel: {
         // used for validation

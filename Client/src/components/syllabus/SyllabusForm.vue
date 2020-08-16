@@ -125,7 +125,7 @@ export default {
                 contentName: this.model.contentName,
                 description: this.model.description,
                 text: this.model.text,
-                HomepageArticle : this.model.HomepageArticle,
+                HomepageArticle : this.model.HomepageArticle
 
             };
             this.$parent.addContent(newContent, this.files);
@@ -150,7 +150,7 @@ export default {
                 contentName: this.model.contentName,
                 description: this.model.description,
                 text: this.model.text,
-                HomepageArticle: this.model.HomepageArticle,
+                HomepageArticle: this.model.HomepageArticle
             };
             this.$parent.updateContent(currentContent, this.files);
             this.resetContent();
