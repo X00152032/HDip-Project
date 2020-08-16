@@ -41,7 +41,7 @@ const routes = [
    
   {
     path: '/Calendar',
-    name: 'Calendar',
+    name: 'CalendarPage',
     component: CalendarPage
   }
 
@@ -51,6 +51,5 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
 
 export default router

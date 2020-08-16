@@ -111,11 +111,12 @@ export default {
             }
             return this.model.isValid;
         },
+
         addContent() {
             if (!this.validate()) {
                 return; // Not valid no more processing
             }
-             if (this.model.isForHomePage) {
+            if (this.model.isForHomePage) {
                 this.model.HomepageArticle = 1;
             } else {
                 this.model.HomepageArticle = 0;
@@ -126,7 +127,6 @@ export default {
                 description: this.model.description,
                 text: this.model.text,
                 HomepageArticle : this.model.HomepageArticle
-
             };
             this.$parent.addContent(newContent, this.files);
             this.resetContent();

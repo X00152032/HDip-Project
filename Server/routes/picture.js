@@ -23,7 +23,7 @@ const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Picture WHERE id = @id for json path
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
 const SQL_INSERT = 'INSERT INTO dbo.Picture (contentId, pictureName, picture) VALUES (@contentId, @pictureName, @picture); SELECT * from dbo.Picture WHERE id = SCOPE_IDENTITY();';
 
-// const SQL_UPDATE = 'UPDATE dbo.Picture SET contentId = @contentId, pictureName = @pictureName WHERE id = @id; SELECT * FROM dbo.Picture WHERE id = @id;';
+//const SQL_UPDATE = 'UPDATE dbo.Picture SET contentId = @contentId, pictureName = @pictureName WHERE id = @id; SELECT * FROM dbo.Picture WHERE id = @id;';
 
 const SQL_DELETE = 'DELETE FROM dbo.Picture WHERE id = @id;';
 
