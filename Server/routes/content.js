@@ -17,7 +17,7 @@ const SQL_SELECT_ALL = 'SELECT * FROM dbo.Content';
 const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Content WHERE id = @id for json path, without_array_wrapper;';
 
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
-const SQL_INSERT = 'INSERT INTO dbo.Content (subjectId, contentName, description, text, HomepageArticle,) VALUES (@subjectId, @contentName, @description, @text, @HomepageArticle); SELECT * from dbo.Content WHERE id = SCOPE_IDENTITY();';
+const SQL_INSERT = 'INSERT INTO dbo.Content (subjectId, contentName, description, text, HomepageArticle) VALUES (@subjectId, @contentName, @description, @text, @HomepageArticle); SELECT * from dbo.Content WHERE id = SCOPE_IDENTITY()';
 
 const SQL_UPDATE = 'UPDATE dbo.Content SET subjectId = @subjectId, contentName = @contentName, description = @description, text = @text, HomepageArticle = @HomepageArticle WHERE id = @id; SELECT * FROM dbo.Content WHERE id = @id;';
 
