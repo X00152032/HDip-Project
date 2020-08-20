@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 
-// my server on azure address (not working yet - problem with deployment)
 const HOST = 'localhost';
 const PORT = 3000;
 
@@ -50,7 +49,7 @@ server.use('/picture', require('./routes/picture'));
 server.use('/login', require('./routes/login'));
 
 
-// catch 404 and forward to error handler
+//catch 404 and forward to error handler
 server.use(function (req, res, next) {
     var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
     err.status = 404;
