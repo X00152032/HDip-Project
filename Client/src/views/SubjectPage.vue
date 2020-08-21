@@ -1,15 +1,15 @@
 <!-- Subject Page -->
 <template>
 <div class="subject container-fluid">
+    <div class=title> <h2>Subjects</h2> <hr> </div>
    <!-- Header Image in App.vue -->
-    <Welcome msg="Subjects" leader=""/>
-    <hr><div class="subjectimages">
+    <div class="subjectimages">
             <img alt="Results day" src="../assets/science.jpg">
             <img alt="Results day" src="../assets/exams.jpg">
             <img alt="Results day" src="../assets/results.jpg">
             <br>
-        <h6><b> Here are some of the subjects we offer in St. Raphaela's. Please don't hesitate to contact us if you have 
-            any quiries about our subject choices. </b></h6>
+        <h5> Here are some of the subjects we offer in St. Raphaela's. Please contact us if you have 
+            any quiries about our subject choices.</h5>
       </div>
 
   <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
@@ -24,14 +24,12 @@
 <script>
 // @ is an alias to /src
 import SubjectItem from '@/components/subject/SubjectItem.vue';
-import Welcome from '@/components/Welcome.vue';
 import axios from 'axios';
 import serverDetails from '../constants';
 
 export default {
     name: 'SubjectPage',
     components: {
-        Welcome, //load message 
         SubjectItem //load table of subjects
     },
     created() {
@@ -68,9 +66,15 @@ export default {
 
 
 <style scoped>
-.subject {
+
+.title{
+margin-left:45px;
+}
+
+.subject{
     text-align: center;
 }
+
 .ordered-list {
     padding: 1em;
 }
@@ -82,8 +86,8 @@ export default {
     image-rendering: optimizeSpeed;
     margin-top:20px;
     margin-bottom:20px;
-    margin-left:20px; /*to have the space under the image*/
-    margin-right:20px; /*to have the space under the image*/
+    margin-left:30px; /*to have the space under the image*/
+    margin-right:30px; /*to have the space under the image*/
 }
 
 .ordered-list{
@@ -93,7 +97,4 @@ text-align:justify
 h6{
     text-align: center;
 }
-
-.footer{
-text-align: center;}
 </style>

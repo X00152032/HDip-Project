@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import SubjectPage from '../views/SubjectPage.vue'
 import AdmissionsPage from '../views/AdmissionsPage.vue'
+import PolicyPage from '../views/PolicyPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
 
@@ -21,6 +22,12 @@ const routes = [
     path: '/Admissions',
     name: 'AdmissionsPage',
     component: AdmissionsPage
+  },
+
+  {
+    path: '/Policy',
+    name: '/PolicyPage',
+    component: PolicyPage
   },
 
   {

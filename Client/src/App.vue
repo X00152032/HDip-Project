@@ -1,8 +1,8 @@
 
 <!-- Just nav bar and style here really at the moment -->
 <template>
-
 <div id="app" class="container-fluid">
+    <body>
     <div class="row" style="margin-bottom:1em;"> <!-- margin between header and nav bar -->
         <div class="col">
             <div id="nav">
@@ -23,7 +23,14 @@
     </div>
         <div class="logo"><img alt="School logo" src="./assets/school-crest-header-new.png"></div> <!--school header-->
     <router-view />
-</div>
+    </body>
+  <footer class="footer">
+        <p class="cp-text">
+    © Copyright 2020 St. Raphaela's Secondary School.
+        </p>
+        <p><a href="/#/policy" target="_blank">Privacy Policy</a></p>
+  </footer>
+    </div>
 </template>
 
 <script>
@@ -50,6 +57,7 @@ export default {
 </script>
 
 <style>
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -67,7 +75,7 @@ export default {
     font-size: 1.3em;
 }
 #nav a.router-link-exact-active {
-    color: #1c3bc4;
+    color: #003ea1;
 }
 
 .logo{
@@ -80,5 +88,50 @@ export default {
   margin: auto;
   display: block;
 }
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+
+.footer p{
+    text-align: center;
+}
+
+.footer{
+    background:#003ea1; 
+    padding:.5%;
+    flex-shrink: 0;}
+
+/* unvisited link */
+.footer a:link {
+  color: white;
+}
+
+/* visited link */
+.footer a:visited {
+color: white;
+text-decoration: none;
+}
+
+/* mouse over link */
+.footer a:hover {
+color: white;
+text-decoration: underline;
+}
+
+/* selected link */
+.footer a:active {
+color: white;
+text-decoration: none;
+}
+
+.cp-text{ color:white;}
 
 </style>

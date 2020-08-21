@@ -37,8 +37,6 @@ For further clarification in relation to admission to the school, please contact
 <style>
 .admissions {
   text-align:justify;
-    margin-top:0px; /*to have the space above the image*/
-    margin-bottom:20px; /*to have the space under the image*/
     margin-left:30px; /*to have the space under the image*/
     margin-right:30px; /*to have the space under the image*/
 }
@@ -48,20 +46,22 @@ p{
 }
 
 h2{
-  text-align:center
+  text-align:center;
+  margin-right:50px;
 }
 
 
+
 .image img{
-    width:350px;
-    height:420px;
+    width:330px;
+    height:400px;
     image-rendering: optimizeSpeed;
     float:right;
     border-radius: 15%;
     margin-top:20px; /*to have the space above the image*/
     margin-bottom:20px; /*to have the space under the image*/
-    margin-left:30px; /*to have the space under the image*/
-    margin-right:30px; /*to have the space under the image*/
+    margin-left:40px; /*to have the space under the image*/
+    margin-right:20px; /*to have the space under the image*/
 }
 
 </style>

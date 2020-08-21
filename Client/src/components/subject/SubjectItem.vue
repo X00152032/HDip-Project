@@ -105,7 +105,8 @@ h4 {
 }
 
 article {
-    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
     
 

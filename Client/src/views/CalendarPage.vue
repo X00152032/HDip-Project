@@ -32,7 +32,7 @@
   height: 100%;
 }
 
-.admissions {
+.calendar {
   text-align:justify;
     margin-top:0px; /*to have the space above the image*/
     margin-bottom:20px; /*to have the space under the image*/
@@ -41,7 +41,8 @@
 }
 
 p{
-  text-align:justify
+  text-align:justify;
+  margin-right:30px; /*to have the space under the image*/
 }
 
 h2{

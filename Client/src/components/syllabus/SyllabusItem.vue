@@ -100,6 +100,9 @@ export default {
 article {
     padding-top: 10px;
     border-bottom: 1px solid rgb(33, 54, 240);
+    margin-left:30px;
+    margin-right:30px;
+
 }
 
 h4{
@@ -126,6 +129,7 @@ img {
 
 p {
     margin: 8px;
+    margin-bottom:10px;
 }
 
 </style>
