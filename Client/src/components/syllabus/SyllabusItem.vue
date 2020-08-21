@@ -3,6 +3,11 @@
     <h4><b>{{ contentModel.contentName }}</b></h4>
     <div class="gallery">
         <div class="picture" v-for='item in pictures' :key='item.id'>
+             <div class="delete-icon" v-show="loggedIn">
+                <a href="javascript:;" v-on:click="deletePicture(item.id)">
+                    <font-awesome-icon icon="minus-circle" />
+                </a>
+            </div>
             <img v-bind:src='item.picture' :alt='item.pictureName'>
             <p><strong>{{ }}</strong></p>
         </div>
@@ -28,7 +33,8 @@ export default {
     computed: {
         loggedIn() {
             return sessionStorage.loggedIn === "true";
-        }},
+        },
+    },
 
     methods: {
         deletePicture(id) {
@@ -94,6 +100,10 @@ export default {
 article {
     padding-top: 10px;
     border-bottom: 1px solid rgb(33, 54, 240);
+}
+
+h4{
+    padding-left: 7px;
 }
 
 .delete-icon {

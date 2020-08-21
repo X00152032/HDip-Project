@@ -2,11 +2,14 @@
 <template>
 <div class="subject container-fluid">
    <!-- Header Image in App.vue -->
-    <Welcome msg="Subjects" leader=""/> <!-- / is important-->
+    <Welcome msg="Subjects" leader=""/>
     <hr><div class="subjectimages">
             <img alt="Results day" src="../assets/science.jpg">
             <img alt="Results day" src="../assets/exams.jpg">
             <img alt="Results day" src="../assets/results.jpg">
+            <br>
+        <h6><b> Here are some of the subjects we offer in St. Raphaela's. Please don't hesitate to contact us if you have 
+            any quiries about our subject choices. </b></h6>
       </div>
 
   <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
@@ -85,6 +88,10 @@ export default {
 
 .ordered-list{
 text-align:justify 
+}
+
+h6{
+    text-align: center;
 }
 
 .footer{

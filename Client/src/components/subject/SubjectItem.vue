@@ -5,13 +5,17 @@
     <div>
         <h4><b>{{ contentModel.contentName }}</b></h4>
             <div class="gallery">
-            <div class="picture" v-for='item in pictures' :key='item.id'>
-                <img v-bind:src='item.picture' :alt='item.pictureName'>
-            <p><strong>{{ }}</strong></p>
+                <div class="picture" v-for='item in pictures' :key='item.id'>
+                    <div class="delete-icon" v-show="loggedIn">
+                        <a href="javascript:;" v-on:click="deletePicture(item.id)">
+                            <font-awesome-icon icon="minus-circle" />
+                        </a>
+                    </div>
+                    <img v-bind:src='item.picture' :alt='item.pictureName'>
+                </div>
             </div>
-            </div>
-        <p> {{ contentModel.name }}</p>
-        <p> {{ contentModel.text }}</p>
+            <p> {{ contentModel.name }}</p>
+            <p> {{ contentModel.text }}</p><br>
     </div>
 </article>
 </template>
@@ -29,7 +33,11 @@ export default {
             pictures: []
         }
     },
-    
+    computed: {
+        loggedIn() {
+            return sessionStorage.loggedIn === "true";
+        },
+    },
     methods: {
         deletePicture(id) {
             if (confirm(`Are you sure you want to do delete the picture?`)) {
@@ -91,30 +99,30 @@ export default {
 </script>
 
 <style scoped>
-article {
-    padding-top: 10px;
-   /* border-bottom: 3px solid rgb(33, 54, 240); */
+
+h4 {
+    padding-left: 10px;
 }
 
-.delete-icon {
-    color: white;
-    text-align: right;
-    padding-top: 5px;
-    padding-right: 10px;
+article {
+    padding-top: 10px;
 }
+    
+
+.picture:hover {
+    background-color: rgb(245, 110, 110);
+}
+
 
 .picture {
     display: inline-block;
-    text-align: center;
+    text-align: center;    
     background-color: white;
     margin: 10px;
 }
 
-img {
+p {
     margin: 10px;
 }
 
-p {
-    margin: 8px;
-}
 </style>

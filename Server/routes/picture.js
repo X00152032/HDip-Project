@@ -145,4 +145,42 @@ router.post('/', upload.any(), async (req, res) => {
     });
 });
 
+/**
+ * DELETE single Picture by id
+ * Address http://server:port/Picture/:id
+ * @id passed as parameter via url
+ */
+router.delete('/:id', async (req, res) => {
+    // Read value of parameter from the request url
+    const PictureId = req.params.id;
+
+    /**
+     * Validate input - important as bad input could crash the server or lead to an attack
+     * See link to validator npm package (at top) for docs
+     * If validation fails return an error message
+     */
+    if (!validator.isNumeric(PictureId, { no_symbols: true })) {
+        res.json({ "error": "invalid id parameter" });
+        return false;
+    }
+
+    // If validation passed delete Picture with matching id
+    try {
+        // Get a DB connection and execute SQL
+        const pool = await dbConnPoolPromise
+        const result = await pool.request()
+            // set id parameter(s) in query
+            .input('id', sql.Int, PictureId)
+            // Execute Query
+            .query(SQL_DELETE);
+    
+        // If successful, return OK
+        res.status(200);
+        res.end();
+    } catch (err) {
+        res.status(500);
+        res.send(err.message);
+    }
+});
+
 module.exports = router;

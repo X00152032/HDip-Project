@@ -38,7 +38,7 @@
         <label for="HomepageArticle">Select if this arcticle is for the Homepage Only</label>
         </div>
         <div class="form-group"> <!-- upload picture option -->
-            <label for="files">Picture</label> &nbsp; &nbsp;
+            <label for="files">Picture (must be less than 8kb)</label> &nbsp; &nbsp;
             <input type="file" id="files" name="files" multiple @change="onFileSelected">
         </div>
 
