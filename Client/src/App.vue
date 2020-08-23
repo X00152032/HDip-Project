@@ -9,7 +9,8 @@
                 <router-link to="/">Home</router-link> |
                 <router-link to="/admissions">Admissions</router-link> |
                 <router-link to="/subject">Subjects</router-link> | <!-- router has index.js with details-->
-                <router-link to="/calendar">Calendar</router-link> 
+                <router-link to="/calendar">Calendar</router-link> |                
+                <router-link to="/contact">Contact</router-link>
 
                 <span v-show="loggedIn">
                     |   <router-link to="/syllabus">Edit Subjects</router-link> <!-- router has index.js with details-->
@@ -29,6 +30,8 @@
     © Copyright 2020 St. Raphaela's Secondary School.
         </p>
         <p><a href="/#/policy" target="_blank">Privacy Policy</a></p>
+        <p><a href="/#/contact" target="_blank">Contact Us</a></p>
+
   </footer>
     </div>
 </template>
@@ -107,6 +110,8 @@ body {
 .footer{
     background:#003ea1; 
     padding:.5%;
+    margin-right: 10px;
+    margin-left:10px;
     flex-shrink: 0;}
 
 /* unvisited link */

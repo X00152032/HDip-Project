@@ -6,6 +6,7 @@ import HomePage from '../views/HomePage.vue'
 import SubjectPage from '../views/SubjectPage.vue'
 import AdmissionsPage from '../views/AdmissionsPage.vue'
 import PolicyPage from '../views/PolicyPage.vue'
+import ContactPage from '../views/ContactPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
 
@@ -28,6 +29,12 @@ const routes = [
     path: '/Policy',
     name: '/PolicyPage',
     component: PolicyPage
+  },
+
+  {
+    path: '/Contact',
+    name: '/ContactPage',
+    component: ContactPage
   },
 
   {
@@ -59,4 +66,6 @@ const router = new VueRouter({
   routes
 })
 
+
 export default router
+
