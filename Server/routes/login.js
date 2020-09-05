@@ -24,7 +24,7 @@ router.post('/auth', async (req, res) => {
           message: info ? info.message : 'Login failed',
           user: user
         });
-      } 
+      }
       else {
 
         // Define the JWT contents
@@ -54,15 +54,15 @@ router.post('/auth', async (req, res) => {
 
 // logout
 router.get('/logout', async (req, res) => {
-    try {
-        // add the jwt to the cookie and send
-        res.clearCookie('jwt', {path: '/'});
-        return res.status(200).send({"message": "Logged out"});
+  try {
+    // add the jwt to the cookie and send
+    res.clearCookie('jwt', { path: '/' });
+    return res.status(200).send({ "message": "Logged out" });
     // Catch and send errors  
-    } catch (err) {
-        res.status(500)
-        res.send(err.message)
-    }
-  });
+  } catch (err) {
+    res.status(500)
+    res.send(err.message)
+  }
+});
 
 module.exports = router;

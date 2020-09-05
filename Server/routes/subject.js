@@ -32,12 +32,12 @@ router.get('/', async (req, res) => {
         const result = await pool.request()
             // execute query
             .query(SQL_SELECT_ALL);
-        
+
         // Send HTTP reponse
         // JSON data from SQL is contained in first element of recordset
         res.status(200);
         res.json(result.recordset[0]);
-    } catch(err) {
+    } catch (err) {
         res.status(500);
         res.send(err.message);
     }
@@ -74,12 +74,12 @@ router.get('/:id', async (req, res) => {
             .input('id', sql.Int, subjectId)
             // execute query
             .query(SQL_SELECT_BY_ID);
-        
+
         // Send HTTP reponse
         // JSON data from SQL is contained in first element of recordset
         res.status(200);
         res.json(result.recordset[0]);
-    } catch(err) {
+    } catch (err) {
         res.status(500);
         res.send(err.message);
     }
@@ -102,13 +102,13 @@ function validate(req, isUpdate) {
             errors += "invalid id; ";
         }
     }
-    
+
     // Escape text and potentially bad characters
     const subjectName = validator.escape(req.body.subjectName);
     if (subjectName === "") {
         errors += "invalid subjectName; ";
     }
-    
+
     return errors;
 }
 
@@ -117,7 +117,7 @@ function validate(req, isUpdate) {
  * This async function processes a HTTP post request
  */
 router.post('/', async (req, res) => {
-    
+
     // Validate - erros string, initally empty, will store any errors
     let errors = validate(req);
 
@@ -126,7 +126,7 @@ router.post('/', async (req, res) => {
         // return http response 400 (bad request) with errors if validation failed
         res.status(400);
         res.json({ "error": errors });
-        return false;  
+        return false;
     }
 
     // If no errors, insert
@@ -139,7 +139,7 @@ router.post('/', async (req, res) => {
             .input('description', sql.NVarChar(MAX), validator.escape(req.body.description || ''))
             // Execute Query
             .query(SQL_INSERT);
-    
+
         // If successful, return inserted subject via HTTP   
         res.status(201);
         res.json(result.recordset);
@@ -163,7 +163,7 @@ router.put('/', async (req, res) => {
         // return http response 400 (bad request) with errors if validation failed
         res.status(400);
         res.json({ "error": errors });
-        return false;  
+        return false;
     }
 
     // If no errors, update
@@ -177,7 +177,7 @@ router.put('/', async (req, res) => {
             .input('id', sql.Int, req.body.id)
             // Execute Query
             .query(SQL_UPDATE);
-    
+
         // If successful, return inserted subject via HTTP   
         res.status(200);
         res.json(result.recordset[0]);
@@ -215,7 +215,7 @@ router.delete('/:id', async (req, res) => {
             .input('id', sql.Int, subjectId)
             // Execute Query
             .query(SQL_DELETE);
-    
+
         // If successful, return OK
         res.status(200);
         res.end();

@@ -38,12 +38,12 @@ router.get('/', async (req, res) => {
         const result = await pool.request()
             // execute query
             .query(parsedSQL);
-        
+
         // Send HTTP reponse
         // JSON data from SQL is contained in first element of recordset
         res.status(200);
         res.json(result.recordset[0]);
-    } catch(err) {
+    } catch (err) {
         res.status(500);
         res.send(err.message);
     }
@@ -80,12 +80,12 @@ router.get('/:id', async (req, res) => {
             .input('id', sql.Int, pictureId)
             // execute query
             .query(SQL_SELECT_BY_ID);
-        
+
         // Send HTTP reponse
         // JSON data from SQL is contained in first element of recordset
         res.status(200);
         res.json(result.recordset[0]);
-    } catch(err) {
+    } catch (err) {
         res.status(500);
         res.send(err.message);
     }
@@ -172,7 +172,7 @@ router.delete('/:id', async (req, res) => {
             .input('id', sql.Int, PictureId)
             // Execute Query
             .query(SQL_DELETE);
-    
+
         // If successful, return OK
         res.status(200);
         res.end();

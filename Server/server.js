@@ -25,7 +25,7 @@ server.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.setHeader("Access-Control-Allow-Methods", "*");
     next();
-}); 
+});
 
 // Allow server to support differnt body content types (using the bodyParser package)
 server.use(bodyParser.text());
@@ -51,14 +51,14 @@ server.use('/login', require('./routes/login'));
 
 //catch 404 and forward to error handler
 server.use(function (req, res, next) {
-    var err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
+    var err = new Error('Not Found: ' + req.method + ":" + req.originalUrl);
     err.status = 404;
     next(err);
 });
 
 // Start the HTTP server using HOST address and PORT consts defined above
 // Listen for incoming connections
-server.listen(PORT, HOST, function() {
+server.listen(PORT, HOST, function () {
     console.log(`Express server listening on http://${HOST}:${PORT}`);
 });
 

@@ -7,12 +7,12 @@ const config = require('config');
 // Setup the Database Connection
 // config is used to read the values from the connection section of /config/default.json
 const dbConnPoolPromise = new sql.ConnectionPool(config.get('connection'))
-        .connect()
-        .then(pool => {
+    .connect()
+    .then(pool => {
         console.log('Connected to MSSQL')
         return pool
-        })
-        .catch(err => console.log('Database Connection Failed - error: ', err))
+    })
+    .catch(err => console.log('Database Connection Failed - error: ', err))
 
 function buildSelect(req) {
     let sql_select = '';
@@ -25,13 +25,13 @@ function buildSelect(req) {
                     sql_select += ` WHERE ${field.column} LIKE '%${field.criteria}%'`;
                 } else {
                     sql_select += ` AND ${field.column} LIKE '%${field.criteria}%'`;
-                }    
+                }
             } else {
                 if (firstField) {
                     sql_select += ` WHERE ${field.column} ${field.operator} '${field.criteria}'`;
                 } else {
                     sql_select += ` AND ${field.column} ${field.operator} '${field.criteria}'`;
-                }    
+                }
             }
             firstField = false;
         });

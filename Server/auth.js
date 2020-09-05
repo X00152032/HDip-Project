@@ -24,21 +24,21 @@ const keys = config.get('keys');
 const getUser = async (username) => {
 
   try {
-        const SQL_FIND_USER = 'SELECT * FROM dbo.AppUser WHERE email = @email for json path, without_array_wrapper;';
-        // Get a DB connection and execute SQL
-        const pool = await dbConnPoolPromise
-        const result = await pool.request()
-            // set name parameter(s) in query
-            .input('email', sql.NVarChar, username)
-            // execute query
-            .query(SQL_FIND_USER);
+    const SQL_FIND_USER = 'SELECT * FROM dbo.AppUser WHERE email = @email for json path, without_array_wrapper;';
+    // Get a DB connection and execute SQL
+    const pool = await dbConnPoolPromise
+    const result = await pool.request()
+      // set name parameter(s) in query
+      .input('email', sql.NVarChar, username)
+      // execute query
+      .query(SQL_FIND_USER);
 
-        return (result.recordset[0]);
-        // Catch and send errors  
-      } catch (err) {
-        res.status(500)
-        res.send(err.message)
-      }
+    return (result.recordset[0]);
+    // Catch and send errors  
+  } catch (err) {
+    res.status(500)
+    res.send(err.message)
+  }
 }
 
 // The local strategy middleware
@@ -47,7 +47,7 @@ passport.use(new LocalStrategy({
   // These values are passsed via HTTP 
   usernameField: 'username',
   passwordField: 'password',
-},async (username, password, done) => {
+}, async (username, password, done) => {
   try {
     const user = await getUser(username);
     if (user.password === password) {
@@ -62,10 +62,10 @@ passport.use(new LocalStrategy({
 
 // JWT strategy middleware
 passport.use(new JWTStrategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    // jwtFromRequest: req => req.cookies.jwt,
-    secretOrKey: keys.secret
-  },
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  // jwtFromRequest: req => req.cookies.jwt,
+  secretOrKey: keys.secret
+},
   (jwtPayload, done) => {
     console.log(`jwt: ${jwtPayload.username}`);
     // Check if JWT has expired 

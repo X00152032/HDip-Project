@@ -1,12 +1,12 @@
 {
     "connection": {
-        "user" : "X00152032",
+        "user": "X00152032",
         "password": "Password2020!",
-        "server" : "x00152032.database.windows.net",
-        "database" : "X00152032_Project_DB",
+        "server": "x00152032.database.windows.net",
+        "database": "X00152032_Project_DB",
         "parseJSON": true,
         "options": {
-            "encrypt" : true
+            "encrypt": true
         },
         "pool": {
             "min": 2,
@@ -14,7 +14,6 @@
             "idleTimeoutMillis": 0
         }
     },
-
     "keys": {
         "secret": "Do you like Star Wars?"
     }

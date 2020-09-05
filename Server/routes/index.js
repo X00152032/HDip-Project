@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
 
     // Send a JSON response - this app will be a web api so no need to send HTML
     //res.end(JSON.stringify({message: 'This is the home page'}));
-    res.json({content: 'This is the way...'});
+    res.json({ content: 'This is the way...' });
 
 });
 

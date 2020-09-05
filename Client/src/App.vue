@@ -62,22 +62,22 @@
         <div class="row">
         <div class="column">
             <a href="https://www.facebook.com/StRaphaelasSecondarySchool/" target="_blank">
-            <img alt="facebook link" src="./assets/f_icon.jpg" width="36" height="44">
+            <img alt="facebook link" src="./assets/f_icon.jpg" width="38" height="46">
             </a>
         </div>
         <div class="column">
             <a href="https://www.instagram.com/straphaelas/?hl=en" target="_blank">
-            <img alt="instagram link" src="./assets/instagram_icon.jpg" width="36" height="44">
+            <img alt="instagram link" src="./assets/instagram_icon.jpg" width="38" height="46">
             </a>
         </div>
         <div class="column">
             <a href="https://straphaelas.myschoolwise.com/Login?returnurl=%2f" target="_blank">
-            <img alt="instagram link" src="./assets/schoolwise_icon.jpg" width="36" height="44">
+            <img alt="instagram link" src="./assets/schoolwise_icon.jpg" width="38" height="46">
             </a>
         </div>
         <div class="column">
             <a href="https://login.microsoftonline.com" target="_blank">
-            <img alt="instagram link" src="./assets/office_icon.jpg" width="36" height="44">
+            <img alt="instagram link" src="./assets/office_icon.jpg" width="38" height="46">
             </a>
         </div>
     </div>
@@ -192,9 +192,17 @@ text-decoration: none;
 /* format the social links in footer */
 .column {
   float: left;
-  width: 4%;
-  padding-left:30px;
-  padding-bottom:15px;
+  width: 1%;
+  margin-left:35px;
+  margin-bottom:10px;
+  margin-top:-115px;
+}
+
+/*to change the image on hover - for red colour*/ 
+.column:hover {
+opacity: .9;
+-webkit-filter: invert(40%) grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
 }
 
 /* Clear floats after image containers */
@@ -204,13 +212,13 @@ text-decoration: none;
   display: table;
 }
 
-/* Floating Social Media Bar Style Starts Here */
+/* Floating Social Media Icons*/
 
 .fl-fl {
   background: #003ea1;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   padding: 3px;
-  width: 200px;
+  width: 16%;
   position: fixed;
   right: -160px;
   z-index: 1000;
@@ -230,7 +238,7 @@ text-decoration: none;
 }
 
 .float-sm a:hover {
-color: #beb632;
+color: white;
 text-decoration: none;
 }
 
@@ -247,14 +255,24 @@ text-decoration: none;
 }
 
 .float-fb {
-top: 346px;
-background: #003ea1;
-
+  top: 346px;
+  background: #003ea1;
 }
+
+.float-fb:hover {
+  top: 346px;
+  background: #a91424;
+}
+
 
 .float-ig {
   top: 396px;
   background: #003ea1;
+}
+
+.float-ig:hover {
+  top: 396px;
+  background: #a91424;
 }
 
 .float-schoolwise {
@@ -262,13 +280,22 @@ background: #003ea1;
   background: #003ea1;
 }
 
+.float-schoolwise:hover {
+  top: 446px;
+  background: #a91424;
+}
+
 .float-office {
   top: 496px;
   background: #003ea1;
 }
 
-/* Yellow colour in crest = #beb632
- Red Colour in crest = #a91424
+.float-office:hover {
+  top: 496px;
+  background: #a91424;
+}
 
-Floating Social Media Bar Style Ends Here */
+/*  Yellow colour in crest = #beb632
+    Red Colour in crest = #a91424 
+*/
 </style>

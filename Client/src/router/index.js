@@ -52,7 +52,7 @@ const routes = [
     name: 'Subject',
     component: SubjectPage
   },
-   
+
   {
     path: '/Calendar',
     name: 'CalendarPage',

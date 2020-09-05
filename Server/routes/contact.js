@@ -8,7 +8,7 @@ const app = express();
 
 // body parser middleware
 app.use(express.json());
-app.use(express.urlencoded( { extended: false } )); // this is to handle URL encoded data
+app.use(express.urlencoded({ extended: false })); // this is to handle URL encoded data
 // end parser middleware
 
 
