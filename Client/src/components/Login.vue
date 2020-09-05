@@ -1,5 +1,7 @@
+<!-- Login Boxes for top right of pages -->
 <template>
 <div class="login">
+    <!-- If not logged in then show login button -->
     <form v-if="!loggedIn" @submit="login" class="form-inline" id="createAdministrator">
         <div class="row">
             <div class="form-group">
@@ -11,13 +13,14 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
+    <!-- If logged in then show logout button -->
     <form v-else-if="loggedIn" @submit="logout" class="form-inline" id="createAdministrator">
         <div>
             <button type="submit" class="btn btn-primary">Logout</button>
         </div>
     </form>
     <p v-if="errors.length">
-        <b></b> <!-- Enter a message in here if required -->
+        <b></b> <!-- Enter a message in here if needed, e.g. error-->
         <ul class="list-group">
             <li v-for="error in errors" v-bind:key="error" class="list-group-item list-group-item-danger">{{ error }}</li>
         </ul>
@@ -25,9 +28,10 @@
 </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+/*Scope applies css to this only*/
+
 .login {
     margin-top: 1em;
     margin-right: 1em;
@@ -48,6 +52,7 @@ export default {
             return sessionStorage.loggedIn === "true";
         }
     },
+    //model for the login component
     data() {
         return {
             errors: [],

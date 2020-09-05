@@ -1,5 +1,5 @@
 <template> 
-<!--sets uo the subject page with the form and the table and this is called by the Subjectpage.vue-->
+<!--This sets up the subject page with the form and table and this is called by the Subjectpage.vue-->
 <div>
         <div class="col-sm-8 bg-secondary">
             <div class="row row-table">
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+//import all required components
 import axios from 'axios';
 import serverDetails from '../../constants';
 import SubjectTable from './SubjectTable';
@@ -29,8 +30,7 @@ export default {
         },
     },
     created() {
-        // fetch the data when the view is created and the data is
-        // already being observed
+        // fetch the data when the view is made
         this.getData();
     },
     data() {
@@ -52,6 +52,7 @@ export default {
                     console.log(error);
                 });
         },
+        //add picture(s) and assign to contentId
         addPictures(contentId, files) {
             const fd = new FormData();
             fd.append('contentId', contentId);
@@ -68,6 +69,7 @@ export default {
                 console.log(err);
             });
         },
+        //delete a subject
         deleteSubject(id) {
             this.error = null;
             this.loading = true;
@@ -87,6 +89,7 @@ export default {
                     alert(error.response.data);
                 })
         },
+        //get list of subjects
         getSubjects() {
             this.error = null;
             this.loading = true;
@@ -106,6 +109,7 @@ export default {
                     console.log(error);
                 })
         },
+        //add content to the database
         addContent(newContent, files) {
             this.error = null;
             this.loading = true;
@@ -125,6 +129,7 @@ export default {
                     console.log(error);
                 })
         },
+        //calls list of content and returns according to model
         getContent(id) {
             this.error = null;
             this.loading = true;
@@ -186,6 +191,7 @@ export default {
                     console.log(error);
                 })
         },
+        //delete content according to Id
         deleteContent(id) {
             this.error = null;
             this.loading = true;
@@ -204,6 +210,7 @@ export default {
                     console.log(error);
                 })
         },
+        //update content using the update button (put)
         updateContent(currentContent, files) {
             this.error = null;
             this.loading = true;
@@ -226,7 +233,7 @@ export default {
     },
     props: ['contentModel'],
     watch: {
-        // call again the method if the route changes
+        // If the route changes call the model again
         '$route': 'getData'
     },
 }

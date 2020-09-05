@@ -1,4 +1,6 @@
 <template>
+<!--If this is content for the homepage then do nothing, otherwise show content for subject page)
+This is set by checkbox in subject form for boolean flag in Content table) -->
 <article v-if="contentModel.HomepageArticle">
 </article>
 <article v-else>
@@ -8,12 +10,13 @@
                 <div class="picture" v-for='item in pictures' :key='item.id'>
                     <div class="delete-icon" v-show="loggedIn">
                         <a href="javascript:;" v-on:click="deletePicture(item.id)">
+                            <!--delete picture only an option when logged in -->
                             <font-awesome-icon icon="minus-circle" />
                         </a>
-                    </div>
+                    </div> <!--display picture -->
                     <img v-bind:src='item.picture' :alt='item.pictureName'>
                 </div>
-            </div>
+            </div><!--display content name and text -->
             <p> {{ contentModel.name }}</p>
             <p> {{ contentModel.text }}</p><br>
     </div>
@@ -22,9 +25,10 @@
 
 
 <script>
-import axios from 'axios';
-import serverDetails from '../../constants';
+import axios from 'axios'; //promise-based HTTP client makes HTTP requests to fetch or save data
+import serverDetails from '../../constants'; //local or hosted
 
+//models for content
 export default {
     name: 'SubjectItem',
     props: ['contentModel'],
@@ -66,8 +70,7 @@ export default {
                 operator: '=',
                 criteria: this.contentModel.id
             };
-            // get non-observed version of the current model, 
-            // so when the model changes it will not effect the product id search
+            
             params.search = {...params.search};
             axios.get(`${url}picture/`, {
                     params
@@ -99,6 +102,7 @@ export default {
 </script>
 
 <style scoped>
+/*Scope applies css to this only*/
 
 h4 {
     padding-left: 10px;

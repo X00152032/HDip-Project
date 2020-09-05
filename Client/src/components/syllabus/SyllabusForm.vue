@@ -172,6 +172,8 @@ export default {
 </script>
 
 <style scoped>
+/*Scope applies css to this only*/
+
 article {
     padding-top: 10px;
     border-bottom: 3px solid rgb(33, 54, 240);

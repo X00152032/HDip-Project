@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios';//promise-based HTTP client makes HTTP requests to fetch or save data
 import serverDetails from '../constants';
 
 export default {

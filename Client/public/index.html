@@ -1,4 +1,4 @@
-<!-- If javascript is diabled then display this page-->
+<!-- If javascript is diabled then we will display this page-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,9 +10,9 @@
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>This site doesn't work properly without JavaScript enabled. Please enable it to use site.</strong>
     </noscript>
+    <!--show rest of files-->
     <div id="app" :contents="contents" :subjects="subjects"></div>
-    <!-- built files will be auto injected -->
   </body>
 </html>

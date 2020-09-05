@@ -123,7 +123,7 @@ export default {
             this.$parent.getContents(this.search);
         },
         deleteContent(event, row) {
-            // stop propagation of the event to the table row
+            // stop showing content if deleted
             event.stopPropagation();
             if (confirm(`Are you sure you want to delete the Content "${row.contentName}"?`)) {
                 this.$parent.deleteContent(row.id);

@@ -1,4 +1,3 @@
-//not working yet
 const express = require("express");
 const path = require("path");
 const nodemailer = require("nodemailer");
@@ -24,7 +23,7 @@ app.use(log);
 
 // enable static files pointing to the folder "public"
 // this can be used to serve the index.html file
-app.use(express.static(path.join(__dirname, "src/views/")));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 // HTTP POST
@@ -64,7 +63,6 @@ app.post("/ajax/email", function(request, response) {
 
 
 // set port from environment variable, or 8000
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
-

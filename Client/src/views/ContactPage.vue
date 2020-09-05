@@ -2,7 +2,7 @@
 
 <template>
 <body>
-    <div id = maintable class="bg-white text-grey" style="text-align: left"> <!--format table-->
+    <div id = maintable class="bg-white text-grey" style="text-align: left">
         <ol class="ordered-list">
         <h2>Contact Us</h2> <hr>
         </ol><br>

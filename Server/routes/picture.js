@@ -1,4 +1,3 @@
-// Import router package
 const router = require('express').Router();
 const validator = require('validator');
 const fs = require('fs');

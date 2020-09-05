@@ -1,4 +1,5 @@
-<!--Calendar Page -->
+<!--Calendar Page
+just embedding a calendar for the moment -->
 <template>
   <div class="Calendar container-fluid">
     <div class="bg-white text-grey" style="text-align: left"> <!--format table-->

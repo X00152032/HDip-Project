@@ -1,7 +1,7 @@
 <!--Admissions Page -->
 <template>
   <div class="admissions container-fluid">
-    <div class="bg-white text-grey" style="text-align: left"> <!--format table-->
+    <div class="bg-white text-grey" style="text-align: left">
         <ol class="ordered-list">
         <h2>Admissions</h2> <hr>
         <h3> IMPORTANT INFORMATION FOR PARENTS/GUARDIANS </h3>

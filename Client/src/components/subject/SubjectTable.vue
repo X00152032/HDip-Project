@@ -81,11 +81,11 @@ export default {
             return subject[0].subjectName || '';
         },
         getContents() {
-            // $parent is the parent component (in this case the Syllabus.vue component)
+            // $parent is the parent component (in this case the Subject.vue component)
             this.$parent.getContents(this.search);
         },
         deleteContent(event, row) {
-            // stop propagation of the event to the table row
+            // stop showing content if deleted
             event.stopPropagation();
             if (confirm(`Are you sure you want to delete the Content "${row.contentName}"?`)) {
                 this.$parent.deleteContent(row.id);
@@ -97,6 +97,7 @@ export default {
 
 
 <style scoped>
+/*Scope applies css to this only*/
 
 .subject {
     align-content: center;

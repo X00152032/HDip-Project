@@ -22,15 +22,65 @@
             <Login />
         </div>
     </div>
-        <div class="logo"><img alt="School logo" src="./assets/school-crest-header-new.png"></div> <!--school header-->
+        <div class="logo"><img alt="School logo" src="./assets/school-crest-header-new.png"> <!--school header-->
+    </div>
+
+<!-- Floating Social Media bar Starts -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="float-sm">
+  <div class="fl-fl float-fb">
+    <i class="fa fa-facebook" aria-hidden="true"></i>
+    <a href="https://www.facebook.com/StRaphaelasSecondarySchool/" target="_blank">Facebook</a>
+  </div>
+  <div class="fl-fl float-ig">
+    <i class="fa fa-instagram" aria-hidden="true"></i>
+    <a href="https://www.instagram.com/straphaelas/?hl=en" target="_blank">Instagram</a>
+  </div>
+    <div class="fl-fl float-schoolwise">
+    <i class="fa fa-university" aria-hidden="true"></i>
+    <a href="https://straphaelas.myschoolwise.com/Login?returnurl=%2f" target="_blank">SchoolWise</a>
+  </div>
+    <div class="fl-fl float-office">
+    <i class="fa fa-windows" aria-hidden="true"></i>
+    <a href="https://login.microsoftonline.com" target="_blank">Office 365</a>
+  </div>
+
+</div>
+<!-- Floating Social Media bar Ends -->
+
     <router-view />
     </body>
   <footer class="footer">
+
         <p class="cp-text">
     © Copyright 2020 St. Raphaela's Secondary School.
         </p>
         <p><a href="/#/policy" target="_blank">Privacy Policy</a></p>
         <p><a href="/#/contact" target="_blank">Contact Us</a></p>
+
+        <div class="row">
+        <div class="column">
+            <a href="https://www.facebook.com/StRaphaelasSecondarySchool/" target="_blank">
+            <img alt="facebook link" src="./assets/f_icon.jpg" width="36" height="44">
+            </a>
+        </div>
+        <div class="column">
+            <a href="https://www.instagram.com/straphaelas/?hl=en" target="_blank">
+            <img alt="instagram link" src="./assets/instagram_icon.jpg" width="36" height="44">
+            </a>
+        </div>
+        <div class="column">
+            <a href="https://straphaelas.myschoolwise.com/Login?returnurl=%2f" target="_blank">
+            <img alt="instagram link" src="./assets/schoolwise_icon.jpg" width="36" height="44">
+            </a>
+        </div>
+        <div class="column">
+            <a href="https://login.microsoftonline.com" target="_blank">
+            <img alt="instagram link" src="./assets/office_icon.jpg" width="36" height="44">
+            </a>
+        </div>
+    </div>
 
   </footer>
     </div>
@@ -139,4 +189,86 @@ text-decoration: none;
 
 .cp-text{ color:white;}
 
+/* format the social links in footer */
+.column {
+  float: left;
+  width: 4%;
+  padding-left:30px;
+  padding-bottom:15px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Floating Social Media Bar Style Starts Here */
+
+.fl-fl {
+  background: #003ea1;
+  letter-spacing: 1px;
+  padding: 3px;
+  width: 200px;
+  position: fixed;
+  right: -160px;
+  z-index: 1000;
+  font: normal normal 23px Arial;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.fa {
+  color: white;
+  padding: 10px 0;
+  width: 40px;
+  margin-left: 5px;
+}
+
+.float-sm a:hover {
+color: #beb632;
+text-decoration: none;
+}
+
+.fl-fl:hover {
+  right: 0;
+}
+
+.fl-fl a {
+  color: white;
+  text-decoration: none;
+  text-align: left;
+  line-height: 43px;
+  vertical-align: top;
+}
+
+.float-fb {
+top: 346px;
+background: #003ea1;
+
+}
+
+.float-ig {
+  top: 396px;
+  background: #003ea1;
+}
+
+.float-schoolwise {
+  top: 446px;
+  background: #003ea1;
+}
+
+.float-office {
+  top: 496px;
+  background: #003ea1;
+}
+
+/* Yellow colour in crest = #beb632
+ Red Colour in crest = #a91424
+
+Floating Social Media Bar Style Ends Here */
 </style>

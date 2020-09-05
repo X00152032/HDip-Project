@@ -1,4 +1,3 @@
-// https://restfulapi.net/http-status-codes/
 
 // Import router package
 const router = require('express').Router();
