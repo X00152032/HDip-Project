@@ -9,6 +9,7 @@ import PolicyPage from '../views/PolicyPage.vue'
 import ContactPage from '../views/ContactPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
+import userModel from '../models';
 
 Vue.use(VueRouter)
 
@@ -57,7 +58,17 @@ const routes = [
     path: '/Calendar',
     name: 'CalendarPage',
     component: CalendarPage
-  }
+  },
+  
+  {
+    path: '/user',
+    name: 'User',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/UserPage.vue'),
+    props: { models: userModel }
+  },
 
 ]
 

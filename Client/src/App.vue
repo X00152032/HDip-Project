@@ -9,13 +9,14 @@
                 <router-link to="/">Home</router-link> |
                 <router-link to="/admissions">Admissions</router-link> |
                 <router-link to="/subject">Subjects</router-link> | <!-- router has index.js with details-->
+            <span v-show="loggedIn">
+                <router-link to="/syllabus">Edit-Subjects</router-link> |
+                <router-link to="/user">Users</router-link> |
+            </span>
                 <router-link to="/calendar">Calendar</router-link> |                
-                <router-link to="/contact">Contact</router-link>
+                <router-link to="/contact">Contact Us</router-link>
 
-                <span v-show="loggedIn">
-                    |   <router-link to="/syllabus">Edit Subjects</router-link> <!-- router has index.js with details-->
-                    |   <router-link to="/user">Users</router-link>
-                </span>
+                
             </div>
         </div>
         <div class="col float-right">
@@ -52,12 +53,20 @@
     <router-view />
     </body>
   <footer class="footer">
-
-        <p class="cp-text">
-    © Copyright 2020 St. Raphaela's Secondary School.
-        </p>
-        <p><a href="/#/policy" target="_blank">Privacy Policy</a></p>
-        <p><a href="/#/contact" target="_blank">Contact Us</a></p>
+        <div class="rightrow">
+        <p class="policy"><a href="/#/policy" target="_blank">Privacy Policy</a></p>
+        <div class="column2">
+            <a href="/#/policy" target="_blank">
+            <img alt="privacy policy" src="./assets/privacy_icon.jpg" width="38" height="46">
+            </a>
+        </div>
+        <p class="contact"><a href="/#/contact" target="_blank">Contact Us</a></p>
+        <div class="column2">
+            <a href="/#/contact" target="_blank">
+            <img alt="contact us" src="./assets/contact_icon_awesome.jpg" width="38" height="46">
+            </a>
+        </div>
+        </div>
 
         <div class="row">
         <div class="column">
@@ -81,7 +90,11 @@
             </a>
         </div>
     </div>
-
+    <div class="copyright">
+        <p class="cp-text">
+            © Copyright 2020 St. Raphaela's Secondary School.
+        </p>
+    </div>
   </footer>
     </div>
 </template>
@@ -151,65 +164,6 @@ body {
 }
 .content {
   flex: 1 0 auto;
-}
-
-.footer p{
-    text-align: center;
-}
-
-.footer{
-    background:#003ea1; 
-    padding:.5%;
-    margin-right: 10px;
-    margin-left:10px;
-    flex-shrink: 0;}
-
-/* unvisited link */
-.footer a:link {
-  color: white;
-}
-
-/* visited link */
-.footer a:visited {
-color: white;
-text-decoration: none;
-}
-
-/* mouse over link */
-.footer a:hover {
-color: white;
-text-decoration: underline;
-}
-
-/* selected link */
-.footer a:active {
-color: white;
-text-decoration: none;
-}
-
-.cp-text{ color:white;}
-
-/* format the social links in footer */
-.column {
-  float: left;
-  width: 1%;
-  margin-left:35px;
-  margin-bottom:10px;
-  margin-top:-115px;
-}
-
-/*to change the image on hover - for red colour*/ 
-.column:hover {
-opacity: .9;
--webkit-filter: invert(40%) grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
-filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
-}
-
-/* Clear floats after image containers */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 
 /* Floating Social Media Icons*/
@@ -298,4 +252,102 @@ text-decoration: none;
 /*  Yellow colour in crest = #beb632
     Red Colour in crest = #a91424 
 */
+/*Footer settings*/
+
+.footer p{
+    text-align: center;
+}
+
+.footer{
+    background:#003ea1; 
+    padding: 5px;
+    margin-right: 10px;
+    margin-left:10px;
+    padding-bottom: 5px;
+    flex-shrink: 0;}
+
+/* unvisited link */
+.footer a:link {
+  color: white;
+}
+
+/* visited link */
+.footer a:visited {
+color: white;
+text-decoration: none;
+}
+
+/* mouse over link */
+.footer a:hover {
+color: white;
+text-decoration: underline;
+}
+
+/* selected link */
+.footer a:active {
+color: white;
+text-decoration: none;
+}
+
+/* copyright text */
+.cp-text{ 
+color:white;
+margin-left:218px;
+margin-bottom:10px;
+}
+
+/* policy text */
+.policy{
+color:white;
+float:right;
+margin-right:2%;
+margin-top:60px;
+}
+
+/* contact us text */
+.contact{ 
+color:white;
+float:right;
+margin-right:2%;
+margin-top:60px;
+}
+
+
+/* format the social links in footer */
+.column {
+  float: left;
+  width: 1.5%;
+  margin-left:40px;
+  margin-top: 10px;
+}
+
+/*to change the image on hover - for red colour*/ 
+.column:hover {
+opacity: .8;
+-webkit-filter: invert(40%) grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+}
+
+.column2 {
+  float: right;
+  width: 0%;
+  margin-right:0px;
+  margin-top: 10px;
+}
+
+/*to change the image on hover - for red colour*/ 
+.column2:hover {
+opacity: .8;
+-webkit-filter: invert(40%) grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+filter: grayscale(100%) brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+}
+
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 </style>

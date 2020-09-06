@@ -10,13 +10,13 @@
             <div class="form-group">
                 <input v-model="model.password" type="password" class="form-control" id="password" placeholder="Password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Login</button>
         </div>
     </form>
     <!-- If logged in then show logout button -->
     <form v-else-if="loggedIn" @submit="logout" class="form-inline" id="createAdministrator">
         <div>
-            <button type="submit" class="btn btn-primary">Logout</button>
+            <button type="submit" class="btn btn-primary active" role="button" aria-pressed="true">Logout</button>
         </div>
     </form>
     <p v-if="errors.length">

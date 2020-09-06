@@ -1,6 +1,6 @@
 <template>
-<table class="table table-dark table-hover bg-secondary">
-    <thead>
+<table class="table table-sm table-light table-hover bg-light">
+    <thead class="table-primary">
         <tr> <!--rows of headings in the table -->
             <th>Name</th>
             <th>Description</th>
@@ -17,7 +17,7 @@
             </th>
         </tr>
     </thead>
-    <thead>
+    <thead class="table-primary">
         <tr>
             <th>
                 <div style="display:flex;">
@@ -41,7 +41,7 @@
                 </select>
             </th>
             <th>
-                <button class="btn btn-primary" v-on:click="getContents">Find</button>
+                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getContents">Find</button>
             </th>
             <th>
                 &nbsp;
@@ -52,7 +52,7 @@
         </tr>
     </thead>
     <tbody> <!--rows of values in the table -->
-        <tr v-for="row in contents" v-on:click="clickContent(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
+        <tr class="table-primary table-bordered" v-for="row in contents" v-on:click="clickContent(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
             <td>{{ row.contentName }}</td>
             <td>{{ row.description }}</td>
             <td>{{ row.text }}</td>

@@ -33,7 +33,7 @@
                     <font-awesome-icon icon="minus-square" /></button>
             </span>
         </div>
-         <div class="form-group">
+         <div class="form-group" id="checkboxes">
         <input type="checkbox" id="HomepageArticle" v-model="model.isForHomePage">
         <label for="HomepageArticle">Select if this arcticle is for the Homepage Only</label>
         </div>
@@ -195,5 +195,17 @@ img {
 
 p {
     margin: 8px;
+}
+
+#checkboxes {
+text-align:left;
+}
+
+#checkboxes input{
+margin: 10px 0px 0px 0px;
+}
+
+#checkboxes label{
+margin: 10px 0px 0px 3px;
 }
 </style>

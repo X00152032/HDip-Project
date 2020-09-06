@@ -1,7 +1,9 @@
 <!-- Syllabus Page -->
 <template>
-<div class="syllabus container-fluid"> <!-- call models (based on db tables) to page --> 
-<h4>Add, Edit and Remove Subjects and Syllabus Content - visible when logged in as Teacher/Admin</h4>
+<div class="subject container-fluid">
+    <div class=title> 
+        <h5>Add, Edit and Remove Subjects and Syllabus Content</h5> <hr> 
+    </div>
     <Syllabus :contentModel="models.contentModel" :subjectModel="models.subjectModel" />
 </div>
 </template>
@@ -19,3 +21,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+.title{
+margin-left:45px;
+}
+
+.subject h5{
+    text-align: center;
+}
+</style>
