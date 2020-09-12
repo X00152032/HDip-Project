@@ -30,14 +30,16 @@ let models = {
         isValid: false,
         // used for display
         isAdmin: false,
+        isStaff: false,
+        isStudent: false,
         // model
         id: null,
         firstName: null,
         lastName: null,
         email: null,
         password: null,
-        role: null,
-    }
+        role: null
+    },
 }
 
 export default models;

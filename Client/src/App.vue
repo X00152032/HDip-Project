@@ -15,8 +15,6 @@
             </span>
                 <router-link to="/calendar">Calendar</router-link> |                
                 <router-link to="/contact">Contact Us</router-link>
-
-                
             </div>
         </div>
         <div class="col float-right">
@@ -54,19 +52,20 @@
     </body>
   <footer class="footer">
         <div class="rightrow">
+          <p class="contact"><a href="/#/contact" target="_blank">Contact Us</a></p>
+        <div class="column2">
+            <a href="/#/contact" target="_blank">
+            <img alt="contact us" src="./assets/contact_icon_awesome.jpg" width="38" height="46">
+            </a>
+        </div>
         <p class="policy"><a href="/#/policy" target="_blank">Privacy Policy</a></p>
         <div class="column2">
             <a href="/#/policy" target="_blank">
             <img alt="privacy policy" src="./assets/privacy_icon.jpg" width="38" height="46">
             </a>
         </div>
-        <p class="contact"><a href="/#/contact" target="_blank">Contact Us</a></p>
-        <div class="column2">
-            <a href="/#/contact" target="_blank">
-            <img alt="contact us" src="./assets/contact_icon_awesome.jpg" width="38" height="46">
-            </a>
         </div>
-        </div>
+
 
         <div class="row">
         <div class="column">
@@ -104,6 +103,7 @@
 import Login from '@/components/Login.vue'
 //login has been imported and export it
 export default {
+
     components: {
         Login
     },
@@ -145,7 +145,7 @@ export default {
 }
 
 .logo{
-    width:100%
+    width:100%;
 }
 
 .logo img{
@@ -174,7 +174,7 @@ body {
   padding: 3px;
   width: 16%;
   position: fixed;
-  right: -160px;
+  right: -13%;
   z-index: 1000;
   font: normal normal 23px Arial;
   -webkit-transition: all .3s ease;

@@ -25,7 +25,7 @@ const SQL_INSERT = 'INSERT INTO dbo.AppUser (firstName, lastName, email, passwor
 
 const SQL_UPDATE = 'UPDATE dbo.AppUser SET firstName = @firstName, lastName = @lastName, email = @email, password = @password, role = @role WHERE id = @id; SELECT * FROM dbo.AppUser WHERE id = @id;';
 
-const SQL_DELETE = 'DELETE FROM dbo.AppUser WHERE id = @id;';
+const SQL_DELETE = 'DELETE FROM dbo.AppUser WHERE id = @id';
 
 /**
  * GET list of all users
@@ -94,12 +94,12 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-async function emailExists(email) {
+async function emailExists(emailAddress) {
     try {
         const pool = await dbConnPoolPromise
         const result = await pool.request()
             // set id parameter(s) in query
-            .input('email', sql.NVarChar, email)
+            .input('email', sql.NVarChar, emailAddress)
             // execute query
             .query(SQL_SELECT_BY_EMAIL);
         
@@ -107,7 +107,7 @@ async function emailExists(email) {
     } catch(err) {
         throw err;
     }
-}
+};
 
 /**
  * Validate request data for both post/insert and put/update
@@ -122,40 +122,40 @@ function validate(req, isUpdate) {
         // Make sure that id is just a number - note that values are read from request body
         const id = req.body.id;
         if (!validator.isNumeric(String(id), { no_symbols: true })) {
-            errors += "invalid id; ";
+            errors += "Invalid id; ";
         }
     }
     
     // Escape text and potentially bad characters
     const firstName = validator.escape(req.body.firstName);
     if (firstName === "") {
-        errors += "invalid firstName; ";
+        errors += "Invalid firstName; ";
     }
 
     // Escape text and potentially bad characters
     const lastName = validator.escape(req.body.lastName);
     if (lastName === "") {
-        errors += "invalid lastName; ";
+        errors += "Invalid lastName; ";
     }
 
     const emailAddress = validator.escape(req.body.email);
     if (emailAddress === "" || !validator.isEmail(emailAddress)) {
-        errors += "invalid email; ";
-    }
-
-    if (!isUpdate) {
-        if (emailExists(emailAddress)) {
-            errors += "user already exists";
-        }
+        errors += "Invalid email; ";
     }
 
     const password = req.body.password;
     if (password === "" || password.length < 8) {
-        errors += "invalid password; ";
+        errors += "Invalid password; ";
     }
     
+ //   if (!isUpdate) {
+ //       if (emailExists(emailAddress)) {
+ //           errors += "User already exists";
+ //       }
+ //   }
     return errors;
-}
+    
+};
 
 /**
  * POST - Insert a new user
@@ -184,7 +184,7 @@ router.post('/', async (req, res) => {
             .input('lastName', sql.NVarChar, validator.escape(req.body.lastName))
             .input('email', sql.NVarChar, validator.escape(req.body.email))
             .input('password', sql.NVarChar, validator.escape(req.body.password))
-            .input('role', sql.NVarChar, validator.escape(req.body.role))
+            .input('role', sql.NVarChar, (req.body.role))
             // Execute Query
             .query(SQL_INSERT);
     
@@ -224,7 +224,7 @@ router.put('/', async (req, res) => {
             .input('lastName', sql.NVarChar, validator.escape(req.body.lastName))
             .input('email', sql.NVarChar, validator.escape(req.body.email))
             .input('password', sql.NVarChar, validator.escape(req.body.password))
-            .input('role', sql.NVarChar, validator.escape(req.body.role))
+            .input('role', sql.NVarChar, (req.body.role))
             .input('id', sql.Int, req.body.id)
             // Execute Query
             .query(SQL_UPDATE);
@@ -263,7 +263,7 @@ router.delete('/:id', async (req, res) => {
         const pool = await dbConnPoolPromise
         const result = await pool.request()
             // set id parameter(s) in query
-            .input('id', sql.Int, req.body.id)
+            .input('id', sql.Int, id)
             // Execute Query
             .query(SQL_DELETE);
     

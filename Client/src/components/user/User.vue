@@ -86,13 +86,13 @@ export default {
             let params = {
                 ...serverDetails.params
             };
-            // const api = axios.create({
-            //     headers: {
-            //         'Authorization': 'Bearer ' + sessionStorage.token
-            //     },
-            //     withCredentials: true
-            // });
-            axios.get(`${url}user/${id}`, {
+             const api = axios.create({
+                 headers: {
+                     'Authorization': 'Bearer ' + sessionStorage.token
+                 },
+                 withCredentials: true
+             });
+            api.get(`${url}user/${id}`, {
                     params
                 },
                 {
@@ -106,10 +106,12 @@ export default {
                     this.userModel.email = response.data.email;
                     this.userModel.password = response.data.password;
                     this.userModel.role = response.data.role;
-                    if (this.userModel.role === 'admin') {
+                        if (this.userModel.role === 'admin') {
                         this.userModel.isAdmin = true;
-                    } else {
-                        this.userModel.isAdmin = false;
+                        }else if (this.userModel.role === 'staff') {
+                        this.userModel.isStaff = true;
+                        }else if (this.userModel.role === 'student') {
+                        this.userModel.isStudent = true;
                     }
                     console.log('promise has resolved', response.data);
                 })
@@ -171,9 +173,12 @@ export default {
                     this.users = response.data.map((user) => {
                         if (user.role === 'admin') {
                             user.isAdmin = true;
-                        } else {
-                            user.isAdmin = false;
-                        }
+
+                        }else if (user.role === 'staff') {
+                            user.isStaff = true;
+                        
+                        }else if (user.role === 'student') {
+                            user.isStudent = true;}
                         return user;
                     });
                     console.log('promise has resolved', response.data);
@@ -196,7 +201,7 @@ export default {
                     'Authorization': 'Bearer ' + sessionStorage.token
                 },
                 withCredentials: true
-            });
+             });
             api.put(`${url}user`, currentUser, {
                     params
                 })

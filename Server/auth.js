@@ -70,7 +70,7 @@ passport.use(new JWTStrategy({
     console.log(`jwt: ${jwtPayload.username}`);
     // Check if JWT has expired 
     if (parseInt(Date.now()) > parseInt(jwtPayload.expires)) {
-      return done('jwt expired');
+      return done('jwt has expired');
     } else {
       return done(null, jwtPayload);
     }

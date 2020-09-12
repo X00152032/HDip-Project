@@ -105,13 +105,6 @@ export default {
             row.selected = true;
             this.$parent.getUser(row.id);
         },
-        deleteUser(event, row) {
-            // stop propagation of the event to the table row
-            event.stopPropagation();
-            if (confirm(`Are you sure you want to do delete the user "${row.firstName} ${row.lastName} (${row.email})"?`)) {
-                this.$parent.deleteUser(row.id);
-            }
-        },
         getUsers() {
             // $parent = User.vue
             this.$parent.getUsers(this.search, this.sortItem);
@@ -124,6 +117,13 @@ export default {
             } else {
                 this.sortItem.direction = 'asc';
                 this.getUsers();
+            }
+        },
+        deleteUser(event, row) {
+            // stop propagation of the event to the table row
+            event.stopPropagation();
+            if (confirm(`Are you sure you want to do delete the user "${row.firstName} ${row.lastName} (${row.email})"?`)) {
+                this.$parent.deleteUser(row.id);
             }
         },
     },

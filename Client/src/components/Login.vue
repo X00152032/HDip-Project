@@ -66,10 +66,10 @@ export default {
         login(event) {
             this.errors = [];
             if (!this.model.email) {
-                this.errors.push('Email required.');
+                this.errors.push('Email is required.');
             }
             if (!this.model.password) {
-                this.errors.push('Password required.');
+                this.errors.push('Password is required.');
             } else {
                 let url = serverDetails.url;
                 let params = {
@@ -84,6 +84,10 @@ export default {
                 }).then((response) => {
                     // A successful login will return a user
                     if (response.data.user != false) {
+                        //if role = certain type then loggedInAdmin
+                        //or loggedinStaff or loggedInStudent
+                        //e.g. sessionStorage.loggedInAdmin = "true";
+
                         // If a user then record in session storage
                         sessionStorage.loggedIn = "true";
                         sessionStorage.token = response.data.token;
@@ -114,7 +118,7 @@ export default {
                 sessionStorage.loggedIn = "false";
                 sessionStorage.token = undefined;
                 // display message and force reload of page
-                alert('Logout Successful')
+                alert('You were successful logged out.')
                 //This below reloads homepage..
                 window.location.replace('/')
             }).catch((err) => {
