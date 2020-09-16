@@ -8,8 +8,8 @@
         </ol><br>
 <div class="fill_form">
     <h5>Have a Question?<br>Fill out our Contact Form.</h5><br>
-    <a href="#contact-id">
-      <img id="contact_form" src="../assets/contact_form.png" alt="link to the contact form">
+    <a href="#/contactform" target=_blank>
+      <img id="gform" src="../assets/contact_form.png" alt="link to the contact form">
       </a>
       <br>
       <br>
@@ -26,54 +26,34 @@
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2385.3584702473318!2d-6.207522084617531!3d53.28311338714746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4867091346a24979%3A0xb1a0dc6ef3c078c5!2sSt%20Raphaelas%20Secondary%20School!5e0!3m2!1sen!2sie!4v1598194032451!5m2!1sen!2sie" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe><br>
 </div>
 </div>
+	
 	<div class="contact" id="contact-id">
-		<section><h3><a href="#!">[ close ]</a></h3></section>
-		<form action="/ajax/email" class="contact-form" method="POST" onsubmit="submitEmailForm(this)">
+		<section><h3><a href="#/contact">[ close ]</a></h3></section>
+		<form action="https://script.google.com/macros/s/AKfycbxo1qtVRQWh1KCpaic2sooO6KKemdQBH9JjXaNFMQ/exec" form class="gform pure-form pure-form-stacked" method="POST" data-email="straphaelasschool@gmail.com">
 			<div>
-				<input type="text" name="name" placeholder="name" class="contact-form-input" required />
+				<input type="text" name="name" placeholder="name" class="gform-input" required />
 			</div>
 			<div>
-				<input type="email" name="email" placeholder="email" class="contact-form-input" required />
+				<input type="email" name="email" placeholder="email" class="gform-input" required />
 			</div>
 			<div>
-				<textarea name="message" class="contact-form-input" placeholder="MESSAGE" required></textarea>
+				<textarea name="message" class="gform-input" placeholder="MESSAGE" required></textarea>
 			</div>
 			<div>
 				<button type="submit">send</button>
 			</div>
+			<div style="display:none" class="thankyou_message">
+			<!-- Customize the thankyou message -->
+			<h5><em>Thank you</em> for contacting us. We will get back to you as soon as possible</h5>
+			</div>
 		</form>
 	</div>
+	
   </body>
 </template>
 
-<script>
-export default {
-     
-    methods: {
-		submitEmailForm(form) {
-			var obj = new XMLHttpRequest();
-			obj.onreadystatechange = function(){
-			if(obj.readyState == 4){
-				if(obj.status == 200){
-						var res = JSON.parse(obj.responseText);
-						alert(res.message);
-					}
-				else{
-						alert("XMLHttp status " + obj.status + ": " + obj.statusText);
-					}
-				}
-      };
-      
-			obj.open("post", form.action, true);
-			obj.setRequestHeader("Content-Type", "application/json"); // NOTICE: "application/json"
-			obj.send(JSON.stringify({ name: form.name.value, email: form.email.value, message: form.message.value }));
-			return false;
-    }
-    }}
-	</script>
 
 <style scoped>
-
 
 .fill_form{
   float:left;
@@ -101,7 +81,7 @@ export default {
 }
 
 
-#contact_form{
+#gform{
 align-content: center;   
 width: 150px;
 border-radius: 15%;
@@ -144,7 +124,7 @@ margin-left: 200px;
 			visibility: visible;
 			opacity: 1;
 		}
-		.contact-form {
+		.gform {
 			position: absolute;
 			max-width: 500px;
 			left: 50%;
@@ -157,8 +137,8 @@ margin-left: 200px;
 			border-radius: 20px;
 			overflow: hidden;
 		}
-		.contact-form-input,
-		.contact-form button {
+		.gform-input,
+		.gform button {
 			font-family: inherit;
 			text-transform: uppercase;
 			font-weight: bold;
@@ -169,17 +149,17 @@ margin-left: 200px;
 			width: 100%;
 			outline: none;
 		}
-		.contact-form button {
+		.gform button {
 			background-color: #003ea1;
 			padding: 20px;
 			color: #fff;
 		}
-		.contact-form div:nth-child(1),
-		.contact-form div:nth-child(2) {
+		.gform div:nth-child(1),
+		.gform div:nth-child(2) {
 			position: relative;
 		}
-		.contact-form div:nth-child(1)::after,
-		.contact-form div:nth-child(2)::after {
+		.gform div:nth-child(1)::after,
+		.gform div:nth-child(2)::after {
 			content: "";
 			position: absolute;
 			left: 0;
@@ -188,7 +168,7 @@ margin-left: 200px;
 			height: 1px;
 			background-color: rgba(0,0,0,0.15);
 		}
-		.contact-form textarea {
+		.gform textarea {
 			overflow: auto;
 			height: 100px;
 			text-transform: none;

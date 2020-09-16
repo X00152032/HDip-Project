@@ -7,6 +7,7 @@ import SubjectPage from '../views/SubjectPage.vue'
 import AdmissionsPage from '../views/AdmissionsPage.vue'
 import PolicyPage from '../views/PolicyPage.vue'
 import ContactPage from '../views/ContactPage.vue'
+import ContactFormPage from '../views/ContactFormPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
 import userModel from '../models';
@@ -36,6 +37,12 @@ const routes = [
     path: '/Contact',
     name: '/ContactPage',
     component: ContactPage
+  },
+
+  {
+    path: '/ContactForm',
+    name: '/ContactForm',
+    component: ContactFormPage
   },
 
   {

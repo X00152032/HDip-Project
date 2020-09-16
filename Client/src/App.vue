@@ -99,6 +99,7 @@
 </template>
 
 <script>
+document.title = "St. Raphaela's Secondary School"
 // @ is an alias to /src
 import Login from '@/components/Login.vue'
 //login has been imported and export it
@@ -120,6 +121,7 @@ export default {
         }
     },
 }
+
 </script>
 
 <style>
