@@ -115,7 +115,7 @@ async function emailExists(emailAddress) {
  * @return errors if any
  */
 function validate(req, isUpdate) {
-    // Validate - erros string, initally empty, will store any errors
+    // Validate - error string, initally empty, will store any errors
     let errors = "";
 
     if (isUpdate) {

@@ -2,7 +2,7 @@
 <template>
 <div class="subject container-fluid">
     <div class=title> 
-        <h5>Add, Edit and Remove Subjects and Syllabus Content</h5> <hr> 
+        <h5>Edit Subjects and/or Home pages content</h5> <hr> 
     </div>
     <Syllabus :contentModel="models.contentModel" :subjectModel="models.subjectModel" />
 </div>

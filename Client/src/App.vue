@@ -12,6 +12,7 @@
             <span v-show="loggedIn">
                 <router-link to="/syllabus">Edit-Subjects</router-link> |
                 <router-link to="/user">Users</router-link> |
+                <router-link to="/assessment">Edit-Assessments</router-link> |
             </span>
                 <router-link to="/calendar">Calendar</router-link> |                
                 <router-link to="/contact">Contact Us</router-link>

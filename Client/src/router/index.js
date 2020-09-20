@@ -1,4 +1,4 @@
-//first import all components needed including home page and subject content model
+//first import all components needed including home page and content models
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -11,6 +11,7 @@ import ContactFormPage from '../views/ContactFormPage.vue'
 import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
 import userModel from '../models';
+import assessmentModel from '../models';
 
 Vue.use(VueRouter)
 
@@ -66,7 +67,7 @@ const routes = [
     name: 'CalendarPage',
     component: CalendarPage
   },
-  
+
   {
     path: '/user',
     name: 'User',
@@ -77,6 +78,15 @@ const routes = [
     props: { models: userModel }
   },
 
+  {
+    path: '/assessment',
+    name: 'Assessment',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AssessmentPage.vue'),
+    props: { models: assessmentModel, userModel}
+  },
 ]
 
 //look in routes folder

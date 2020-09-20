@@ -3,7 +3,7 @@
   <div class="admissions container-fluid">
     <div class="bg-white text-grey" style="text-align: left">
         <ol class="ordered-list">
-        <h2>Admissions</h2> <hr>
+        <h2>Student Admissions</h2> <hr>
         <h3> IMPORTANT INFORMATION FOR PARENTS/GUARDIANS </h3>
   <div class="image">
             <img alt="School Entrance" src="../assets/welcome.jpg">

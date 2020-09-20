@@ -46,6 +46,7 @@ server.use('/content', require('./routes/content'));
 server.use('/subject', require('./routes/subject'));
 server.use('/picture', require('./routes/picture'));
 server.use('/user', require('./routes/user'));
+server.use('/assessment', require('./routes/assessment'));
 // route to /login
 server.use('/login', require('./routes/login'));
 

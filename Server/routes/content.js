@@ -133,7 +133,7 @@ function validate(req, isUpdate) {
  */
 router.post('/', async (req, res) => {
 
-    // Validate - erros string, initally empty, will store any errors
+    // Validate - error string, initally empty, will store any errors
     let errors = validate(req);
 
     // If errors send details in response
