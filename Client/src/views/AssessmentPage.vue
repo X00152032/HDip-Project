@@ -2,9 +2,9 @@
 <template>
 <div class="subject container-fluid">
     <div class=title> 
-        <h5>Edit Assessments</h5> <hr> 
+        <h2>Assessments</h2> <hr> 
     </div>
-    <Assessment :contentModel="models.contentModel" :subjectModel="models.subjectModel" :assessmentModel="models.assessmentModel" />
+    <Assessment :contentModel="models.contentModel" :subjectModel="models.subjectModel" :assessmentModel="models.assessmentModel" :levelModel="models.levelModel"/>
 </div>
 </template>
 

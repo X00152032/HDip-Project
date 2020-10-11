@@ -14,11 +14,12 @@
       <br>
       <br>
       <br>
-      <h5>St. Raphaela’s Secondary School,<br>
-          St. Raphaela’s Road,<br>
-          Stillorgan,<br>
-          Co. Dublin.<br>
-          01-2888730</h5>
+      <h5>	St. Raphaela’s Secondary School,<br>
+			St. Raphaela’s Road,<br>
+			Stillorgan,<br>
+			Co. Dublin.<br>
+			01-2888730<br><br>
+			Email: secretary@straphaelas.ie</h5>
     </div>
 <div class="map">
 <h5>How to Find Us<br></h5>

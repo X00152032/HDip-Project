@@ -12,7 +12,7 @@
             <span v-show="loggedIn">
                 <router-link to="/syllabus">Edit-Subjects</router-link> |
                 <router-link to="/user">Users</router-link> |
-                <router-link to="/assessment">Edit-Assessments</router-link> |
+                <router-link to="/assessment">Assessments</router-link> |
             </span>
                 <router-link to="/calendar">Calendar</router-link> |                
                 <router-link to="/contact">Contact Us</router-link>
@@ -53,9 +53,9 @@
     </body>
   <footer class="footer">
         <div class="rightrow">
-          <p class="contact"><a href="/#/contact" target="_blank">Contact Us</a></p>
+          <p class="contact"><a href="/#/contact" target="_self">Contact Us</a></p>
         <div class="column2">
-            <a href="/#/contact" target="_blank">
+            <a href="/#/contact" target="_self">
             <img alt="contact us" src="./assets/contact_icon_awesome.jpg" width="38" height="46">
             </a>
         </div>

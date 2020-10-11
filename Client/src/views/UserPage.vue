@@ -1,5 +1,8 @@
 <template>
 <div class="home container-fluid">
+     <div class=title> 
+        <h2>Edit Users</h2> <hr> 
+    </div>
     <User :userModel="models.userModel" />
 </div>
 </template>

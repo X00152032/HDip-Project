@@ -1,69 +1,133 @@
 <template>
 <div>
     <!-- use the modal component, pass in the properties -->
-    <SubjectDialog v-if="showSubjectDialog" @close="showSubjectDialog = false" :subjectId="model.subjectId">
-        <h3 slot="header">Add/Edit Subject</h3>
-    </SubjectDialog>
-
-<!-- the form itself -->
     <form @submit.prevent>
         <div class="form-group">
-            <label for="contentName">Content Name *</label>
-            <input class="form-control" placeholder="Name of Content" id="contentName" v-model="model.contentName" :class="{ error : errorName }" @keyup="validate">
+            <label for="appUserId"><b>Student Email *</b></label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="appUserId" v-model="model.appUserId">
+                    <option v-for="option in users" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
+                </select>
+            </span>
         </div>
         <div class="form-group">
-            <label for="contentDescription">Description</label>
-            <input class="form-control" placeholder="Description of Content" id="description" v-model="model.description">
-        </div>
-        <div class="form-group">
-            <label for="text">Text *</label>
-            <input type="form-control" class="form-control" placeholder="Your text here" id="text" v-model="model.text">
-        </div>
-        <div class="form-group">
-            <label for="subjectId">Subject *</label> <!-- drop-down box option -->
+            <label for="subjectId"><b>Subject *</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
                 <select class="form-control" style="flex-grow:1;" id="subjectId" v-model="model.subjectId" :class="{ error : errorSubject }" @change="validate">
                     <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
                 </select>
-                <button class="btn btn-primary" @click="addSubject()">
-                    <font-awesome-icon icon="plus-square" /></button>
-                <button class="btn btn-primary" @click="updateSubject()" :disabled="!this.model.subjectId">
-                    <font-awesome-icon icon="pen-square" /></button>
-                <button class="btn btn-primary" @click="deleteSubject()" :disabled="!this.model.subjectId">
-                    <font-awesome-icon icon="minus-square" /></button>
             </span>
         </div>
-         <div class="form-group" id="checkboxes">
-        <input type="checkbox" id="HomepageArticle" v-model="model.isForHomePage">
-        <label for="HomepageArticle">Article is for <b><u>Home Page</u></b> (not for Subject Page)</label>
+        <div class="form-group">
+            <label for="assessmentName"><b>Assessment Name *</b></label>
+            <input class="form-control" placeholder="Enter name of Assessment" id="assessmentName" v-model="model.assessmentName" :class="{ error : errorName }" @keyup="validate">
         </div>
-        <div class="form-group"> <!-- upload picture option -->
-            <label for="files">Picture (must be less than 8kb)</label> &nbsp; &nbsp;
-            <input type="file" id="files" name="files" multiple @change="onFileSelected">
+      <!--  <div class="form-group">
+            <label for="examLevelId">Exam Level</label>
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="examLevelId" v-model="model.examLevelId">
+                    <option value="blank"></option>
+                    <option value="Higher">Higher</option>
+                    <option value="Ordinary">Ordinary</option>
+                    <option value="Foundation">Foundation</option>
+                </select>
+            </span>
+        </div> -->
+        <div class="form-group">
+            <label for="percentage"><b>Enter score as a %</b></label>
+            <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" :class="{ error : errorName }" @keyup="validate">
+        </div>
+        <div class="form-group">
+            <b>Please Choose an Exam Level</b><br><br>
+            <input type="checkbox" name="choice-Higher" id="choice-Higher">
+            <label for="choice-Higher">Higher Level</label>
+            <div class="reveal-if-active">
+            <label for="grade_Higher">Grade</label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                    <option value="blank"></option>
+                    <option value="H1">H1</option>
+                    <option value="H2">H2</option>
+                    <option value="H3">H3</option>
+                    <option value="H4">H4</option>
+                    <option value="H5">H5</option>
+                    <option value="H6">H6</option>
+                    <option value="H7">H7</option>
+                    <option value="H8">H8</option>                                       
+                </select>
+            </span>
+        </div>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="choice-Ordinary" id="choice-Ordinary">
+            <label for="choice-Ordinary">Ordinary Level</label>
+            <div class="reveal-if-active">
+            <label for="grade_Ordinary">Grade</label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                    <option value="blank"></option>
+                    <option value="O1">O1</option>
+                    <option value="O2">O2</option>
+                    <option value="O3">O3</option>
+                    <option value="O4">O4</option>
+                    <option value="O5">O5</option>
+                    <option value="O6">O6</option>
+                    <option value="O7">O7</option>
+                    <option value="O8">O8</option>                                        
+                </select>
+            </span>
+        </div>
+    </div>
+        <div class="form-group">
+            <input type="checkbox" name="choice-Foundation" id="choice-Foundation">
+            <label for="choice-Foundation">Foundation Level</label>
+            <div class="reveal-if-active">
+            <label for="grade_Foundation">Grade</label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                    <option value="blank"></option>
+                    <option value="F1">F1</option>
+                    <option value="F2">F2</option>
+                    <option value="F3">F3</option>
+                    <option value="F4">F4</option>                                        
+                </select>
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="Descriptor"><b>Descriptor</b></label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="Descriptor" v-model="model.Descriptor">
+                    <option value="blank"></option>
+                    <option value="Exceptional">Exceptional</option>
+                    <option value="Above Expectations">Above Expectations</option>
+                    <option value="In line with Expectations">In line with Expectations</option>
+                    <option value="Yet to meet Expectations">Yet to meet Expectations</option>
+                    <option value="Not Rated">Not Rated</option>
+                <!--  <option v-for="option in assessments" :value="option.id" v-bind:key="option.id">{{ option.descriptor }}</option> -->
+                </select>
+            </span>
+        </div>
         </div>
 
-        
         <div class="form-group"> <!-- main buttons to run add, update, reset -->
-            <button class="btn btn-primary" v-on:click="addContent" :disabled="!model.isValid">Add</button>
-            <button class="btn btn-primary" v-on:click="updateContent" :disabled="!model.isValid">Update</button>
-            <button class="btn btn-secondary" v-on:click="resetContent">Reset</button>
+            <button class="btn btn-primary" v-on:click="addAssessment" :disabled="!model.isValid">Add</button>
+            <button class="btn btn-primary" v-on:click="updateAssessment" :disabled="!model.isValid">Update</button>
+            <button class="btn btn-secondary" v-on:click="resetAssessment">Reset</button>
         </div>
     </form>
 </div>
 </template>
 
 <script>
-import SubjectDialog from '../SubjectDialog'; //call in subject dialog to add/edit/remove etc 
 
 export default {
-    name: 'SyllabusForm',
-    props: ['contents', 'subjects', 'contentModel'],
+    name: 'AssessmentForm',
+    props: ['assessments', 'subjects', 'users', 'assessmentModel', 'levels'],
     components: {
-        SubjectDialog,
     },
     computed: {
         errorName() {
-            return !this.model.isNew && (!this.model.contentName || this.model.contentName.length < 3);
+            return !this.model.isNew && (!this.model.assessmentName || this.model.assessmentName.length < 3);
         },
         
         errorSubject() {
@@ -72,100 +136,83 @@ export default {
     },
     data() {
         return {
-            model: this.contentModel,
-            showSubjectDialog: false,
+            model: this.assessmentModel,
+            appUserId: null,
             subjectId: null,
-            files: [],
+            assessmentName: null,
+            examLevel: null,
+            percentage: null,
+            grade: null,
+            descriptor: null,
         }
+
     },
     methods: {
-        onFileSelected(event) {
-            this.files = event.target.files;
-        },
-        addSubject() {
-            this.model.subjectId = null;
-            this.showSubjectDialog = true;
-        },
-        updateSubject() {
-            this.showSubjectDialog = true;
-        },
-        deleteSubject() {
-            let subject = this.subjects.filter((subject) => {
-                return subject.id == this.model.subjectId;
-            });
-            if (confirm(`Are you sure you want to do delete the Subject "${subject[0].subjectName}"?`)) {
-                this.$parent.deleteSubject(this.model.subjectId);
-                this.model.subjectId = null;
-            }
-        },
+        
         validate() {
             this.model.isNew = false;
             // returns an array of 1 subject e.g. [{ id: 0, subjectName: '' }]
             let subject = this.subjects.filter((subject) => {
                 return subject.id == this.model.subjectId;
             });
-            if (!this.model.contentName || this.model.contentName.length < 3 || subject.length === 0) {
+            if (!this.model.assessmentName || this.model.assessmentName.length < 3 || subject.length === 0) {
                 this.model.isValid = false;
             } else {
                 this.model.isValid = true;
             }
-            return this.model.isValid;
         },
 
-        addContent() {
+        addAssessment() {
             if (!this.validate()) {
                 return; // Not valid no more processing
             }
-            if (this.model.isForHomePage) {
-                this.model.HomepageArticle = 1;
-            } else {
-                this.model.HomepageArticle = 0;
-            }
-            let newContent = {
+            let newAssessment = {
+                appUserId: this.model.appUserId,
                 subjectId: this.model.subjectId,
-                contentName: this.model.contentName,
-                description: this.model.description,
-                text: this.model.text,
-                HomepageArticle : this.model.HomepageArticle
+                yearGroupId: this.model.yearGroupId,
+                assessmentName: this.model.assessmentName,
+                examLevel: this.model.examLevel,
+                percentage: this.model.percentage,
+                descriptor: this.model.descriptor,
+                grade: this.model.grade,
             };
-            this.$parent.addContent(newContent, this.files);
-            this.resetContent();
+            this.$parent.addAssessment(newAssessment);
+            this.resetAssessment();
         },
-        updateContent() {
+        updateAssessment() {
             if (!this.model.id) {
-                alert('Please select Content to update');
+                alert('Please select Assessment to update');
                 return; // No content selected
             }
             if (!this.validate()) {
                 return; // Not valid no more processing
             }
-            if (this.model.isForHomePage) {
-                this.model.HomepageArticle = 1;
-            } else {
-                this.model.HomepageArticle = 0;
-            }
-            let currentContent = {
+                let currentAssessment = {
                 id: this.model.id,
+                appUserId: this.model.appUserId,
                 subjectId: this.model.subjectId,
-                contentName: this.model.contentName,
-                description: this.model.description,
-                text: this.model.text,
-                HomepageArticle: this.model.HomepageArticle
+                yearGroupId: this.model.yearGroupId,
+                assessmentName: this.model.assessmentName,
+                examLevel: this.model.examLevel,
+                percentage: this.model.percentage,
+                descriptor: this.model.descriptor,
+                grade: this.model.grade,
             };
-            this.$parent.updateContent(currentContent, this.files);
-            this.resetContent();
+            this.$parent.updateAssessment(currentAssessment); 
+            this.resetAssessment();
         },
-        resetContent() {
+        resetAssessment() {
             this.model.isNew = true;
             this.model.isValid = false;
-            this.model.isForHomePage = false;
             this.model.id = null;
+            this.model.assessmentName = null;
+            this.model.examLevel = null;
+            this.model.percentage = null;
+            this.model.grade = null;
+            this.model.descriptor = null;
+            this.model.appUserId = null;
             this.model.subjectId = null;
-            this.model.contentName = null;
-            this.model.description = null;
-            this.model.text = null;
-            this.model.HomepageArticle = false;
-            this.files = [];
+            this.model.yearGroupId = null;
         },
     },
 }
@@ -197,15 +244,27 @@ p {
     margin: 8px;
 }
 
-#checkboxes {
-text-align:left;
+#choice-Higher {
+text-align:center;
 }
 
-#checkboxes input{
+#choice-Higher input{
 margin: 10px 0px 0px 0px;
 }
 
-#checkboxes label{
+#choice-Higher label{
 margin: 10px 0px 0px 3px;
+}
+
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+input[type="checkbox"]:checked ~ .reveal-if-active {
+  opacity: 1;
+  max-height: 100px; /* little bit of a magic number :( */
+  overflow: visible;
 }
 </style>

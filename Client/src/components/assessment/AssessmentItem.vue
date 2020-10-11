@@ -2,7 +2,7 @@
 <!--If this is content for the homepage then do show, otherwise do nothing)
 This is set by checkbox in subject form for boolean flag in Content table) -->
 <article v-if="contentModel.HomepageArticle">
-    <h4><b>{{ contentModel.contentName }}</b></h4>
+    <h4><b>{{ contentModel.assessmentName }}</b></h4>
     <div class="gallery">
         <div class="picture" v-for='item in pictures' :key='item.id'>
         <!--delete picture only an option when logged in -->
@@ -15,8 +15,8 @@ This is set by checkbox in subject form for boolean flag in Content table) -->
             <p><strong>{{ }}</strong></p>
         </div>
     </div><!--display content name and text -->
-    <p>{{ contentModel.name }}</p>
-    <p>{{ contentModel.text }}</p>
+    <p>{{ assessmentModel.level }}</p>
+    <p>{{ assessmentModel.grade }}</p>
 </article>
 </template>
 
@@ -26,8 +26,8 @@ import serverDetails from '../../constants'; //local or hosted
 
 //models for content
 export default {
-    name: 'SyllabusItem',
-    props: ['contentModel'],
+    name: 'AssessmentItem',
+    props: ['assessmentModel'],
     data() {
         return {
             pictures: []

@@ -48,13 +48,34 @@ let models = {
         // model
         id: null,
         assessmentName: null,
-        level: null,
+        examLevel: null,
         percentage: null,
         grade: null,
         descriptor: null,
         appUserId: null,
         subjectId: null,
         yearGroupId: null,
+    },
+    activityModel: {
+        // used for validation
+        isNew: true,
+        isValid: false,
+        // used for display
+        // model
+        id: null,
+        yearGroupId: null,
+        activityName: null,
+        description: null,
+        day: null,
+        time: null,
+        location: null,
+    },
+    levelModel: {
+        isNew: true,
+        isValid: false,
+        // model
+        id: null,
+        levelName: null,
     },
 }
 
