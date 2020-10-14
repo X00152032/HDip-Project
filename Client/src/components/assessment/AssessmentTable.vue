@@ -2,16 +2,22 @@
 <table class="table table-sm table-light table-hover bg-light">
     <thead class="table-danger">
         <tr> <!--rows of headings in the table -->
-            <th>Student Email</th>
+            <th>Email</th>
             <th>Subject</th>
-            <th>Assessment Name</th>
+           <!-- <th>Percentage</th>
             <th>Level</th>
             <th>Grade</th>
-            <th>Descriptor</th>
+            <th>Descriptor</th> -->
             <th>
-                &nbsp;  <!--needed to continue table line -->
-            </th>
+                &nbsp;  <!--needed to continue table line-->
+            </th> 
             <th>    
+                &nbsp;
+            </th>
+            <th>
+                &nbsp;
+            </th>
+            <th>
                 &nbsp;
             </th>
             <th>
@@ -22,9 +28,9 @@
     <thead class="table-danger">
         <tr>
             <th>
-                <select class="form-control" v-model="search.subject.criteria"> <!--subject here is the table-->
-                    <option value="" selected>User</option>
-                    <option v-for="option in assessments" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
+                <select class="form-control" v-model="search.email.criteria"> <!--subject here is the table-->
+                    <option value="" selected>Student Email</option>
+                    <option v-for="option in users" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
                 </select>
             </th>
             <th>
@@ -33,43 +39,61 @@
                     <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
                 </select>
             </th>
-            <th>
-                <div style="display:flex;"> <!--Search bar -->
-                    <input class="form-control" placeholder="Name" v-model="search.assessmentName.criteria">
+     <!--       <th>
+                <div style="display:flex;">
+                    <input class="form-control" placeholder="Percentage" v-model="search.percentage.criteria">
                 </div>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="Description" v-model="search.description.criteria">
+                    <input class="form-control" placeholder="Level" v-model="search.examLevel.criteria">
+                </div>
+            </th>
+             <th>
+                <div style="display:flex;"> 
+                    <input class="form-control" placeholder="Grade" v-model="search.grade.criteria">
                 </div>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control search-small" placeholder="Text" v-model="search.text.criteria">
+                    <input class="form-control" placeholder="Descriptor" v-model="search.descriptor.criteria">
                 </div>
-            </th>
+            </th> -->
             <th>
-                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getAssessments">Find</button>
+                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="warn">Find Test Average</button>
             </th>
             <th>
                 &nbsp;
             </th>
             <th>
+                &nbsp;
+            </th>
+             <th>
+                &nbsp;
+            </th>
+             <th>
                 &nbsp;
             </th>
         </tr>
     </thead>
     <tbody> <!--rows of values in the table -->
-        <tr class="table-primary table-bordered" v-for="row in assessments" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
-            <td>{{ row.assessmentName }}</td>
-            <td>{{ row.description }}</td>
-            <td>{{ row.text }}</td>
+        <tr class="table-primary table-bordered" v-for="row in assessment" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
+            <td>{{ getUserEmail(row.appUserId) }}</td>
             <td>{{ getSubjectName(row.subjectId) }}</td>
+            <td>{{ row.percentage }}</td>
+            <td>{{ row.examLevel }}</td>
+            <td>{{ row.grade }}</td>
+            <td>{{ row.descriptor }}</td>
+
             <td class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
                     <font-awesome-icon icon="minus-circle" />
                 </a>
             </td>
+   <!--         <td class="btn btn primary" role="button" aria-pressed="true">
+                <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
+                </a>
+            </td> -->
         </tr>
     </tbody>
 </table>
@@ -78,29 +102,39 @@
 <script>
 export default {
     name: 'AssessmentTable',
-    props: ['assessments', 'subjects', 'assessmentModel'],
+    props: ['assessments', 'subjects', 'users'],
     data: () => {
         return {
             
             // used for search
             search: {
-                assessmentName: {
-                    column: 'assessmentName',
-                    operator: '=',
-                    criteria: null
-                },
-                description: {
-                    column: 'description',
-                    operator: '=',
-                    criteria: null
-                },
-                text: {
-                    column: 'text',
+                email: {
+                    column: 'appUserId',
                     operator: '=',
                     criteria: null
                 },
                 subject: {
                     column: 'subjectId',
+                    operator: '=',
+                    criteria: null
+                },
+                percentage: {
+                    column: 'percentage',
+                    operator: '=',
+                    criteria: null
+                },
+                examLevel: {
+                    column: 'examLevel',
+                    operator: '=',
+                    criteria: null
+                },
+                grade: {
+                    column: 'grade',
+                    operator: '=',
+                    criteria: null
+                },
+                descriptor: {
+                    column: 'descriptor',
                     operator: '=',
                     criteria: null
                 },
@@ -120,6 +154,18 @@ export default {
             });
             return subject[0].subjectName || '';
         },
+        getAppUserId(appUserId) {
+            let appUserIds = this.users.filter((email) => {
+                return appUserId.email === email;
+            });
+            return appUserIds[0].id || null;
+        },
+        getUserEmail(appUserId) {
+            let email = this.users.filter((email) => {
+                return email.id == appUserId;
+            });
+            return email[0].email || '';
+        },
         clickAssessment(row) {
             this.assessments.forEach((assessment) => {
                 assessment.selected = false;
@@ -131,6 +177,13 @@ export default {
             // $parent is the parent component (in this case the Syllabus.vue component)
             this.$parent.getAssessments(this.search);
         },
+        //just some test code for moment
+        warn() {
+               var x = Math.floor((Math.random() * 101));
+
+               alert ("This student's Average Score for this Subject is: " + x +"%.");
+        },
+
         deleteAssessment(event, row) {
             // stop showing content if deleted
             event.stopPropagation();

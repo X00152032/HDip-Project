@@ -22,17 +22,6 @@
             <label for="assessmentName"><b>Assessment Name *</b></label>
             <input class="form-control" placeholder="Enter name of Assessment" id="assessmentName" v-model="model.assessmentName" :class="{ error : errorName }" @keyup="validate">
         </div>
-      <!--  <div class="form-group">
-            <label for="examLevelId">Exam Level</label>
-            <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="examLevelId" v-model="model.examLevelId">
-                    <option value="blank"></option>
-                    <option value="Higher">Higher</option>
-                    <option value="Ordinary">Ordinary</option>
-                    <option value="Foundation">Foundation</option>
-                </select>
-            </span>
-        </div> -->
         <div class="form-group">
             <label for="percentage"><b>Enter score as a %</b></label>
             <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" :class="{ error : errorName }" @keyup="validate">
@@ -122,7 +111,7 @@
 
 export default {
     name: 'AssessmentForm',
-    props: ['assessments', 'subjects', 'users', 'assessmentModel', 'levels'],
+    props: ['assessments', 'subjects', 'users', 'assessmentModel', 'userModel'],
     components: {
     },
     computed: {
@@ -139,10 +128,9 @@ export default {
             model: this.assessmentModel,
             appUserId: null,
             subjectId: null,
-            assessmentName: null,
-            examLevel: null,
             percentage: null,
             grade: null,
+            examLevel: null,
             descriptor: null,
         }
 

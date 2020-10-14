@@ -3,7 +3,7 @@
 <div>
     <div class="row bg-light text-dark">
         <div class="col-sm-10">
-            <AssessmentForm :levels="levels" :assessments="assessments" :subjects="subjects" :users="users" :assessmentModel="assessmentModel" :userModel="userModel" :levelModel="levelModel"/>
+            <AssessmentForm :assessments="assessments" :subjects="subjects" :users="users" :assessmentModel="assessmentModel" :userModel="userModel"/>
         </div>
         <div class="col-sm-12 bg-secondary">
             <div class="row row-table">
@@ -47,14 +47,13 @@ export default {
             subjects: null,
             assessments: null,
             users: null,
-            levels:null,
         }
     },
     methods: {
         getData() {
             this.error = null;
             this.loading = true;
-            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers(), this.getLevels()])
+            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers()])
                 .catch(error => {
                     this.loading = false;
                     this.error = error.toString();
@@ -84,25 +83,6 @@ export default {
         },
 
             //get list of subjects
-        getLevels() {
-            this.error = null;
-            this.loading = true;
-            let url = serverDetails.url;
-            let params = {...serverDetails.params};
-            axios.get(`${url}ExamLevel`, {
-                    params
-                })
-                .then(response => {
-                    this.loading = false;
-                    this.subjects = response.data;
-                    console.log('promise has resolved', response.data);
-                })
-                .catch(error => {
-                    this.loading = false;
-                    this.error = error.toString();
-                    console.log(error);
-                })
-        },
 
         getUsers(search, order) {
             this.error = null;

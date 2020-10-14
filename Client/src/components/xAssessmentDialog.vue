@@ -1,5 +1,5 @@
 
-<!-- The dialog window for editting the Subjects option in form -->
+<!-- The dialog window for editting the Assessments option in form -->
 <template>
 <!-- https://vuejs.org/v2/examples/modal.html -->
 <transition name="modal">
