@@ -47,6 +47,8 @@ server.use('/subject', require('./routes/subject'));
 server.use('/picture', require('./routes/picture'));
 server.use('/user', require('./routes/user'));
 server.use('/assessment', require('./routes/assessment'));
+//route to use sample data from sample table - will work for proper data too now
+server.use('/sample', require('./routes/sample'));
 // route to /login
 server.use('/login', require('./routes/login'));
 

@@ -7,7 +7,7 @@
         </div>
         <div class="col-sm-12 bg-secondary">
             <div class="row row-table">
-                <AssessmentTable :assessments="assessments" :subjects="subjects" :users="users"/>
+                <AssessmentTable :subjects="subjects" :users="users" :samples="samples" :sampleModel="sampleModel" />
             </div>
         </div>
     </div>
@@ -47,13 +47,14 @@ export default {
             subjects: null,
             assessments: null,
             users: null,
+            samples: null,
         }
     },
     methods: {
         getData() {
             this.error = null;
             this.loading = true;
-            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers()])
+            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers(), this.getSamples()])
                 .catch(error => {
                     this.loading = false;
                     this.error = error.toString();
@@ -82,6 +83,25 @@ export default {
                 })
         },
 
+            getSamples() {
+            this.error = null;
+            this.loading = true;
+            let url = serverDetails.url;
+            let params = {...serverDetails.params};
+            axios.get(`${url}sample`, {
+                    params
+                })
+                .then(response => {
+                    this.loading = false;
+                    this.samples = response.data;
+                    console.log('promise has resolved', response.data);
+                })
+                .catch(error => {
+                    this.loading = false;
+                    this.error = error.toString();
+                    console.log(error);
+                })
+        },
             //get list of subjects
 
         getUsers(search, order) {

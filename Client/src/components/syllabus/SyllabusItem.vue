@@ -128,6 +128,10 @@ h4{
     margin: 10px;
 }
 
+.picture:hover {
+    background-color: rgb(245, 110, 110);
+}
+
 img {
     margin: 10px;
 }

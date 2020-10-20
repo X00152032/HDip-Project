@@ -58,7 +58,7 @@
             <td>{{ row.text }}</td>
             <td>{{ getSubjectName(row.subjectId) }}</td>
             <td class="delete-icon">
-                <a href="javascript:;" v-on:click="deleteContent($event, row)">
+                <a href="javascript:;" v-on:click="deleteContent($event, row)"> <!--add delete pic needed too? -->
                     <font-awesome-icon icon="minus-circle" />
                 </a>
             </td>

@@ -77,6 +77,22 @@ let models = {
         id: null,
         levelName: null,
     },
+    sampleModel: {
+        // used for validation
+        isNew: true,
+        isValid: false,
+        // used for display
+        // model
+        id: null,
+        email: null,
+        subject: null,
+        assessmentName: null,
+        percentage: null,
+        examLevel: null,
+        descriptor: null,
+        average: null,
+    },
+
 }
 
 export default models;

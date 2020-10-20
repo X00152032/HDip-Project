@@ -1,8 +1,8 @@
-<!-- Assessment Page -->
+<!-- Sample Page for calling in sample data into assessment table-->
 <template>
 <div class="subject container-fluid">
     <div class=title> 
-        <h2>Assessments</h2> <hr> 
+        <h2>Sample</h2> <hr> 
     </div>
     <Assessment :contentModel="models.contentModel" :subjectModel="models.subjectModel" :assessmentModel="models.assessmentModel" :sampleModel="models.sampleModel" />
 </div>

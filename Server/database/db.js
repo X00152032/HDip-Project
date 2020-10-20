@@ -4,7 +4,7 @@ const sql = require('mssql');
 // bring in config package used to manage configuration options
 const config = require('config');
 
-// Setup the Database Connection
+// Info to Setup the Database Connection
 // config is used to read the values from the connection section of /config/default.json
 const dbConnPoolPromise = new sql.ConnectionPool(config.get('connection'))
     .connect()

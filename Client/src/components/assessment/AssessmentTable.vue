@@ -4,10 +4,13 @@
         <tr> <!--rows of headings in the table -->
             <th>Email</th>
             <th>Subject</th>
-           <!-- <th>Percentage</th>
+            <th>Test1</th>
+            <th>Test2</th>
+            <th>Test3</th>
+            <th>Test4</th>
+            <th>Test5</th>
             <th>Level</th>
-            <th>Grade</th>
-            <th>Descriptor</th> -->
+            <th>Descriptor</th>
             <th>
                 &nbsp;  <!--needed to continue table line-->
             </th> 
@@ -28,20 +31,40 @@
     <thead class="table-danger">
         <tr>
             <th>
-                <select class="form-control" v-model="search.email.criteria"> <!--subject here is the table-->
+                <select class="form-control" v-model="search.email.criteria">
                     <option value="" selected>Student Email</option>
-                    <option v-for="option in users" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
+                    <option v-for="option in samples" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
                 </select>
             </th>
             <th>
-                <select class="form-control" v-model="search.subject.criteria"> <!--subject here is the table-->
+                <select class="form-control" v-model="search.subject.criteria"> 
                     <option value="" selected>Subject</option>
-                    <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
+                    <option v-for="option in samples" :value="option.id" v-bind:key="option.id">{{ option.subject }}</option>
                 </select>
             </th>
-     <!--       <th>
+            <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="Percentage" v-model="search.percentage.criteria">
+                    <input class="form-control" placeholder="%" v-model="search.Test1.criteria">
+                </div>
+            </th>
+            <th>
+                <div style="display:flex;">
+                    <input class="form-control" placeholder="%" v-model="search.Test2.criteria">
+                </div>
+            </th>
+            <th>
+                <div style="display:flex;">
+                    <input class="form-control" placeholder="%" v-model="search.Test3.criteria">
+                </div>
+            </th>
+            <th>
+                <div style="display:flex;">
+                    <input class="form-control" placeholder="%" v-model="search.Test4.criteria">
+                </div>
+            </th>
+            <th>
+                <div style="display:flex;">
+                    <input class="form-control" placeholder="%" v-model="search.Test5.criteria">
                 </div>
             </th>
             <th>
@@ -49,18 +72,13 @@
                     <input class="form-control" placeholder="Level" v-model="search.examLevel.criteria">
                 </div>
             </th>
-             <th>
-                <div style="display:flex;"> 
-                    <input class="form-control" placeholder="Grade" v-model="search.grade.criteria">
-                </div>
-            </th>
             <th>
                 <div style="display:flex;">
                     <input class="form-control" placeholder="Descriptor" v-model="search.descriptor.criteria">
                 </div>
-            </th> -->
+            </th>
             <th>
-                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="warn">Find Test Average</button>
+                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getSamples">Find</button>
             </th>
             <th>
                 &nbsp;
@@ -77,14 +95,21 @@
         </tr>
     </thead>
     <tbody> <!--rows of values in the table -->
-        <tr class="table-primary table-bordered" v-for="row in assessment" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
-            <td>{{ getUserEmail(row.appUserId) }}</td>
-            <td>{{ getSubjectName(row.subjectId) }}</td>
-            <td>{{ row.percentage }}</td>
+        <tr class="table-danger table-bordered" id="myTable" v-for="row in samples" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
+            <td>{{ row.email }}</td>
+            <td>{{ row.subject }}</td>
+            <td>{{ row.Test1 }}</td>
+            <td>{{ row.Test2 }}</td>
+            <td>{{ row.Test3 }}</td>
+            <td>{{ row.Test4 }}</td>
+            <td>{{ row.Test5 }}</td>
             <td>{{ row.examLevel }}</td>
-            <td>{{ row.grade }}</td>
             <td>{{ row.descriptor }}</td>
 
+            
+            <th>
+                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage">Average</button>
+            </th>
             <td class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
                     <font-awesome-icon icon="minus-circle" />
@@ -102,7 +127,7 @@
 <script>
 export default {
     name: 'AssessmentTable',
-    props: ['assessments', 'subjects', 'users'],
+    props: ['assessments', 'subjects', 'users', 'samples'],
     data: () => {
         return {
             
@@ -118,8 +143,28 @@ export default {
                     operator: '=',
                     criteria: null
                 },
-                percentage: {
-                    column: 'percentage',
+                Test1: {
+                    column: 'Test1',
+                    operator: '=',
+                    criteria: null
+                },
+                Test2: {
+                    column: 'Test2',
+                    operator: '=',
+                    criteria: null
+                },
+                Test3: {
+                    column: 'Test3',
+                    operator: '=',
+                    criteria: null
+                },
+                Test4: {
+                    column: 'Test4',
+                    operator: '=',
+                    criteria: null
+                },
+                Test5: {
+                    column: 'Test5',
                     operator: '=',
                     criteria: null
                 },
@@ -177,12 +222,39 @@ export default {
             // $parent is the parent component (in this case the Syllabus.vue component)
             this.$parent.getAssessments(this.search);
         },
-        //just some test code for moment
-        warn() {
-               var x = Math.floor((Math.random() * 101));
 
-               alert ("This student's Average Score for this Subject is: " + x +"%.");
+        getSamples() {
+            // $parent is the parent component (in this case the Syllabus.vue component)
+            this.$parent.getSamples(this.search);
+
         },
+
+        //just some test code for moment - creates random number 35 to 100%
+        findAverage() {
+               var x = Math.floor(Math.random() * 67)+35;
+               alert ("This student's average score for this subject is: " + x +"%.");
+        },
+//trying code to get average of html table
+//        myFunction() {
+//        var table = document.getElementById("myTable");
+//        var rows = table.rows;
+//
+//        for (var i = 1; i < rows.length; i++) {
+//            var cells = rows[i].cells;
+//            var sum = 0;
+//            var numbers = 0;
+//        for (var x = 2; x < (cells.length -1); x++) {
+//            var cell = cells[x];
+//            var addme = parseInt(cell.innerHTML);
+//        if(!isNaN(addme)) {       
+//            sum += addme;
+//            numbers++;
+//       }
+//        }
+//       var average = sum / numbers;
+//        alert ("Student's average score for this Subject is: " + Math.round(average) +"%.");
+//        }}
+//    },
 
         deleteAssessment(event, row) {
             // stop showing content if deleted
@@ -191,6 +263,7 @@ export default {
                 this.$parent.deleteAssessment(row.id);
             }
         },
-    },
+    }
 }
 </script>
+

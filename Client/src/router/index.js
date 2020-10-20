@@ -12,6 +12,7 @@ import CalendarPage from '../views/CalendarPage.vue'
 import contentModel from '../models';
 import userModel from '../models';
 import assessmentModel from '../models';
+import sampleModel from '../models';
 
 Vue.use(VueRouter)
 
@@ -85,7 +86,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AssessmentPage.vue'),
-    props: { models: assessmentModel, userModel}
+    props: { models: assessmentModel, userModel, sampleModel}
   },
 ]
 
