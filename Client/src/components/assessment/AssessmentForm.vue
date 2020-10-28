@@ -3,28 +3,28 @@
     <!-- use the modal component, pass in the properties -->
     <form @submit.prevent>
         <div class="form-group">
-            <label for="appUserId"><b>Student Email *</b></label> <!-- drop-down box option -->
+          <label for="appUserId"><b>Student Email *</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="appUserId" v-model="model.appUserId">
-                    <option v-for="option in users" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
-                </select>
+              <select class="form-control" style="flex-grow:1;" id="appUserId" v-model="model.appUserId">
+                <option v-for="option in users" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
+              </select>
             </span>
         </div>
         
         <div class="form-group">
-            <label for="yearGroupId"><b>Year Group</b></label> <!-- drop-down box option -->
+          <label for="yearGroupId"><b>Year Group</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
                 <select class="form-control" style="flex-grow:1;" id="yearGroupId" v-model="model.yearGroupId">
-                    <option v-for="option in assessments" :value="option.yearGroupId" v-bind:key="option.id">{{ option.yearGroupId }}</option>
+                  <option v-for="option in assessments" :value="option.yearGroupId" v-bind:key="option.id">{{ option.yearGroupId }}</option>
                 </select>
             </span>
         </div>
         
         <div class="form-group">
-            <label for="subjectId"><b>Subject *</b></label> <!-- drop-down box option -->
+          <label for="subjectId"><b>Subject *</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
                 <select class="form-control" style="flex-grow:1;" id="subjectId" v-model="model.subjectId" :class="{ error : errorSubject }">
-                    <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
+                  <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
                 </select>
             </span>
         </div>
@@ -34,24 +34,25 @@
             <input class="form-control" placeholder="Enter name of Assessment" id="assessmentName" v-model="model.assessmentName" :class="{ error : errorName }" @keyup="validate">
         </div>
 
-          <div class="form-group" id="checkboxes">
-            <b>Please Choose an Assessment Type</b><br>
-              <input type="checkbox" id="assessmentType" v-model="model.isTest">
-                <label>Test</label>
-                  <div class="reveal-if-active">
-
+    <div class="form-group" id="checkboxes"> <!-- open div for all of Test or CBA -->
+          <b>Please Choose an Assessment Type</b><br>
+            <input type="checkbox" id="assessmentType" v-model="model.isTest">
+              <label>Test</label>
+      <div class="reveal-if-active"> <!-- open div to reveal all under Test -->
+                  
+                  
                   <div class="form-group">
-                      <label for="percentage"><b>Enter score as a %</b></label>
+                    <label for="percentage"><b>Enter score as a %</b></label>
                       <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" :class="{ error : errorName }">
                   </div>
-
-            <div class="form-group" id="checkboxes">
-        <span class="form-inline" style="display:flex;">
-            <b>Please Choose a Subject Level</b><br>
-                <input type="checkbox" id="subjectLevel" v-model="model.isHigher">
-                    <label>Higher Level</label>
-                        <div class="reveal-if-active">
-                            <label>Grade</label> <!-- drop-down box option -->
+              
+         
+          <div class="form-group" id="checkboxes">
+              <b>Please Choose a Subject Level</b><br>
+                <input type="checkbox" id="subjectLevelHigher" v-model="model.isHigher">
+                  <label>Higher Level</label>
+                      <div class="reveal-if-active">
+                        <label>Grade</label> <!-- drop-down box option -->
                                 <span class="form-inline" style="display:flex;">
                                     <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
                                       <option value="blank"></option>
@@ -65,10 +66,11 @@
                                         <option value="H8">H8</option>                                       
                                     </select>
                                 </span>
-                        </div>
-              
-                
-                <input type="checkbox" id="subjectLevel" v-model="model.isOrdinary">
+                      </div>
+            </div>
+
+              <div class="form-group" id="checkboxes">
+                <input type="checkbox" id="subjectLevelOrdinary" v-model="model.isOrdinary">
                     <label>Ordinary Level</label>
                         <div class="reveal-if-active">
                           <label>Grade</label> <!-- drop-down box option -->
@@ -86,8 +88,10 @@
                               </select>
                             </span>
                         </div>
-                      
-                <input type="checkbox" id="subjectLevel" v-model="model.isFoundation">
+                </div>
+                            
+              <div class="form-group" id="checkboxes">
+                <input type="checkbox" id="subjectLevelFoundation" v-model="model.isFoundation">
                     <label>Foundation Level</label>
                         <div class="reveal-if-active">
                           <label>Grade</label> <!-- drop-down box option -->
@@ -101,38 +105,41 @@
                               </select>
                             </span>
                         </div>
-                        </span>
-                  </div>
-                </div>
-            <input type="checkbox" id="assessmentType" v-model="model.isCBA">
+              </div>
+          </div><br>    <!-- close ,div reveal-if-active> -->
+
+          <input type="checkbox" id="assessmentType" v-model="model.isCBA">
               <label>CBA</label>
-            <div class="reveal-if-active">
-          <span class="form-inline" style="display:flex;">
+                <div class="reveal-if-active">
+                  <span class="form-inline" style="display:flex;">
+                      <div class="form-group" id="descriptor">
+                        <label for="descriptor"><b>Descriptor</b></label>
+                          <span class="form-inline" style="display:flex;">
+                            <select class="form-control" style="flex-grow:1;" v-model="model.descriptor">
+                              <option v-for="option in assessments" :value="option.descriptor" v-bind:key="option.id">{{ option.descriptor }}</option>
+                            </select>
+                          </span>
+                      </div>
 
-
-            <div class="form-group" id="checkboxes">
-            <b>Please Choose a Subject Level</b><br>
-                <input type="checkbox" id="subjectLevel" v-model="model.isHigher">
-                    <label>Higher Level</label>
-        
-                
-                <input type="checkbox" id="subjectLevel" v-model="model.isOrdinary">
-                    <label>Ordinary Level</label>
-                        
-                <input type="checkbox" id="subjectLevel" v-model="model.isFoundation">
-                    <label>Foundation Level</label>
-                  </span>
-                  
-                  <div class="form-group" id="descriptor">
-                      <label for="descriptor"><b>Descriptor</b></label>
+                      <div class="form-group" id="checkboxes">        
                         <span class="form-inline" style="display:flex;">
-                          <select class="form-control" style="flex-grow:1;" v-model="model.descriptor">
-                            <option v-for="option in assessments" :value="option.descriptor" v-bind:key="option.id">{{ option.descriptor }}</option>
-                          </select>
-                        </span>
-                    </div></div>
-</div>
+                          <b>Please Choose a Subject Level</b><br>
+                            <div class="reveal-if-active">
 
+                              <input type="checkbox" id="subjectLevel" v-model="model.isHigher">
+                                <label>Higher Level</label>
+        
+                              <input type="checkbox" id="subjectLevel" v-model="model.isOrdinary">
+                                <label>Ordinary Level</label>
+                        
+                              <input type="checkbox" id="subjectLevel" v-model="model.isFoundation">
+                                <label>Foundation Level</label>
+                            </div>
+                        </span>
+                      </div>
+                  </span>
+                  </div></div>
+        <br>
         <div class="form-group"> <!-- main buttons to run add, update, reset -->
             <button class="btn btn-primary" v-on:click="addAssessment" :disabled="!model.isValid">Add</button>
             <button class="btn btn-primary" v-on:click="updateAssessment" :disabled="!model.isValid">Update</button>
@@ -327,11 +334,11 @@ p {
 }
 
 #checkboxes input {
-  margin: 10px 5px 8px 10px;
+  margin: 0px 0px 0px 0px;
 }
 
 #checkboxes label {
-  margin: 10px 5px 8px 3px;
+  margin: 0px 0px 0px 0px;
 }
 
 .reveal-if-active {
@@ -342,7 +349,7 @@ p {
 
 input[type="checkbox"]:checked ~ .reveal-if-active {
   opacity: 1;
-  max-height: 200px; /* little bit of a magic number :( */
+  max-height: 600px; /* little bit of a magic number :( */
   overflow: visible;
 }
 
