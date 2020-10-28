@@ -4,22 +4,15 @@
         <tr> <!--rows of headings in the table -->
             <th>Email</th>
             <th>Subject</th>
-            <th>Test1</th>
-            <th>Test2</th>
-            <th>Test3</th>
-            <th>Test4</th>
-            <th>Test5</th>
-            <th>Level</th>
+            <th>Year</th>
+            <th>Subject Level</th>
+            <th>Exam type</th>
+            <th>Percentage</th>
+            <th>Grade</th>
             <th>Descriptor</th>
             <th>
                 &nbsp;  <!--needed to continue table line-->
             </th> 
-            <th>    
-                &nbsp;
-            </th>
-            <th>
-                &nbsp;
-            </th>
             <th>
                 &nbsp;
             </th>
@@ -31,45 +24,40 @@
     <thead class="table-danger">
         <tr>
             <th>
-                <select class="form-control" v-model="search.email.criteria">
+                <select class="form-control" v-model="search.appUserId.criteria">
                     <option value="" selected>Student Email</option>
-                    <option v-for="option in samples" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
+                    <option v-for="option in users" :value="option.id" v-bind:key="option.id">{{ option.email }}</option>
                 </select>
             </th>
             <th>
-                <select class="form-control" v-model="search.subject.criteria"> 
+                <select class="form-control" v-model="search.subjectId.criteria"> 
                     <option value="" selected>Subject</option>
-                    <option v-for="option in samples" :value="option.id" v-bind:key="option.id">{{ option.subject }}</option>
+                    <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
                 </select>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="%" v-model="search.Test1.criteria">
+                    <input class="form-control" placeholder="Year Group" v-model="search.yearGroupId.criteria">
                 </div>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="%" v-model="search.Test2.criteria">
+                    <input class="form-control" placeholder="Level" v-model="search.subjectLevel.criteria">
                 </div>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="%" v-model="search.Test3.criteria">
+                    <input class="form-control" placeholder="Type" v-model="search.assessmentType.criteria">
                 </div>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="%" v-model="search.Test4.criteria">
+                    <input class="form-control" placeholder="%" v-model="search.percentage.criteria">
                 </div>
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="%" v-model="search.Test5.criteria">
-                </div>
-            </th>
-            <th>
-                <div style="display:flex;">
-                    <input class="form-control" placeholder="Level" v-model="search.examLevel.criteria">
+                    <input class="form-control" placeholder="Grade" v-model="search.grade.criteria">
                 </div>
             </th>
             <th>
@@ -78,38 +66,33 @@
                 </div>
             </th>
             <th>
-                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getSamples">Find</button>
+                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getAssessments">Search</button>
             </th>
             <th>
-                &nbsp;
+                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage">Average</button>
             </th>
             <th>
-                &nbsp;
-            </th>
-             <th>
-                &nbsp;
-            </th>
-             <th>
                 &nbsp;
             </th>
         </tr>
     </thead>
     <tbody> <!--rows of values in the table -->
-        <tr class="table-danger table-bordered" id="myTable" v-for="row in samples" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
-            <td>{{ row.email }}</td>
-            <td>{{ row.subject }}</td>
-            <td>{{ row.Test1 }}</td>
-            <td>{{ row.Test2 }}</td>
-            <td>{{ row.Test3 }}</td>
-            <td>{{ row.Test4 }}</td>
-            <td>{{ row.Test5 }}</td>
-            <td>{{ row.examLevel }}</td>
+        <tr class="table-danger table-bordered" id="" v-for="row in assessments" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
+            <td>{{ getEmail(row.appUserId) }}</td>
+            <td>{{ getSubjectName(row.subjectId) }}</td>
+            <td>{{ row.yearGroupId }}</td>
+            <td>{{ row.subjectLevel }}</td>
+            <td>{{ row.assessmentType }}</td>
+            <td>{{ row.percentage }}</td>
+            <td>{{ row.grade }}</td>
             <td>{{ row.descriptor }}</td>
-
-            
             <th>
-                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage">Average</button>
+                &nbsp;
             </th>
+            <th>
+                &nbsp;
+            </th>
+            
             <td class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
                     <font-awesome-icon icon="minus-circle" />
@@ -127,49 +110,44 @@
 <script>
 export default {
     name: 'AssessmentTable',
-    props: ['assessments', 'subjects', 'users', 'samples'],
+    props: ['assessments', 'subjects', 'users'],
     data: () => {
         return {
             
             // used for search
             search: {
-                email: {
+                appUserId: {
                     column: 'appUserId',
                     operator: '=',
                     criteria: null
                 },
-                subject: {
+                subjectId: {
                     column: 'subjectId',
                     operator: '=',
                     criteria: null
                 },
-                Test1: {
-                    column: 'Test1',
+                yearGroupId: {
+                    column: 'yearGroupId',
                     operator: '=',
                     criteria: null
                 },
-                Test2: {
-                    column: 'Test2',
+                subjectLevel: {
+                    column: 'subjectLevel',
                     operator: '=',
                     criteria: null
                 },
-                Test3: {
-                    column: 'Test3',
+                assessmentName: {
+                    column: 'assessmentName',
                     operator: '=',
                     criteria: null
                 },
-                Test4: {
-                    column: 'Test4',
+                assessmentType: {
+                    column: 'assessmentType',
                     operator: '=',
                     criteria: null
                 },
-                Test5: {
-                    column: 'Test5',
-                    operator: '=',
-                    criteria: null
-                },
-                examLevel: {
-                    column: 'examLevel',
+                percentage: {
+                    column: 'percentage',
                     operator: '=',
                     criteria: null
                 },
@@ -200,16 +178,16 @@ export default {
             return subject[0].subjectName || '';
         },
         getAppUserId(appUserId) {
-            let appUserIds = this.users.filter((email) => {
+           let appUserIds = this.users.filter((email) => {
                 return appUserId.email === email;
             });
             return appUserIds[0].id || null;
         },
-        getUserEmail(appUserId) {
-            let email = this.users.filter((email) => {
-                return email.id == appUserId;
+        getEmail(appUserId) {
+            let appUser = this.users.filter((appUser) => {
+                return appUser.id == appUserId;
             });
-            return email[0].email || '';
+            return appUser[0].email || '';
         },
         clickAssessment(row) {
             this.assessments.forEach((assessment) => {
@@ -219,13 +197,8 @@ export default {
             this.$parent.getAssessment(row.id);
         },
         getAssessments() {
-            // $parent is the parent component (in this case the Syllabus.vue component)
+            // $parent is the parent component (in this case the assessment.vue component)
             this.$parent.getAssessments(this.search);
-        },
-
-        getSamples() {
-            // $parent is the parent component (in this case the Syllabus.vue component)
-            this.$parent.getSamples(this.search);
 
         },
 

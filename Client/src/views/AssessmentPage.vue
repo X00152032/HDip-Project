@@ -4,7 +4,7 @@
     <div class=title> 
         <h2>Assessments</h2> <hr> 
     </div>
-    <Assessment :contentModel="models.contentModel" :subjectModel="models.subjectModel" :assessmentModel="models.assessmentModel" :sampleModel="models.sampleModel" />
+    <Assessment :contentModel="models.contentModel" :subjectModel="models.subjectModel" :assessmentModel="models.assessmentModel" />
 </div>
 </template>
 

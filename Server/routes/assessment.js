@@ -15,9 +15,9 @@ const SQL_SELECT_ALL = 'SELECT * FROM dbo.Assessment for json path;';
 const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Assessment WHERE id = @id for json path, without_array_wrapper;';
 
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
-const SQL_INSERT = 'INSERT INTO dbo.Assessment (appUserId, yearGroupId, subjectId, assessmentName, examLevel, percentage, grade, descriptor) VALUES (@appUserId, @yearGroupId, @subjectId, @assessmentName, @examLevel, @percentage, @grade, @description); SELECT * from dbo.Assessment WHERE id = SCOPE_IDENTITY();';
+const SQL_INSERT = 'INSERT INTO dbo.Assessment (appUserId, yearGroupId, subjectId, subjectLevel, assessmentName, assessmentType, percentage, grade, descriptor) VALUES (@appUserId, @yearGroupId, @subjectId, @subjectLevel, @assessmentName, @assessmentType, @percentage, @grade, @descriptor); SELECT * from dbo.Assessment WHERE id = SCOPE_IDENTITY();';
 
-const SQL_UPDATE = 'UPDATE dbo.Assessment SET  appUserId=@appUserId, yearGroupId=@yearGroupId, subjectId=@subjectId, assessmentName = @assessmentName, examLevel = @examLevel, percentage = @percentage, grade = @grade, descriptor = @descriptor WHERE id = @id; SELECT * FROM dbo.Assessment WHERE id = @id;';
+const SQL_UPDATE = 'UPDATE dbo.Assessment SET  appUserId=@appUserId, yearGroupId=@yearGroupId, subjectId=@subjectId, subjectLevel = @subjectLevel, assessmentName = @assessmentName, assessmentType = @assessmentType, percentage = @percentage, grade = @grade, descriptor = @descriptor WHERE id = @id; SELECT * FROM dbo.Assessment WHERE id = @id;';
 
 const SQL_DELETE = 'DELETE FROM dbo.Assessment WHERE id = @id;';
 
@@ -138,11 +138,12 @@ router.post('/', async (req, res) => {
             .input('appUserId', sql.Int, req.body.appUserId)
             .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('subjectId', sql.Int, req.body.subjectId)
+            .input('subjectLevel', sql.NVarChar(50), validator.escape(req.body.subjectLevel))
             .input('assessmentName', sql.NVarChar(50), validator.escape(req.body.assessmentName))
-            .input('examLevel', sql.NVarChar(50), validator.escape(req.body.examLevel))
-            .input('percentage', sql.Float(2), (req.body.percentage))
-            .input('grade', sql.NVarChar(50), validator.escape(req.body.grade))
-            .input('descriptor', sql.NVarChar(MAX), validator.escape(req.body.descriptor || ''))
+            .input('assessmentType', sql.NVarChar(50), validator.escape(req.body.assessmentType))
+            .input('percentage', sql.Float(2), req.body.percentage)
+            .input('grade', sql.NVarChar(50), req.body.grade)
+            .input('descriptor', sql.NVarChar(50), req.body.descriptor || '')            
             // Execute Query
             .query(SQL_INSERT);
 
@@ -181,11 +182,12 @@ router.put('/', async (req, res) => {
             .input('appUserId', sql.Int, req.body.appUserId)
             .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('subjectId', sql.Int, req.body.subjectId)
+            .input('subjectLevel', sql.NVarChar(50), validator.escape(req.body.subjectLevel))
             .input('assessmentName', sql.NVarChar(50), validator.escape(req.body.assessmentName))
-            .input('examLevel', sql.NVarChar(50), validator.escape(req.body.examLevel))
+            .input('assessmentType', sql.NVarChar(50), validator.escape(req.body.assessmentType))
             .input('percentage', sql.Float(2), (req.body.percentage))
             .input('grade', sql.NVarChar(50), validator.escape(req.body.grade))
-            .input('descriptor', sql.NVarChar(MAX), validator.escape(req.body.descriptor || ''))
+            .input('descriptor', sql.NVarChar(50), validator.escape(req.body.descriptor || ''))            
             .input('id', sql.Int, req.body.id)
             // Execute Query
             .query(SQL_UPDATE);

@@ -7,7 +7,7 @@
         </div>
         <div class="col-sm-12 bg-secondary">
             <div class="row row-table">
-                <AssessmentTable :subjects="subjects" :users="users" :assessments="assessments" :assessmentModel="assessmentModel" />
+                <AssessmentTable :subjects="subjects" :users="users" :assessments="assessments" :assessmentModel="assessmentModel"/>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@ export default {
         getData() {
             this.error = null;
             this.loading = true;
-            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers(),])
+            axios.all([this.getSubjects(), this.getAssessmentsStart(), this.getUsers(),])
                 .catch(error => {
                     this.loading = false;
                     this.error = error.toString();
@@ -82,7 +82,6 @@ export default {
                 })
         },
 
-
         //get list of assessments
         getAssessmentsStart() {
             this.error = null;
@@ -103,8 +102,7 @@ export default {
                     console.log(error);
                 })
         },
-            //get list of Users
-
+            //get list of users
         getUsers(search, order) {
             this.error = null;
             this.loading = true;
@@ -184,7 +182,7 @@ export default {
                 })
                 .then(() => { //removed res
                    // this.addPictures(res.data.id, files);
-                    this.getAssessments();
+                    this.getAssessmentsStart();
                     this.loading = false;
                 })
                 .catch(error => {
@@ -206,21 +204,11 @@ export default {
                     this.loading = false;
                     this.assessmentModel.id = response.data.id;
                     this.assessmentModel.appUserId = response.data.appUserId;
-                    this.assessmentModel.yearGroupId = response.data.yearGroupId;                    
+                    this.assessmentModel.yearGroupId = response.data.yearGroupId;
                     this.assessmentModel.subjectId = response.data.subjectId;
-                    this.assessmentModel.subjectLevel = response.data.subjectLevel;  
-                    if (this.assessmentModel.subjectLevel === 'Higher') {
-                        this.assessmentModel.isHigher = true;
-                        }else if (this.assessmentModel.subjectLevel === 'Ordinary') {
-                        this.assessmentModel.isOrdinary = true;
-                        }else if (this.assessmentModel.subjectLevel === 'Foundation') {
-                        this.assessmentModel.isFoundation = true;   }               
+                    this.assessmentModel.subjectLevel = response.data.subjectLevel;
                     this.assessmentModel.assessmentName = response.data.assessmentName;
                     this.assessmentModel.assessmentType = response.data.assessmentType;
-                    if (this.assessmentModel.assessmentType === 'Test') {
-                        this.assessmentModel.isTest = true;
-                        }else if (this.assessmentModel.assessmentType === 'CBA') {
-                        this.assessmentModel.isCBA = true;   }  
                     this.assessmentModel.percentage = response.data.percentage;
                     this.assessmentModel.grade = response.data.grade;
                     this.assessmentModel.descriptor = response.data.descriptor;
@@ -258,28 +246,8 @@ export default {
                     params
                 })
                 .then(response => {
-                this.loading = false;
-
-                    this.assessments = response.data.map((assessment) => {
-                        if (assessment.assessmentType === 'Test') {
-                            assessment.isTest = true;
-
-                        }else if (assessment.assessmentType === 'CBA') {
-                            assessment.isCBA = true;}
-                        return assessment;
-                    });
-
-                    this.assessments = response.data.map((assessment) => {
-                        if (assessment.subjectLevel === 'Higher') {
-                            assessment.isHigher = true;
-
-                        }else if (assessment.subjectLevel === 'Ordinary') {
-                            assessment.isOrdinary = true;
-                        
-                        }else if (assessment.subjectLevel === 'Foundation') {
-                            assessment.isFoundation = true;}
-                        return assessment;
-                    });
+                    this.loading = false;
+                    this.assessments = response.data;
                     console.log('promise has resolved', response.data);
                 })
                 .catch(error => {
@@ -299,7 +267,7 @@ export default {
                 })
                 .then(() => {
                     this.loading = false;
-                    this.getAssessments();
+                    this.getAssessmentsStart();
                 })
                 .catch(error => {
                     this.loading = false;
@@ -318,7 +286,7 @@ export default {
                 })
                 .then(() => {
                 //    this.addPictures(currentAssessment.id, files);
-                    this.getAssessments();
+                    this.getAssessmentsStart();
                     this.loading = false;
                 })
                 .catch(error => {

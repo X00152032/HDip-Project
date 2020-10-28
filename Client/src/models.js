@@ -9,6 +9,7 @@ let models = {
         subjectName: null,
         description: null,
     },
+    
     contentModel: {
         // used for validation
         isNew: true,
@@ -24,6 +25,7 @@ let models = {
         picture: null,
         subjectId: null,
     },
+
     userModel: {
         // used for validation
         isNew: true,
@@ -40,59 +42,29 @@ let models = {
         password: null,
         role: null,
     },
-    assessmentModel: {
+
+        assessmentModel: {
         // used for validation
         isNew: true,
         isValid: false,
         // used for display
+        isHigher: false,
+        isOrdinary: false,
+        isFoundation: false, 
+        isTest: false,
+        isCBA: false,       
         // model
         id: null,
+        appUserId: null,
+        yearGroupId: null,
+        subjectId: null,
+        subjectLevel: null,
         assessmentName: null,
-        examLevel: null,
+        assessmentType: null,
         percentage: null,
         grade: null,
         descriptor: null,
-        appUserId: null,
-        subjectId: null,
-        yearGroupId: null,
     },
-    activityModel: {
-        // used for validation
-        isNew: true,
-        isValid: false,
-        // used for display
-        // model
-        id: null,
-        yearGroupId: null,
-        activityName: null,
-        description: null,
-        day: null,
-        time: null,
-        location: null,
-    },
-    levelModel: {
-        isNew: true,
-        isValid: false,
-        // model
-        id: null,
-        levelName: null,
-    },
-    sampleModel: {
-        // used for validation
-        isNew: true,
-        isValid: false,
-        // used for display
-        // model
-        id: null,
-        email: null,
-        subject: null,
-        assessmentName: null,
-        percentage: null,
-        examLevel: null,
-        descriptor: null,
-        average: null,
-    },
-
 }
 
 export default models;

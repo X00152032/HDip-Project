@@ -10,93 +10,128 @@
                 </select>
             </span>
         </div>
+        
+        <div class="form-group">
+            <label for="yearGroupId"><b>Year Group</b></label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="yearGroupId" v-model="model.yearGroupId">
+                    <option v-for="option in assessments" :value="option.yearGroupId" v-bind:key="option.id">{{ option.yearGroupId }}</option>
+                </select>
+            </span>
+        </div>
+        
         <div class="form-group">
             <label for="subjectId"><b>Subject *</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="subjectId" v-model="model.subjectId" :class="{ error : errorSubject }" @change="validate">
+                <select class="form-control" style="flex-grow:1;" id="subjectId" v-model="model.subjectId" :class="{ error : errorSubject }">
                     <option v-for="option in subjects" :value="option.id" v-bind:key="option.id">{{ option.subjectName }}</option>
                 </select>
             </span>
         </div>
+        
         <div class="form-group">
             <label for="assessmentName"><b>Assessment Name *</b></label>
             <input class="form-control" placeholder="Enter name of Assessment" id="assessmentName" v-model="model.assessmentName" :class="{ error : errorName }" @keyup="validate">
         </div>
-        <div class="form-group">
-            <label for="percentage"><b>Enter score as a %</b></label>
-            <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" :class="{ error : errorName }" @keyup="validate">
-        </div>
-        <div class="form-group">
-            <b>Please Choose an Exam Level</b><br><br>
-            <input type="checkbox" name="choice-Higher" id="choice-Higher">
-            <label for="choice-Higher">Higher Level</label>
+
+          <div class="form-group" id="checkboxes">
+            <b>Please Choose an Assessment Type</b><br>
+              <input type="checkbox" id="assessmentType" v-model="model.isTest">
+                <label>Test</label>
+                  <div class="reveal-if-active">
+
+                  <div class="form-group">
+                      <label for="percentage"><b>Enter score as a %</b></label>
+                      <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" :class="{ error : errorName }">
+                  </div>
+
+            <div class="form-group" id="checkboxes">
+        <span class="form-inline" style="display:flex;">
+            <b>Please Choose a Subject Level</b><br>
+                <input type="checkbox" id="subjectLevel" v-model="model.isHigher">
+                    <label>Higher Level</label>
+                        <div class="reveal-if-active">
+                            <label>Grade</label> <!-- drop-down box option -->
+                                <span class="form-inline" style="display:flex;">
+                                    <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                                      <option value="blank"></option>
+                                        <option value="H1">H1</option>
+                                        <option value="H2">H2</option>
+                                        <option value="H3">H3</option>
+                                        <option value="H4">H4</option>
+                                        <option value="H5">H5</option>
+                                        <option value="H6">H6</option>
+                                        <option value="H7">H7</option>
+                                        <option value="H8">H8</option>                                       
+                                    </select>
+                                </span>
+                        </div>
+              
+                
+                <input type="checkbox" id="subjectLevel" v-model="model.isOrdinary">
+                    <label>Ordinary Level</label>
+                        <div class="reveal-if-active">
+                          <label>Grade</label> <!-- drop-down box option -->
+                            <span class="form-inline" style="display:flex;">
+                              <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                                <option value="blank"></option>
+                                <option value="O1">O1</option>
+                                <option value="O2">O2</option>
+                                <option value="O3">O3</option>
+                                <option value="O4">O4</option>
+                                <option value="O5">O5</option>
+                                <option value="O6">O6</option>
+                                <option value="O7">O7</option>
+                                <option value="O8">O8</option>                                        
+                              </select>
+                            </span>
+                        </div>
+                      
+                <input type="checkbox" id="subjectLevel" v-model="model.isFoundation">
+                    <label>Foundation Level</label>
+                        <div class="reveal-if-active">
+                          <label>Grade</label> <!-- drop-down box option -->
+                            <span class="form-inline" style="display:flex;">
+                              <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                                <option value="blank"></option>
+                                <option value="F1">F1</option>
+                                <option value="F2">F2</option>
+                                <option value="F3">F3</option>
+                                <option value="F4">F4</option>                                        
+                              </select>
+                            </span>
+                        </div>
+                        </span>
+                  </div>
+                </div>
+            <input type="checkbox" id="assessmentType" v-model="model.isCBA">
+              <label>CBA</label>
             <div class="reveal-if-active">
-            <label for="grade_Higher">Grade</label> <!-- drop-down box option -->
-            <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
-                    <option value="blank"></option>
-                    <option value="H1">H1</option>
-                    <option value="H2">H2</option>
-                    <option value="H3">H3</option>
-                    <option value="H4">H4</option>
-                    <option value="H5">H5</option>
-                    <option value="H6">H6</option>
-                    <option value="H7">H7</option>
-                    <option value="H8">H8</option>                                       
-                </select>
-            </span>
-        </div>
-        </div>
-        <div class="form-group">
-            <input type="checkbox" name="choice-Ordinary" id="choice-Ordinary">
-            <label for="choice-Ordinary">Ordinary Level</label>
-            <div class="reveal-if-active">
-            <label for="grade_Ordinary">Grade</label> <!-- drop-down box option -->
-            <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
-                    <option value="blank"></option>
-                    <option value="O1">O1</option>
-                    <option value="O2">O2</option>
-                    <option value="O3">O3</option>
-                    <option value="O4">O4</option>
-                    <option value="O5">O5</option>
-                    <option value="O6">O6</option>
-                    <option value="O7">O7</option>
-                    <option value="O8">O8</option>                                        
-                </select>
-            </span>
-        </div>
-    </div>
-        <div class="form-group">
-            <input type="checkbox" name="choice-Foundation" id="choice-Foundation">
-            <label for="choice-Foundation">Foundation Level</label>
-            <div class="reveal-if-active">
-            <label for="grade_Foundation">Grade</label> <!-- drop-down box option -->
-            <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
-                    <option value="blank"></option>
-                    <option value="F1">F1</option>
-                    <option value="F2">F2</option>
-                    <option value="F3">F3</option>
-                    <option value="F4">F4</option>                                        
-                </select>
-            </span>
-        </div>
-        <div class="form-group">
-            <label for="Descriptor"><b>Descriptor</b></label> <!-- drop-down box option -->
-            <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="Descriptor" v-model="model.Descriptor">
-                    <option value="blank"></option>
-                    <option value="Exceptional">Exceptional</option>
-                    <option value="Above Expectations">Above Expectations</option>
-                    <option value="In line with Expectations">In line with Expectations</option>
-                    <option value="Yet to meet Expectations">Yet to meet Expectations</option>
-                    <option value="Not Rated">Not Rated</option>
-                <!--  <option v-for="option in assessments" :value="option.id" v-bind:key="option.id">{{ option.descriptor }}</option> -->
-                </select>
-            </span>
-        </div>
-        </div>
+          <span class="form-inline" style="display:flex;">
+
+
+            <div class="form-group" id="checkboxes">
+            <b>Please Choose a Subject Level</b><br>
+                <input type="checkbox" id="subjectLevel" v-model="model.isHigher">
+                    <label>Higher Level</label>
+        
+                
+                <input type="checkbox" id="subjectLevel" v-model="model.isOrdinary">
+                    <label>Ordinary Level</label>
+                        
+                <input type="checkbox" id="subjectLevel" v-model="model.isFoundation">
+                    <label>Foundation Level</label>
+                  </span>
+                  
+                  <div class="form-group" id="descriptor">
+                      <label for="descriptor"><b>Descriptor</b></label>
+                        <span class="form-inline" style="display:flex;">
+                          <select class="form-control" style="flex-grow:1;" v-model="model.descriptor">
+                            <option v-for="option in assessments" :value="option.descriptor" v-bind:key="option.id">{{ option.descriptor }}</option>
+                          </select>
+                        </span>
+                    </div></div>
+</div>
 
         <div class="form-group"> <!-- main buttons to run add, update, reset -->
             <button class="btn btn-primary" v-on:click="addAssessment" :disabled="!model.isValid">Add</button>
@@ -108,140 +143,195 @@
 </template>
 
 <script>
-
 export default {
-    name: 'AssessmentForm',
-    props: ['assessments', 'subjects', 'users', 'assessmentModel', 'userModel'],
-    components: {
+  name: "AssessmentForm",
+  props: ["assessments", "subjects", "users", "assessmentModel", "userModel", "subjectModel"],
+  computed: {
+    errorName() {
+      return (
+        !this.model.isNew &&
+        (!this.model.assessmentName || this.model.assessmentName.length < 3)
+      );
     },
-    computed: {
-        errorName() {
-            return !this.model.isNew && (!this.model.assessmentName || this.model.assessmentName.length < 3);
-        },
-        
-        errorSubject() {
-            return !this.model.isNew && !this.model.subjectId;
-        }
-    },
-    data() {
-        return {
-            model: this.assessmentModel,
-            appUserId: null,
-            subjectId: null,
-            percentage: null,
-            grade: null,
-            examLevel: null,
-            descriptor: null,
-        }
 
-    },
-    methods: {
-        
-        validate() {
-            this.model.isNew = false;
-            // returns an array of 1 subject e.g. [{ id: 0, subjectName: '' }]
-            let subject = this.subjects.filter((subject) => {
-                return subject.id == this.model.subjectId;
-            });
-            if (!this.model.assessmentName || this.model.assessmentName.length < 3 || subject.length === 0) {
-                this.model.isValid = false;
-            } else {
-                this.model.isValid = true;
-            }
-        },
+    errorSubject() {
+      return !this.model.isNew && !this.model.subjectId;
+    }
 
-        addAssessment() {
-            if (!this.validate()) {
-                return; // Not valid no more processing
-            }
-            let newAssessment = {
-                appUserId: this.model.appUserId,
-                subjectId: this.model.subjectId,
-                yearGroupId: this.model.yearGroupId,
-                assessmentName: this.model.assessmentName,
-                examLevel: this.model.examLevel,
-                percentage: this.model.percentage,
-                descriptor: this.model.descriptor,
-                grade: this.model.grade,
-            };
-            this.$parent.addAssessment(newAssessment);
-            this.resetAssessment();
-        },
-        updateAssessment() {
-            if (!this.model.id) {
-                alert('Please select Assessment to update');
-                return; // No content selected
-            }
-            if (!this.validate()) {
-                return; // Not valid no more processing
-            }
-                let currentAssessment = {
-                id: this.model.id,
-                appUserId: this.model.appUserId,
-                subjectId: this.model.subjectId,
-                yearGroupId: this.model.yearGroupId,
-                assessmentName: this.model.assessmentName,
-                examLevel: this.model.examLevel,
-                percentage: this.model.percentage,
-                descriptor: this.model.descriptor,
-                grade: this.model.grade,
-            };
-            this.$parent.updateAssessment(currentAssessment); 
-            this.resetAssessment();
-        },
-        resetAssessment() {
-            this.model.isNew = true;
-            this.model.isValid = false;
-            this.model.id = null;
-            this.model.assessmentName = null;
-            this.model.examLevel = null;
-            this.model.percentage = null;
-            this.model.grade = null;
-            this.model.descriptor = null;
-            this.model.appUserId = null;
-            this.model.subjectId = null;
-            this.model.yearGroupId = null;
-        },
+  },
+  data() {
+    return {
+      model: this.assessmentModel,
+      appUserId: null,
+      yearGroupId: null,
+      subjectId: null,
+      subjectLevel: null,
+      assessmentName: null,
+      assessmentType: null,
+      percentage: null,
+      grade: null,
+      descriptor: null,
+    }
+  },
+
+  methods: {
+    validate() {
+      this.model.isNew = false;
+      // returns an array of 1 assessment e.g. [{ id: 0, assessmentName: '' }]
+      this.model.isNew = false;
+      let assessment = this.assessments.filter((assessment) => {
+        return assessment.id == this.model.assessmentId;
+      });
+
+      if (
+        !this.model.assessmentName ||
+        this.model.assessmentName.length < 3 ||
+        assessment.length === 0
+      ) {
+        this.model.isValid = false;
+      } else {
+        this.model.isValid = true;
+      }
     },
-}
+
+    addAssessment() {
+      if (!this.validate()) {
+        return; // Not valid no more processing
+      }
+      if (this.model.isHigher) {
+        this.model.subjectLevel = "Higher";
+      } else if (this.model.isOrdinary) {
+        this.model.subjectLevel = "Ordinary";
+      } else if (this.model.isFoundation) {
+        this.model.subjectLevel = "Foundation";
+      } else {
+        alert("Please select a subject level");
+        return;
+      }
+
+      if (this.model.isTest) {
+        this.model.assessmentType = "Test";
+      } else if (this.model.isCBA) {
+        this.model.assessmentType = "CBA";
+      } else {
+        alert("Please select an Assessment Type");
+        return;
+      }
+
+      let newAssessment = {
+        appUserId: this.model.appUserId,
+        yearGroupId: this.model.yearGroupId,
+        subjectId: this.model.subjectId,
+        subjectLevel: this.model.subjectLevel,
+        assessmentName: this.model.assessmentName,
+        assessmentType: this.model.assessmentType,
+        percentage: this.model.percentage,
+        grade: this.model.grade,
+        descriptor: this.model.descriptor,
+      };
+      this.$parent.addAssessment(newAssessment);
+      this.resetAssessment();
+    },
+    updateAssessment() {
+      if (!this.model.id) {
+        alert("Please select Assessment to update");
+        return; // No content selected
+      }
+      if (!this.validate()) {
+        return; // Not valid no more processing
+      }
+      if (this.model.isHigher) {
+        this.model.subjectLevel = "Higher";
+      } else if (this.model.isOrdinary) {
+        this.model.subjectLevel = "Ordinary";
+      } else if (this.model.isFoundation) {
+        this.model.subjectLevel = "Foundation";
+      } else {
+        alert("Please select a subject level");
+        return;
+      }
+
+      if (this.model.isTest) {
+        this.model.assessmentType = "Test";
+      } else if (this.model.isCBA) {
+        this.model.assessmentType = "CBA";
+      } else {
+        alert("Please select an Assessment Type");
+        return;
+      }
+      let currentAssessment = {
+        id: this.model.id,
+        appUserId: this.model.appUserId,
+        yearGroupId: this.model.yearGroupId,
+        subjectId: this.model.subjectId,
+        subjectLevel: this.model.subjectLevel,
+        assessmentName: this.model.assessmentName,
+        assessmentType: this.model.assessmentType,
+        percentage: this.model.percentage,
+        grade: this.model.grade,
+        descriptor: this.model.descriptor,
+      };
+      this.$parent.updateAssessment(currentAssessment);
+      this.resetAssessment();
+    },
+    resetAssessment() {
+      this.model.isNew = true;
+      this.model.isValid = false;
+      this.model.id = null;
+      //
+      this.model.appUserId = null;
+      this.model.yearGroupId = null;
+      this.model.subjectId = null;
+      this.model.subjectLevel = null;
+      this.model.assessmentName = null;
+      this.model.assessmentType = null;
+      this.model.percentage = null;
+      this.model.grade = null;
+      this.model.descriptor = null;
+      this.model.isHigher = false;
+      this.model.isOrdinary = false;
+      this.model.isFoundation = false;
+      this.model.isTest = false;
+      this.model.isCBA = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
 /*Scope applies css to this only*/
 
 article {
-    padding-top: 10px;
-    border-bottom: 3px solid rgb(33, 54, 240);
+  padding-top: 10px;
+  border-bottom: 3px solid rgb(33, 54, 240);
 }
 
 .delete-icon {
-    color: rgb(201, 21, 21);
-    display:inline-block;
-    text-align: right;
-    padding-top: 5px;
-    padding-right: 10px;
+  color: rgb(201, 21, 21);
+  display: inline-block;
+  text-align: right;
+  padding-top: 5px;
+  padding-right: 10px;
 }
 
-
-
 img {
-    margin: 10px;
+  margin: 10px;
 }
 
 p {
-    margin: 8px;
+  margin: 8px;
 }
 
-#choice-Higher {
-text-align:center;
+#checkboxes {
+  text-align: left;
 }
 
-#choice-Higher input{
-margin: 10px 0px 0px 0px;
+#checkboxes input {
+  margin: 10px 5px 8px 10px;
 }
 
-#choice-Higher label{
-margin: 10px 0px 0px 3px;
+#checkboxes label {
+  margin: 10px 5px 8px 3px;
 }
 
 .reveal-if-active {
@@ -252,7 +342,19 @@ margin: 10px 0px 0px 3px;
 
 input[type="checkbox"]:checked ~ .reveal-if-active {
   opacity: 1;
-  max-height: 100px; /* little bit of a magic number :( */
+  max-height: 200px; /* little bit of a magic number :( */
   overflow: visible;
+}
+
+#subjectLevel {
+  text-align: left;
+}
+
+#subjectLevel input {
+  margin: 5px 5px 0px 0px;
+}
+
+#subjectLevel label {
+  margin: 5px 0px 0px 3px;
 }
 </style>

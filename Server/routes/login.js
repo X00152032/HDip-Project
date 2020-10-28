@@ -30,9 +30,10 @@ router.post('/auth', async (req, res) => {
         // Define the JWT contents
         const payload = {
           username: user.email,
-          // process.env.JWT_EXPIRATION_MS,
+          //process.env.JWT_EXPIRATION_MS,
           // Set expiry to 30 minutes
           expires: Date.now() + (1000 * 60 * 30),
+  
         };
 
         //assigns payload to req.user
