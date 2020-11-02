@@ -37,8 +37,8 @@
     <div class="form-group" id="checkboxes"> <!-- open div for all of Test or CBA -->
           <b>Please Choose an Assessment Type</b><br>
             <input type="checkbox" id="assessmentType" v-model="model.isTest">
-              <label>Test</label>
-      <div class="reveal-if-active"> <!-- open div to reveal all under Test -->
+              <label><b>Test</b></label>
+                <div class="reveal-if-active"> <!-- open div to reveal all under Test -->
                   
                   
                   <div class="form-group">
@@ -106,39 +106,41 @@
                             </span>
                         </div>
               </div>
-          </div><br>    <!-- close ,div reveal-if-active> -->
+ </div> <br>    <!-- close ,div reveal-if-active> -->
+                      <div class="form-group" id="checkboxes">        
 
           <input type="checkbox" id="assessmentType" v-model="model.isCBA">
-              <label>CBA</label>
+              <label><b>CBA</b></label><br>
                 <div class="reveal-if-active">
-                  <span class="form-inline" style="display:flex;">
-                      <div class="form-group" id="descriptor">
-                        <label for="descriptor"><b>Descriptor</b></label>
-                          <span class="form-inline" style="display:flex;">
-                            <select class="form-control" style="flex-grow:1;" v-model="model.descriptor">
-                              <option v-for="option in assessments" :value="option.descriptor" v-bind:key="option.id">{{ option.descriptor }}</option>
-                            </select>
-                          </span>
-                      </div>
+                      <div class="form-group">
+            <label for="descriptor"><b>Descriptor</b></label> <!-- drop-down box option -->
+            <span class="form-inline" style="display:flex;">
+                <select class="form-control" style="flex-grow:1;" id="descriptor" v-model="model.descriptor">
+                    <option value="blank"></option>
+                    <option value="Exceptional">Exceptional</option>
+                    <option value="Above Expectations">Above Expectations</option>
+                    <option value="In line with Expectations">In line with Expectations</option>
+                    <option value="Yet to meet Expectations">Yet to meet Expectations</option>
+                    <option value="Not Rated">Not Rated</option>
+                <!--  <option v-for="option in assessments" :value="option.id" v-bind:key="option.id">{{ option.descriptor }}</option> -->
+                </select>
+            </span>
+        </div>
 
                       <div class="form-group" id="checkboxes">        
-                        <span class="form-inline" style="display:flex;">
                           <b>Please Choose a Subject Level</b><br>
-                            <div class="reveal-if-active">
 
-                              <input type="checkbox" id="subjectLevel" v-model="model.isHigher">
+                              <input type="checkbox" id="subjectLevelHigher2" v-model="model.isHigher2">
                                 <label>Higher Level</label>
         
-                              <input type="checkbox" id="subjectLevel" v-model="model.isOrdinary">
+                              <input type="checkbox" id="subjectLevelOrdinary2" v-model="model.isOrdinary2">
                                 <label>Ordinary Level</label>
                         
-                              <input type="checkbox" id="subjectLevel" v-model="model.isFoundation">
+                              <input type="checkbox" id="subjectLevelFoundation2" v-model="model.isFoundation2">
                                 <label>Foundation Level</label>
-                            </div>
-                        </span>
                       </div>
-                  </span>
-                  </div></div>
+                  </div>
+                </div></div>
         <br>
         <div class="form-group"> <!-- main buttons to run add, update, reset -->
             <button class="btn btn-primary" v-on:click="addAssessment" :disabled="!model.isValid">Add</button>
@@ -152,7 +154,7 @@
 <script>
 export default {
   name: "AssessmentForm",
-  props: ["assessments", "subjects", "users", "assessmentModel", "userModel", "subjectModel"],
+  props: ["assessments", "subjects", "users", "assessmentModel", "userModel", "contentModel"],
   computed: {
     errorName() {
       return (
@@ -183,39 +185,19 @@ export default {
 
   methods: {
     validate() {
-      this.model.isNew = false;
-      // returns an array of 1 assessment e.g. [{ id: 0, assessmentName: '' }]
-      this.model.isNew = false;
-      let assessment = this.assessments.filter((assessment) => {
-        return assessment.id == this.model.assessmentId;
-      });
-
-      if (
-        !this.model.assessmentName ||
-        this.model.assessmentName.length < 3 ||
-        assessment.length === 0
-      ) {
-        this.model.isValid = false;
-      } else {
-        this.model.isValid = true;
-      }
-    },
+     this.model.isNew = false;
+            if (!this.model.assessmentName || this.model.assessmentName.length < 3) {
+                this.model.isValid = false;
+            } else {
+                this.model.isValid = true;
+            }
+            return this.model.isValid;
+        },
 
     addAssessment() {
       if (!this.validate()) {
         return; // Not valid no more processing
       }
-      if (this.model.isHigher) {
-        this.model.subjectLevel = "Higher";
-      } else if (this.model.isOrdinary) {
-        this.model.subjectLevel = "Ordinary";
-      } else if (this.model.isFoundation) {
-        this.model.subjectLevel = "Foundation";
-      } else {
-        alert("Please select a subject level");
-        return;
-      }
-
       if (this.model.isTest) {
         this.model.assessmentType = "Test";
       } else if (this.model.isCBA) {
@@ -224,6 +206,29 @@ export default {
         alert("Please select an Assessment Type");
         return;
       }
+      if ((this.model.isHigher) || (this.model.isHigher2)){
+        this.model.subjectLevel = "Higher";
+      } else if ((this.model.isOrdinary) || (this.model.isOrdinary2)) {
+        this.model.subjectLevel = "Ordinary";
+      } else if ((this.model.isFoundation) || (this.model.isFoundation2)) {
+        this.model.subjectLevel = "Foundation";
+      } else {
+        alert("Please select a subject level");
+        return;
+      }
+
+      if ((this.model.grade === "blank") || (this.model.grade === "")) {
+        alert("Please select a Grade");
+        return;
+      }
+
+      if ((this.model.descriptor === "blank") || (this.model.descriptor === "") && (this.model.isType === "CBA")){
+        alert("Please select a Descriptor");
+        return;
+      }
+    //  if ((this.model.descriptor === "blank") || (this.model.descriptor === "") && (this.model.isType === "Test")){
+    //    return;
+    //  }
 
       let newAssessment = {
         appUserId: this.model.appUserId,
@@ -239,6 +244,9 @@ export default {
       this.$parent.addAssessment(newAssessment);
       this.resetAssessment();
     },
+
+
+
     updateAssessment() {
       if (!this.model.id) {
         alert("Please select Assessment to update");
@@ -247,25 +255,42 @@ export default {
       if (!this.validate()) {
         return; // Not valid no more processing
       }
-      if (this.model.isHigher) {
+      if ((this.model.isHigher) || (this.model.isHigher2)){
         this.model.subjectLevel = "Higher";
-      } else if (this.model.isOrdinary) {
+      } else if ((this.model.isOrdinary) || (this.model.isOrdinary2)) {
         this.model.subjectLevel = "Ordinary";
-      } else if (this.model.isFoundation) {
+      } else if ((this.model.isFoundation) || (this.model.isFoundation2)) {
         this.model.subjectLevel = "Foundation";
       } else {
         alert("Please select a subject level");
         return;
       }
 
+      if (this.model.grade === "blank" || "") {
+        alert("Please select a Grade");
+        return;
+      }
+
+      if ((this.model.descriptor === "blank") || (this.model.descriptor === "") && (this.model.isType === "CBA")){
+        alert("Please select a Descriptor");
+        return;
+      }
+ //     if ((this.model.descriptor === "blank") || (this.model.descriptor === "") && (this.model.isType === "Test")){
+ //       return;
+  //    }
+
       if (this.model.isTest) {
-        this.model.assessmentType = "Test";
+        this.model.assessmentType = "Test",
+        this.model.isCBA = false;
       } else if (this.model.isCBA) {
-        this.model.assessmentType = "CBA";
+        this.model.assessmentType = "CBA",
+        this.model.isTest = false;
       } else {
         alert("Please select an Assessment Type");
         return;
       }
+
+      
       let currentAssessment = {
         id: this.model.id,
         appUserId: this.model.appUserId,
@@ -280,6 +305,7 @@ export default {
       };
       this.$parent.updateAssessment(currentAssessment);
       this.resetAssessment();
+      
     },
     resetAssessment() {
       this.model.isNew = true;
@@ -298,6 +324,9 @@ export default {
       this.model.isHigher = false;
       this.model.isOrdinary = false;
       this.model.isFoundation = false;
+      this.model.isHigher2 = false;
+      this.model.isOrdinary2 = false;
+      this.model.isFoundation2 = false;
       this.model.isTest = false;
       this.model.isCBA = false;
     },
@@ -334,11 +363,11 @@ p {
 }
 
 #checkboxes input {
-  margin: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 10px;
 }
 
 #checkboxes label {
-  margin: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 10px;
 }
 
 .reveal-if-active {

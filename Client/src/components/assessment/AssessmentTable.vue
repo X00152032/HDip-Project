@@ -69,7 +69,7 @@
                 <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getAssessments">Search</button>
             </th>
             <th>
-                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage">Average</button>
+                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage2">Average</button>
             </th>
             <th>
                 &nbsp;
@@ -228,6 +228,26 @@ export default {
 //        alert ("Student's average score for this Subject is: " + Math.round(average) +"%.");
 //        }}
 //    },
+
+
+//public static NewCode[] GetAltCode(int altCodeVer, string descrip)
+//{
+//    var sql = @"select Code, Description, VersionID from Code.CodeLookup where versionid=@vers and description=@description";
+
+//    return ObjectFactory.GetInstance<IDatabaseFactory>().Query<NewCode>(sql, new { vers = altCodeVer, description = descrip, }).ToArray();
+//}
+
+//<option v-for="(location, index) in locations" v-bind:value="location.id" v-bind:selected="index === 0">
+//  {{ location.from }} - {{ location.to }}
+// </option>
+
+            findAverage2() {
+            const grades = [80, 77, 88, 95, 68];
+            const total = grades.reduce((acc, c) => acc + c, 0);
+            const answer = total / grades.length;
+            alert ("This student's average score for this subject is: " + answer +"%.");
+            },
+
 
         deleteAssessment(event, row) {
             // stop showing content if deleted

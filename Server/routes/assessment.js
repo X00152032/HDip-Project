@@ -1,8 +1,10 @@
+// https://restfulapi.net/http-status-codes/
+
 // Import router package
 const router = require('express').Router();
 const validator = require('validator');
 const { sql, dbConnPoolPromise } = require('../database/db.js');
-const { MAX } = require('mssql');
+//const { MAX } = require('mssql');
 
 // Define SQL statements here for use in function below
 // These are parameterised queries note @named parameters.
@@ -49,7 +51,7 @@ router.get('/', async (req, res) => {
  * @id passed as parameter via url
  * @return JSON test object
  */
-router.get('/:id', async (req, res) => {
+    router.get('/:id', async (req, res) => {
     // Read value of parameter from the request url
     const assessmentId = req.params.id;
 
@@ -58,10 +60,11 @@ router.get('/:id', async (req, res) => {
      * See link to validator npm package (at top) for docs
      * If validation fails return an error message
      */
-    if (!validator.isNumeric(assessmentId, { no_symbols: true })) {
+     if (!validator.isNumeric(assessmentId, { no_symbols: true })) {
         res.json({ "error": "invalid id parameter" });
-        return false;
-    }
+        return true;
+        }
+    
 
     /**
      * If validation passed execute query and return result
@@ -107,8 +110,7 @@ function validate(req, isUpdate) {
     const assessmentName = validator.escape(req.body.assessmentName);
     if (assessmentName === "") {
         errors += "invalid assessmentName; ";
-    }
-
+    }     
     return errors;
 }
 
@@ -138,12 +140,12 @@ router.post('/', async (req, res) => {
             .input('appUserId', sql.Int, req.body.appUserId)
             .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('subjectId', sql.Int, req.body.subjectId)
-            .input('subjectLevel', sql.NVarChar(50), validator.escape(req.body.subjectLevel))
+            .input('subjectLevel', sql.NVarChar(50), req.body.subjectLevel)
             .input('assessmentName', sql.NVarChar(50), validator.escape(req.body.assessmentName))
-            .input('assessmentType', sql.NVarChar(50), validator.escape(req.body.assessmentType))
+            .input('assessmentType', sql.NVarChar(50), req.body.assessmentType)
             .input('percentage', sql.Float(2), req.body.percentage)
             .input('grade', sql.NVarChar(50), req.body.grade)
-            .input('descriptor', sql.NVarChar(50), req.body.descriptor || '')            
+            .input('descriptor', sql.NVarChar(50), req.body.descriptor)            
             // Execute Query
             .query(SQL_INSERT);
 
@@ -182,12 +184,12 @@ router.put('/', async (req, res) => {
             .input('appUserId', sql.Int, req.body.appUserId)
             .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('subjectId', sql.Int, req.body.subjectId)
-            .input('subjectLevel', sql.NVarChar(50), validator.escape(req.body.subjectLevel))
+            .input('subjectLevel', sql.NVarChar(50), req.body.subjectLevel)
             .input('assessmentName', sql.NVarChar(50), validator.escape(req.body.assessmentName))
-            .input('assessmentType', sql.NVarChar(50), validator.escape(req.body.assessmentType))
-            .input('percentage', sql.Float(2), (req.body.percentage))
-            .input('grade', sql.NVarChar(50), validator.escape(req.body.grade))
-            .input('descriptor', sql.NVarChar(50), validator.escape(req.body.descriptor || ''))            
+            .input('assessmentType', sql.NVarChar(50), req.body.assessmentType)
+            .input('percentage', sql.Float(2), req.body.percentage)
+            .input('grade', sql.NVarChar(50), req.body.grade)
+            .input('descriptor', sql.NVarChar(50), req.body.descriptor)            
             .input('id', sql.Int, req.body.id)
             // Execute Query
             .query(SQL_UPDATE);

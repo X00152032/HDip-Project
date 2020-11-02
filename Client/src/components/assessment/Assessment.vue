@@ -3,11 +3,11 @@
 <div>
     <div class="row bg-light text-dark">
         <div class="col-sm-10">
-            <AssessmentForm :assessments="assessments" :subjects="subjects" :users="users" :assessmentModel="assessmentModel" :userModel="userModel"/>
+            <AssessmentForm :assessments="assessments" :subjects="subjects" :users="users" :assessmentModel="assessmentModel"/>
         </div>
         <div class="col-sm-12 bg-secondary">
             <div class="row row-table">
-                <AssessmentTable :subjects="subjects" :users="users" :assessments="assessments" :assessmentModel="assessmentModel" />
+                <AssessmentTable :subjects="subjects" :users="users" :assessments="assessments" :assessmentModel="assessmentModel"/>
             </div>
         </div>
     </div>
@@ -53,14 +53,120 @@ export default {
         getData() {
             this.error = null;
             this.loading = true;
-            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers(),])
+            axios.all([this.getSubjects(), this.getAssessments(), this.getUsers()])
                 .catch(error => {
                     this.loading = false;
                     this.error = error.toString();
                     console.log(error);
                 });
         },
-        
+
+        getAssessments(search, order) {
+            this.error = null;
+            this.loading = true;
+            let url = serverDetails.url;
+            let params = {...serverDetails.params};
+            if (search) {
+                params.search = {};
+                Object.values(search).forEach((value) => {
+                    if (value.criteria) {
+                        params.search[value.column] = {
+                            column: value.column,
+                            operator: value.operator,
+                            criteria: value.criteria
+                        }
+                        console.log(params);
+                    }
+                });
+            }
+            if (order && order.column) {
+                params.order = order;
+            }
+            axios.get(`${url}assessment`, {
+                    params
+                })
+                .then(response => {
+                    this.loading = false;
+                    this.assessments = response.data;
+                    console.log('promise has resolved', response.data);
+                })    
+                .catch(error => {
+                    this.loading = false;
+                    this.error = error.toString();
+                    console.log(error);
+                })
+        },
+
+        //add Assessment to the database
+        addAssessment(newAssessment) {
+            this.error = null;
+            this.loading = true;
+            let url = serverDetails.url;
+            let params = {...serverDetails.params};
+            axios.post(`${url}assessment`, newAssessment, {
+                    params
+                })
+                .then(() => {
+                    this.getAssessments();
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+                    this.error = error.toString();
+                    console.log(error);
+                })
+        },
+                //calls list of assessments and returns according to model
+            getAssessment(id) {
+                this.error = null;
+                this.loading = true;
+                let url = serverDetails.url;
+                let params = {...serverDetails.params};
+                axios.get(`${url}assessment/${id}`, {
+                    params
+                    })
+                    .then(response => {
+                        this.loading = false;
+                        this.assessmentModel.id = response.data.id;
+                        this.assessmentModel.appUserId = response.data.appUserId;
+                        this.assessmentModel.yearGroupId = response.data.yearGroupId;                    
+                        this.assessmentModel.subjectId = response.data.subjectId;
+                        this.assessmentModel.assessmentName = response.data.assessmentName;
+                        if (this.assessmentModel.assessmentType === 'Test') {
+                            this.assessmentModel.isTest = true;
+                        }else if (this.assessmentModel.assessmentType === 'CBA') {
+                            this.assessmentModel.isCBA = true;   }  
+                        this.assessmentModel.assessmentType = response.data.assessmentType;
+                        if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'Test')){
+                                ((this.assessmentModel.isHigher = true) && (this.assessmentModel.isHigher2 = false));
+
+                            }else if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'CBA')){
+                                ((this.assessmentModel.isHigher = false) && (this.assessmentModel.isHigher2 = true));
+                        
+                            }else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'Test')){
+                                ((this.assessmentModel.isOrdinary = true) && (this.assessmentModel.isOrdinary2 = false));
+
+                            }else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'CBA')){
+                                ((this.assessmentModel.isOrdinary = false) && (this.assessmentModel.isOrdinary2 = true));
+
+                            }else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'Test')){
+                                ((this.assessmentModel.isFoundation = true) && (this.assessmentModel.isFoundation2 = false));
+
+                            }else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'CBA')){
+                                ((this.assessmentModel.isFoundation = false) && (this.assessmentModel.isFoundation2 = true));}
+                        this.assessmentModel.subjectLevel = response.data.subjectLevel;
+                        this.assessmentModel.percentage = response.data.percentage;
+                        this.assessmentModel.grade = response.data.grade;
+                        this.assessmentModel.descriptor = response.data.descriptor;
+                        this.assessmentModel.isValid = true;
+                        console.log('promise has resolved', response.data);
+                    })
+                    .catch(error => {
+                        this.loading = false;
+                        this.error = error.toString();
+                        console.log(error);
+                    })
+            },
         //get list of subjects
         getSubjects() {
             this.error = null;
@@ -81,30 +187,7 @@ export default {
                     console.log(error);
                 })
         },
-
-
-        //get list of assessments
-        getAssessmentsStart() {
-            this.error = null;
-            this.loading = true;
-            let url = serverDetails.url;
-            let params = {...serverDetails.params};
-            axios.get(`${url}assessment`, {
-                    params
-                })
-                .then(response => {
-                    this.loading = false;
-                    this.assessments = response.data;
-                    console.log('promise has resolved', response.data);
-                })
-                .catch(error => {
-                    this.loading = false;
-                    this.error = error.toString();
-                    console.log(error);
-                })
-        },
-            //get list of Users
-
+        //get list of Users
         getUsers(search, order) {
             this.error = null;
             this.loading = true;
@@ -173,121 +256,7 @@ export default {
                     console.log(error);
                 })
         },
-        //add content to the database
-        addAssessment(newAssessment) {  //removed ,files
-            this.error = null;
-            this.loading = true;
-            let url = serverDetails.url;
-            let params = {...serverDetails.params};
-            axios.post(`${url}assessment`, newAssessment, {
-                    params
-                })
-                .then(() => { //removed res
-                   // this.addPictures(res.data.id, files);
-                    this.getAssessments();
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.loading = false;
-                    this.error = error.toString();
-                    console.log(error);
-                })
-        },
-        //calls list of assessments and returns according to model
-        getAssessment(id) {
-            this.error = null;
-            this.loading = true;
-            let url = serverDetails.url;
-            let params = {...serverDetails.params};
-            axios.get(`${url}assessment/${id}`, {
-                    params
-                })
-                .then(response => {
-                    this.loading = false;
-                    this.assessmentModel.id = response.data.id;
-                    this.assessmentModel.appUserId = response.data.appUserId;
-                    this.assessmentModel.yearGroupId = response.data.yearGroupId;                    
-                    this.assessmentModel.subjectId = response.data.subjectId;
-                    this.assessmentModel.subjectLevel = response.data.subjectLevel;  
-                    if (this.assessmentModel.subjectLevel === 'Higher') {
-                        this.assessmentModel.isHigher = true;
-                        }else if (this.assessmentModel.subjectLevel === 'Ordinary') {
-                        this.assessmentModel.isOrdinary = true;
-                        }else if (this.assessmentModel.subjectLevel === 'Foundation') {
-                        this.assessmentModel.isFoundation = true;   }               
-                    this.assessmentModel.assessmentName = response.data.assessmentName;
-                    this.assessmentModel.assessmentType = response.data.assessmentType;
-                    if (this.assessmentModel.assessmentType === 'Test') {
-                        this.assessmentModel.isTest = true;
-                        }else if (this.assessmentModel.assessmentType === 'CBA') {
-                        this.assessmentModel.isCBA = true;   }  
-                    this.assessmentModel.percentage = response.data.percentage;
-                    this.assessmentModel.grade = response.data.grade;
-                    this.assessmentModel.descriptor = response.data.descriptor;
-                    this.assessmentModel.isValid = true;
-                    console.log('promise has resolved', response.data);
-                })
-                .catch(error => {
-                    this.loading = false;
-                    this.error = error.toString();
-                    console.log(error);
-                })
-        },
-        getAssessments(search, order) {
-            this.error = null;
-            this.loading = true;
-            let url = serverDetails.url;
-            let params = {...serverDetails.params};
-            if (search) {
-                params.search = {};
-                Object.values(search).forEach((value) => {
-                    if (value.criteria) {
-                        params.search[value.column] = {
-                            column: value.column,
-                            operator: value.operator,
-                            criteria: value.criteria
-                        }
-                        console.log(params);
-                    }
-                });
-            }
-            if (order && order.column) {
-                params.order = order;
-            }
-            axios.get(`${url}assessment`, {
-                    params
-                })
-                .then(response => {
-                this.loading = false;
-
-                    this.assessments = response.data.map((assessment) => {
-                        if (assessment.assessmentType === 'Test') {
-                            assessment.isTest = true;
-
-                        }else if (assessment.assessmentType === 'CBA') {
-                            assessment.isCBA = true;}
-                        return assessment;
-                    });
-
-                    this.assessments = response.data.map((assessment) => {
-                        if (assessment.subjectLevel === 'Higher') {
-                            assessment.isHigher = true;
-
-                        }else if (assessment.subjectLevel === 'Ordinary') {
-                            assessment.isOrdinary = true;
-                        
-                        }else if (assessment.subjectLevel === 'Foundation') {
-                            assessment.isFoundation = true;}
-                        return assessment;
-                    });
-                    console.log('promise has resolved', response.data);
-                })
-                .catch(error => {
-                    this.loading = false;
-                    this.error = error.toString();
-                    console.log(error);
-                })
-        },
+        
         //delete assessment according to Id
         deleteAssessment(id) {
             this.error = null;
@@ -307,8 +276,9 @@ export default {
                     console.log(error);
                 })
         },
+
         //update content using the update button (put)
-        updateAssessment(currentAssessment) {    //deleted ,files
+        updateAssessment(currentAssessment) {
             this.error = null;
             this.loading = true;
             let url = serverDetails.url;
@@ -317,7 +287,6 @@ export default {
                     params
                 })
                 .then(() => {
-                //    this.addPictures(currentAssessment.id, files);
                     this.getAssessments();
                     this.loading = false;
                 })
@@ -328,9 +297,9 @@ export default {
                 })
         },
     },
-    props: ['assessmentModel', 'userModel'],
+    props: ['assessmentModel'],
     watch: {
-        // If the route changes call the model again
+        // If the route changes, call the model again
         '$route': 'getData'
     },
 }
