@@ -17,11 +17,13 @@ const SQL_SELECT_ALL = 'SELECT * FROM dbo.Assessment for json path;';
 const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Assessment WHERE id = @id for json path, without_array_wrapper;';
 
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
-const SQL_INSERT = 'INSERT INTO dbo.Assessment (appUserId, yearGroupId, subjectId, subjectLevel, assessmentName, assessmentType, percentage, grade, descriptor) VALUES (@appUserId, @yearGroupId, @subjectId, @subjectLevel, @assessmentName, @assessmentType, @percentage, @grade, @descriptor); SELECT * from dbo.Assessment WHERE id = SCOPE_IDENTITY();';
+const SQL_INSERT = 'INSERT INTO dbo.Assessment (appUserId, subjectId, yearGroup, subjectLevel, assessmentName, assessmentType, percentage, grade, descriptor) VALUES (@appUserId, @subjectId, @yearGroup, @subjectLevel, @assessmentName, @assessmentType, @percentage, @grade, @descriptor); SELECT * from dbo.Assessment WHERE id = SCOPE_IDENTITY();';
 
-const SQL_UPDATE = 'UPDATE dbo.Assessment SET  appUserId=@appUserId, yearGroupId=@yearGroupId, subjectId=@subjectId, subjectLevel = @subjectLevel, assessmentName = @assessmentName, assessmentType = @assessmentType, percentage = @percentage, grade = @grade, descriptor = @descriptor WHERE id = @id; SELECT * FROM dbo.Assessment WHERE id = @id;';
+const SQL_UPDATE = 'UPDATE dbo.Assessment SET  appUserId=@appUserId, subjectId=@subjectId, yearGroup=@yearGroup, subjectLevel = @subjectLevel, assessmentName = @assessmentName, assessmentType = @assessmentType, percentage = @percentage, grade = @grade, descriptor = @descriptor WHERE id = @id; SELECT * FROM dbo.Assessment WHERE id = @id;';
 
 const SQL_DELETE = 'DELETE FROM dbo.Assessment WHERE id = @id;';
+
+const SQL_AVERAGE = 'SELECT appUserId FROM dbo.Assessment for json path;';
 
 /**
  * GET a list of all Assessments
@@ -138,8 +140,8 @@ router.post('/', async (req, res) => {
         const result = await pool.request()
             // set parameter(s) in query
             .input('appUserId', sql.Int, req.body.appUserId)
-            .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('subjectId', sql.Int, req.body.subjectId)
+            .input('yearGroup', sql.NVarChar(50), req.body.yearGroup)
             .input('subjectLevel', sql.NVarChar(50), req.body.subjectLevel)
             .input('assessmentName', sql.NVarChar(50), validator.escape(req.body.assessmentName))
             .input('assessmentType', sql.NVarChar(50), req.body.assessmentType)
@@ -182,8 +184,8 @@ router.put('/', async (req, res) => {
         const result = await pool.request()
             // set parameter(s) in query
             .input('appUserId', sql.Int, req.body.appUserId)
-            .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('subjectId', sql.Int, req.body.subjectId)
+            .input('yearGroup', sql.NVarChar(50), req.body.yearGroup)
             .input('subjectLevel', sql.NVarChar(50), req.body.subjectLevel)
             .input('assessmentName', sql.NVarChar(50), validator.escape(req.body.assessmentName))
             .input('assessmentType', sql.NVarChar(50), req.body.assessmentType)

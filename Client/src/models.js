@@ -59,7 +59,7 @@ let models = {
         // model
         id: null,
         appUserId: null,
-        yearGroupId: null,
+        yearGroup: null,
         subjectId: null,
         subjectLevel: null,
         assessmentName: null,

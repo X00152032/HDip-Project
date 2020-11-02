@@ -12,10 +12,16 @@
         </div>
         
         <div class="form-group">
-          <label for="yearGroupId"><b>Year Group</b></label> <!-- drop-down box option -->
+            <label for="yearGroup"><b>Year Group</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
-                <select class="form-control" style="flex-grow:1;" id="yearGroupId" v-model="model.yearGroupId">
-                  <option v-for="option in assessments" :value="option.yearGroupId" v-bind:key="option.id">{{ option.yearGroupId }}</option>
+                <select class="form-control" style="flex-grow:1;" id="yearGroup" v-model="model.yearGroup">
+                    <option value="First Year">First Year</option>
+                    <option value="Second Year">Second Year</option>
+                    <option value="Third Year">Third Year</option>
+                    <option value="Fourth Year">Fourth Year</option>
+                    <option value="Fifth Year">Fifth Year</option>
+                    <option value="Sixth Year">Sixth Year</option>
+                <!--  <option v-for="option in assessments" :value="option.id" v-bind:key="option.id">{{ option.descriptor }}</option> -->
                 </select>
             </span>
         </div>
@@ -107,12 +113,11 @@
                         </div>
               </div>
  </div> <br>    <!-- close ,div reveal-if-active> -->
-                      <div class="form-group" id="checkboxes">        
-
+        <div class="form-group" id="checkboxes">        
           <input type="checkbox" id="assessmentType" v-model="model.isCBA">
               <label><b>CBA</b></label><br>
                 <div class="reveal-if-active">
-                      <div class="form-group">
+        <div class="form-group">
             <label for="descriptor"><b>Descriptor</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
                 <select class="form-control" style="flex-grow:1;" id="descriptor" v-model="model.descriptor">
@@ -172,7 +177,7 @@ export default {
     return {
       model: this.assessmentModel,
       appUserId: null,
-      yearGroupId: null,
+      yearGroup: null,
       subjectId: null,
       subjectLevel: null,
       assessmentName: null,
@@ -232,7 +237,7 @@ export default {
 
       let newAssessment = {
         appUserId: this.model.appUserId,
-        yearGroupId: this.model.yearGroupId,
+        yearGroup: this.model.yearGroup,
         subjectId: this.model.subjectId,
         subjectLevel: this.model.subjectLevel,
         assessmentName: this.model.assessmentName,
@@ -294,7 +299,7 @@ export default {
       let currentAssessment = {
         id: this.model.id,
         appUserId: this.model.appUserId,
-        yearGroupId: this.model.yearGroupId,
+        yearGroup: this.model.yearGroup,
         subjectId: this.model.subjectId,
         subjectLevel: this.model.subjectLevel,
         assessmentName: this.model.assessmentName,
@@ -313,7 +318,7 @@ export default {
       this.model.id = null;
       //
       this.model.appUserId = null;
-      this.model.yearGroupId = null;
+      this.model.yearGroup = null;
       this.model.subjectId = null;
       this.model.subjectLevel = null;
       this.model.assessmentName = null;

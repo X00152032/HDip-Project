@@ -129,7 +129,7 @@ export default {
                         this.loading = false;
                         this.assessmentModel.id = response.data.id;
                         this.assessmentModel.appUserId = response.data.appUserId;
-                        this.assessmentModel.yearGroupId = response.data.yearGroupId;                    
+                        this.assessmentModel.yearGroup = response.data.yearGroup;                    
                         this.assessmentModel.subjectId = response.data.subjectId;
                         this.assessmentModel.assessmentName = response.data.assessmentName;
                         if (this.assessmentModel.assessmentType === 'Test') {

@@ -37,7 +37,7 @@
             </th>
             <th>
                 <div style="display:flex;">
-                    <input class="form-control" placeholder="Year Group" v-model="search.yearGroupId.criteria">
+                    <input class="form-control" placeholder="Year Group" v-model="search.yearGroup.criteria">
                 </div>
             </th>
             <th>
@@ -80,7 +80,7 @@
         <tr class="table-danger table-bordered" id="" v-for="row in assessments" v-on:click="clickAssessment(row)" :class="{ selected: row.selected }" v-bind:key="row.id" >
             <td>{{ getEmail(row.appUserId) }}</td>
             <td>{{ getSubjectName(row.subjectId) }}</td>
-            <td>{{ row.yearGroupId }}</td>
+            <td>{{ row.yearGroup }}</td>
             <td>{{ row.subjectLevel }}</td>
             <td>{{ row.assessmentType }}</td>
             <td>{{ row.percentage }}</td>
@@ -126,8 +126,8 @@ export default {
                     operator: '=',
                     criteria: null
                 },
-                yearGroupId: {
-                    column: 'yearGroupId',
+                yearGroup: {
+                    column: 'yearGroup',
                     operator: '=',
                     criteria: null
                 },
@@ -243,10 +243,80 @@ export default {
 
             findAverage2() {
             const grades = [80, 77, 88, 95, 68];
+            //v-model="search.appUserId.criteria"
+
+           // context.Database.SqlQuery<YourMappingClass>("SELECT * FROM Assessment")
+
+//$allowed = false;
+//$sqldata = array(":user"=>$userid,":ipaddress"=>$_SERVER['REMOTE_ADDR']);
+//$sql = "SELECT IP_Address FROM ITWhitelist WHERE owner = :user && IP_Address = :ipaddress";
+//$result = $conn->query($sql);
+//if ($result->num_rows > 0) {
+//    while($row = $result->fetch_assoc()) {
+//        if($row["IP_Address"] == $_SERVER['REMOTE_ADDR']){
+//            $allowed = true;
+//            break;
+//        }
+//    }
+//}
+
+//if ($allowed)) {
+    //Action for allowed IP Addresses
+//} else {
+    //Action for all other IP Addresses
+//    echo 'You are not authorized here.'; 
+//    echo "<br />IP Address: ".$_SERVER['REMOTE_ADDR'];
+//    exit;
+//}
+
+          //  const returned = SELECT percentage FROM dbo.[Assessment] WHERE appUserId = 3;
             const total = grades.reduce((acc, c) => acc + c, 0);
             const answer = total / grades.length;
             alert ("This student's average score for this subject is: " + answer +"%.");
             },
+
+//SELECT percentage
+//FROM dbo.[Assessment]
+//WHERE appUserId = 3;
+
+
+
+
+//var express = require('express'); 
+//var app = express();
+//var sql = require("mssql");
+
+// config for your database
+//var config = {
+//    user: 'sa',
+//    password: 'deegii2001060108',
+//    server: 'localhost\\MSSQLSERVER', 
+//    database: 'sample' 
+//};
+
+// connect to your database
+//    sql.connect(config, function (err) {
+
+//    if (err) console.log(err);
+
+    // create Request object
+//    var request = new sql.Request();
+
+    // query to the database and get the records
+//    request.query('select * from tblGender', function (err, result) {
+
+//        if (err) console.log(err)
+
+        // send records as a response
+//        console.log(JSON.stringify(result));
+
+//    });
+//});
+
+
+
+
+
 
 
         deleteAssessment(event, row) {
