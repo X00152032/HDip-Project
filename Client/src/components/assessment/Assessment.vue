@@ -61,7 +61,7 @@ export default {
                 });
         },
 
-        getAssessments(search, order) {
+        getAssessments(search) {
             this.error = null;
             this.loading = true;
             let url = serverDetails.url;
@@ -78,9 +78,6 @@ export default {
                         console.log(params);
                     }
                 });
-            }
-            if (order && order.column) {
-                params.order = order;
             }
             axios.get(`${url}assessment`, {
                     params
@@ -116,6 +113,27 @@ export default {
                     console.log(error);
                 })
         },
+
+        findAverage3(newAverage) {
+            this.error = null;
+            this.loading = true;
+            let url = serverDetails.url;
+            let params = {...serverDetails.params};
+            axios.post(`${url}averages`, newAverage, {
+                    params
+                })
+                .then(() => {
+                    this.findAverage3();
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+                    this.error = error.toString();
+                    console.log(error);
+                })
+        },
+
+
                 //calls list of assessments and returns according to model
             getAssessment(id) {
                 this.error = null;
@@ -132,34 +150,34 @@ export default {
                         this.assessmentModel.yearGroup = response.data.yearGroup;                    
                         this.assessmentModel.subjectId = response.data.subjectId;
                         this.assessmentModel.assessmentName = response.data.assessmentName;
-                        if (this.assessmentModel.assessmentType === 'Test') {
-                            this.assessmentModel.isTest = true;
-                        }else if (this.assessmentModel.assessmentType === 'CBA') {
-                            this.assessmentModel.isCBA = true;   }  
                         this.assessmentModel.assessmentType = response.data.assessmentType;
+                        if (this.assessmentModel.assessmentType === 'Test') {
+                            this.assessmentModel.isTest = true;}
+                        else if (this.assessmentModel.assessmentType === 'CBA') {
+                            this.assessmentModel.isCBA = true;   }
+                        this.assessmentModel.subjectLevel = response.data.subjectLevel;
                         if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'Test')){
                                 ((this.assessmentModel.isHigher = true) && (this.assessmentModel.isHigher2 = false));
-
-                            }else if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'CBA')){
+                        }
+                        else if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'CBA')){
                                 ((this.assessmentModel.isHigher = false) && (this.assessmentModel.isHigher2 = true));
-                        
-                            }else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'Test')){
+                        }
+                        else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'Test')){
                                 ((this.assessmentModel.isOrdinary = true) && (this.assessmentModel.isOrdinary2 = false));
-
-                            }else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'CBA')){
+                        }
+                        else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'CBA')){
                                 ((this.assessmentModel.isOrdinary = false) && (this.assessmentModel.isOrdinary2 = true));
-
-                            }else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'Test')){
+                        }
+                        else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'Test')){
                                 ((this.assessmentModel.isFoundation = true) && (this.assessmentModel.isFoundation2 = false));
-
-                            }else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'CBA')){
+                        }
+                        else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'CBA')){
                                 ((this.assessmentModel.isFoundation = false) && (this.assessmentModel.isFoundation2 = true));}
-                        this.assessmentModel.subjectLevel = response.data.subjectLevel;
                         this.assessmentModel.percentage = response.data.percentage;
                         this.assessmentModel.grade = response.data.grade;
                         this.assessmentModel.descriptor = response.data.descriptor;
                         this.assessmentModel.isValid = true;
-                        console.log('promise has resolved', response.data);
+                        console.log('promise has resolved', response.data)
                     })
                     .catch(error => {
                         this.loading = false;
@@ -167,6 +185,35 @@ export default {
                         console.log(error);
                     })
             },
+
+            getAverage(id) {
+                this.error = null;
+                this.loading = true;
+                let url = serverDetails.url;
+                let params = {...serverDetails.params};
+                axios.get(`${url}assessment/${id}`, {
+                    params
+                    })
+                    .then(response => {
+                        this.loading = false;
+                        this.assessmentModel.appUserId = response.data.appUserId;
+                        this.assessmentModel.subjectId = response.data.subjectId;
+                        this.assessmentModel.percentage = response.data.percentage;
+                        this.assessmentModel.isValid = true;
+                        console.log('promise has resolved', response.data)
+                        function logit(){
+                        console.log(response.data.percentage);
+                        var myPercentage = response.data.percentage;
+                        alert('This student\'s overall average is ' + myPercentage + '%')}
+                        logit();
+                    })
+                    .catch(error => {
+                        this.loading = false;
+                        this.error = error.toString();
+                        console.log(error);
+                    })
+            },
+
         //get list of subjects
         getSubjects() {
             this.error = null;

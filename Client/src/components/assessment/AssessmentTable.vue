@@ -1,6 +1,6 @@
 <template>
 <table class="table table-sm table-light table-hover bg-light">
-    <thead class="table-danger">
+    <thead class="table-danger" id="myTable">
         <tr> <!--rows of headings in the table -->
             <th>Email</th>
             <th>Subject</th>
@@ -13,6 +13,9 @@
             <th>
                 &nbsp;  <!--needed to continue table line-->
             </th> 
+            <th>
+                &nbsp;
+            </th>
             <th>
                 &nbsp;
             </th>
@@ -68,8 +71,14 @@
             <th>
                 <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getAssessments">Search</button>
             </th>
-            <th>
+       <!--     <th>
                 <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage2">Average</button>
+            </th> -->
+            <th>
+                &nbsp;
+            </th>
+            <th>
+                &nbsp;
             </th>
             <th>
                 &nbsp;
@@ -92,7 +101,9 @@
             <th>
                 &nbsp;
             </th>
-            
+            <td>
+                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="clickButton(row)">Average</button>
+            </td>
             <td class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
                     <font-awesome-icon icon="minus-circle" />
@@ -196,6 +207,13 @@ export default {
             row.selected = true;
             this.$parent.getAssessment(row.id);
         },
+        clickButton(row) {
+            this.assessments.forEach((assessment) => {
+                assessment.selected = false;
+            });
+            row.selected = true;
+            this.$parent.getAverage(row.id);
+        },
         getAssessments() {
             // $parent is the parent component (in this case the assessment.vue component)
             this.$parent.getAssessments(this.search);
@@ -240,6 +258,15 @@ export default {
 //<option v-for="(location, index) in locations" v-bind:value="location.id" v-bind:selected="index === 0">
 //  {{ location.from }} - {{ location.to }}
 // </option>
+            findAverage3() {
+                let newAverage = {
+                appUserId: this.Model.appUserId,
+                totalAv: this.model.totalAv,
+        };
+                this.$parent.findAverage3(newAverage);
+        },
+
+ 
 
             findAverage2() {
             const grades = [80, 77, 88, 95, 68];
@@ -272,7 +299,7 @@ export default {
           //  const returned = SELECT percentage FROM dbo.[Assessment] WHERE appUserId = 3;
             const total = grades.reduce((acc, c) => acc + c, 0);
             const answer = total / grades.length;
-            alert ("This student's average score for this subject is: " + answer +"%.");
+            alert ("This student's average score is: " + answer +"%.");
             },
 
 //SELECT percentage
@@ -312,11 +339,14 @@ export default {
 
 //    });
 //});
-
-
-
-
-
+        GetCellValues() {
+        var table = document.getElementById('mytable');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+        for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+            alert(table.rows[r].cells[c].innerHTML);
+        }
+    }
+},
 
 
         deleteAssessment(event, row) {

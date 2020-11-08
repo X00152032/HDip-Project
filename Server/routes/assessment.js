@@ -4,7 +4,6 @@
 const router = require('express').Router();
 const validator = require('validator');
 const { sql, dbConnPoolPromise } = require('../database/db.js');
-//const { MAX } = require('mssql');
 
 // Define SQL statements here for use in function below
 // These are parameterised queries note @named parameters.
@@ -19,11 +18,11 @@ const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Assessment WHERE id = @id for json p
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
 const SQL_INSERT = 'INSERT INTO dbo.Assessment (appUserId, subjectId, yearGroup, subjectLevel, assessmentName, assessmentType, percentage, grade, descriptor) VALUES (@appUserId, @subjectId, @yearGroup, @subjectLevel, @assessmentName, @assessmentType, @percentage, @grade, @descriptor); SELECT * from dbo.Assessment WHERE id = SCOPE_IDENTITY();';
 
-const SQL_UPDATE = 'UPDATE dbo.Assessment SET  appUserId=@appUserId, subjectId=@subjectId, yearGroup=@yearGroup, subjectLevel = @subjectLevel, assessmentName = @assessmentName, assessmentType = @assessmentType, percentage = @percentage, grade = @grade, descriptor = @descriptor WHERE id = @id; SELECT * FROM dbo.Assessment WHERE id = @id;';
+const SQL_UPDATE = 'UPDATE dbo.Assessment SET appUserId=@appUserId, subjectId=@subjectId, yearGroup=@yearGroup, subjectLevel = @subjectLevel, assessmentName = @assessmentName, assessmentType = @assessmentType, percentage = @percentage, grade = @grade, descriptor = @descriptor WHERE id = @id; SELECT * FROM dbo.Assessment WHERE id = @id;';
 
 const SQL_DELETE = 'DELETE FROM dbo.Assessment WHERE id = @id;';
 
-const SQL_AVERAGE = 'SELECT appUserId FROM dbo.Assessment for json path;';
+//const SQL_AVERAGE = 'SELECT AVG(percentage) FROM dbo.Assessment GROUP BY appUserId;';
 
 /**
  * GET a list of all Assessments
@@ -62,15 +61,15 @@ router.get('/', async (req, res) => {
      * See link to validator npm package (at top) for docs
      * If validation fails return an error message
      */
-     if (!validator.isNumeric(assessmentId, { no_symbols: true })) {
-        res.json({ "error": "invalid id parameter" });
-        return true;
+        if (!validator.isNumeric(assessmentId, { no_symbols: true })) {
+            res.json({ "error": "invalid id parameter" });
+            return false;
         }
     
 
     /**
      * If validation passed execute query and return result
-     * Single Subject with matching id is returned
+     * Single Assessment with matching id is returned
      */
     try {
         const pool = await dbConnPoolPromise
