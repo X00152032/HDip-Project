@@ -61,7 +61,9 @@ export default {
                 });
         },
 
-        getAssessments(search) {
+
+
+        getAssessments(search, order) {
             this.error = null;
             this.loading = true;
             let url = serverDetails.url;
@@ -79,19 +81,22 @@ export default {
                     }
                 });
             }
+            if (order && order.column) {
+                params.order = order;
+            }
             axios.get(`${url}assessment`, {
                     params
                 })
                 .then(response => {
                     this.loading = false;
                     this.assessments = response.data;
-                    console.log('promise has resolved', response.data);
-                })    
+                    console.log('promise has resolved', response.data); 
+                })
                 .catch(error => {
                     this.loading = false;
                     this.error = error.toString();
                     console.log(error);
-                })
+                });
         },
 
         //add Assessment to the database
@@ -178,6 +183,14 @@ export default {
                         this.assessmentModel.descriptor = response.data.descriptor;
                         this.assessmentModel.isValid = true;
                         console.log('promise has resolved', response.data)
+                        //var myJSON = response.data;
+                        //console.log(myJSON)
+                        //var myObj = myJSON;
+                        //let x = myObj["percentage"];
+                        //for (x in myObj) {
+                        //document.getElementById("appUserId").innerHTML += myObj[x];
+//}                       //alert(x)
+//
                     })
                     .catch(error => {
                         this.loading = false;
@@ -200,10 +213,11 @@ export default {
                         this.assessmentModel.subjectId = response.data.subjectId;
                         this.assessmentModel.percentage = response.data.percentage;
                         this.assessmentModel.isValid = true;
-                        console.log('promise has resolved', response.data)
                         function logit(){
                         console.log(response.data.percentage);
                         var myPercentage = response.data.percentage;
+                        console.log(response.data.appUserId)
+                        //var myUser = response.data.appUserId;
                         alert('This student\'s overall average is ' + myPercentage + '%')}
                         logit();
                     })
@@ -226,7 +240,7 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.subjects = response.data;
-                    console.log('promise has resolved', response.data);
+                   // console.log('promise has resolved', response.data);
                 })
                 .catch(error => {
                     this.loading = false;
@@ -295,7 +309,7 @@ export default {
                             user.isStudent = true;}
                         return user;
                     });
-                    console.log('promise has resolved', response.data);
+               //     console.log('promise has resolved', response.data);
                 })
                 .catch(error => {
                     this.loading = false;

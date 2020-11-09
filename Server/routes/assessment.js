@@ -3,14 +3,15 @@
 // Import router package
 const router = require('express').Router();
 const validator = require('validator');
-const { sql, dbConnPoolPromise } = require('../database/db.js');
+const { sql, dbConnPoolPromise, buildSelect } = require('../database/db.js');
+//const { sql, dbConnPoolPromise } = require('../database/db.js');
 
 // Define SQL statements here for use in function below
 // These are parameterised queries note @named parameters.
 // Input parameters are parsed and set before queries are executed
 
 // for the json path - Tell MS SQL to return all results as JSON
-const SQL_SELECT_ALL = 'SELECT * FROM dbo.Assessment for json path;';
+const SQL_SELECT_ALL = 'SELECT * FROM dbo.Assessment';
 // without_array_wrapper - use for single result
 
 const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Assessment WHERE id = @id for json path, without_array_wrapper;';
@@ -22,19 +23,21 @@ const SQL_UPDATE = 'UPDATE dbo.Assessment SET appUserId=@appUserId, subjectId=@s
 
 const SQL_DELETE = 'DELETE FROM dbo.Assessment WHERE id = @id;';
 
-//const SQL_AVERAGE = 'SELECT AVG(percentage) FROM dbo.Assessment GROUP BY appUserId;';
+const SQL_AVERAGE = 'INSERT INTO dbo.Averages (appUserId, totalAv) SELECT appUserId, AVG(percentage) FROM dbo.Assessment GROUP BY appUserId;';
 
 /**
  * GET a list of all Assessments
  * Address http://server:port/assessment
+ * @search (optional) passed as parameter via url
  * @return JSON object
  */
 router.get('/', async (req, res) => {
+    let parsedSQL = SQL_SELECT_ALL + buildSelect(req);
     try {
         const pool = await dbConnPoolPromise
         const result = await pool.request()
             // execute query
-            .query(SQL_SELECT_ALL);
+            .query(parsedSQL);
 
         // Send HTTP reponse
         // JSON data from SQL is contained in first element of recordset
@@ -158,6 +161,29 @@ router.post('/', async (req, res) => {
         res.send(err.message);
     }
 });
+
+/**
+ * POST - Insert a new Assessment
+ * This async function processes a HTTP post request
+ */
+router.post('/', async (req, res) => {
+
+    try {
+        // Get a DB connection and execute SQL
+        const pool = await dbConnPoolPromise
+        const result = await pool.request()
+          
+            .query(SQL_AVERAGE);
+
+        // If successful, return inserted subject via HTTP   
+        res.status(201);
+       // res.json(result.recordset);
+    } catch (err) {
+        res.status(500);
+        res.send(err.message);
+    }
+});
+
 
 /**
  * PUT - Update an existing assessment

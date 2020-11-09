@@ -60,7 +60,7 @@
                       <div class="reveal-if-active">
                         <label>Grade</label> <!-- drop-down box option -->
                                 <span class="form-inline" style="display:flex;">
-                                    <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                                    <select class="form-control" style="flex-grow:1;" id="gradeHigh" v-model="model.grade">
                                       <option value="blank"></option>
                                         <option value="H1">H1</option>
                                         <option value="H2">H2</option>
@@ -81,7 +81,7 @@
                         <div class="reveal-if-active">
                           <label>Grade</label> <!-- drop-down box option -->
                             <span class="form-inline" style="display:flex;">
-                              <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                              <select class="form-control" style="flex-grow:1;" id="gradeOrd" v-model="model.grade">
                                 <option value="blank"></option>
                                 <option value="O1">O1</option>
                                 <option value="O2">O2</option>
@@ -102,7 +102,7 @@
                         <div class="reveal-if-active">
                           <label>Grade</label> <!-- drop-down box option -->
                             <span class="form-inline" style="display:flex;">
-                              <select class="form-control" style="flex-grow:1;" id="grade" v-model="model.grade">
+                              <select class="form-control" style="flex-grow:1;" id="gradeFound" v-model="model.grade">
                                 <option value="blank"></option>
                                 <option value="F1">F1</option>
                                 <option value="F2">F2</option>
