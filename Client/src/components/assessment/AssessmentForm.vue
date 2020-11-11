@@ -253,7 +253,7 @@ export default {
 
 
 
-    updateAssessment() {
+      updateAssessment() {
       if (!this.model.id) {
         alert("Please select Assessment to update");
         return; // No content selected
@@ -309,8 +309,8 @@ export default {
       this.$parent.updateAssessment(currentAssessment);
       this.resetAssessment();
       
-    },
-    resetAssessment() {
+      },
+      resetAssessment() {
       this.model.isNew = true;
       this.model.isValid = false;
       this.model.id = null;

@@ -247,13 +247,18 @@ export default {
         var total = 0;
             for(var i= 2; i<tbl.rows.length; i++){
                 var num = Number(tbl.rows[i].cells[5].innerHTML);
-                total += num;
-                count++;
+                if (num == 0) //added to stop CBA results affecting Average of all Tests and CBAs.
+                    count--;  //decrement count to leave out CBA rows
+                else
+                    total += num;
+                    count++;    //increment count for tests only
         }
-        console.log(total/count);
         var average = total/count;
-        var rounded = Math.round(average * 10) / 10
-        alert("Student's average score is: " + rounded +"%.")
+        var rounded = Math.round(average * 10) / 10     //round to 1 deciaml place
+        if (isNaN(rounded))         //code to catch NaN and display a user-friendly alert.
+            alert("Please see the CBA descriptor column for CBA results.");
+        else
+            alert("Student's average test score is: " + rounded +"%.")
 },
 
 
