@@ -152,6 +152,7 @@
             <button class="btn btn-primary" v-on:click="updateAssessment" :disabled="!model.isValid">Update</button>
             <button class="btn btn-secondary" v-on:click="resetAssessment">Reset</button>
         </div>
+        <div> <h4><b>Choose the criteria required in Search, and then press Average</b></h4> </div>
     </form>
 </div>
 </template>
@@ -280,9 +281,6 @@ export default {
         alert("Please select a Descriptor");
         return;
       }
- //     if ((this.model.descriptor === "blank") || (this.model.descriptor === "") && (this.model.isType === "Test")){
- //       return;
-  //    }
 
       if (this.model.isTest) {
         this.model.assessmentType = "Test",
@@ -361,6 +359,10 @@ img {
 
 p {
   margin: 8px;
+}
+
+h4 {
+    text-align: right;
 }
 
 #checkboxes {

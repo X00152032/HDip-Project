@@ -61,8 +61,6 @@ export default {
                 });
         },
 
-
-
         getAssessments(search, order) {
             this.error = null;
             this.loading = true;
@@ -119,26 +117,6 @@ export default {
                 })
         },
 
-        findAverage3(newAverage) {
-            this.error = null;
-            this.loading = true;
-            let url = serverDetails.url;
-            let params = {...serverDetails.params};
-            axios.post(`${url}averages`, newAverage, {
-                    params
-                })
-                .then(() => {
-                    this.findAverage3();
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.loading = false;
-                    this.error = error.toString();
-                    console.log(error);
-                })
-        },
-
-
                 //calls list of assessments and returns according to model
             getAssessment(id) {
                 this.error = null;
@@ -183,43 +161,6 @@ export default {
                         this.assessmentModel.descriptor = response.data.descriptor;
                         this.assessmentModel.isValid = true;
                         console.log('promise has resolved', response.data)
-                        //var myJSON = response.data;
-                        //console.log(myJSON)
-                        //var myObj = myJSON;
-                        //let x = myObj["percentage"];
-                        //for (x in myObj) {
-                        //document.getElementById("appUserId").innerHTML += myObj[x];
-//}                       //alert(x)
-//
-                    })
-                    .catch(error => {
-                        this.loading = false;
-                        this.error = error.toString();
-                        console.log(error);
-                    })
-            },
-
-            getAverage(id) {
-                this.error = null;
-                this.loading = true;
-                let url = serverDetails.url;
-                let params = {...serverDetails.params};
-                axios.get(`${url}assessment/${id}`, {
-                    params
-                    })
-                    .then(response => {
-                        this.loading = false;
-                        this.assessmentModel.appUserId = response.data.appUserId;
-                        this.assessmentModel.subjectId = response.data.subjectId;
-                        this.assessmentModel.percentage = response.data.percentage;
-                        this.assessmentModel.isValid = true;
-                        function logit(){
-                        console.log(response.data.percentage);
-                        var myPercentage = response.data.percentage;
-                        console.log(response.data.appUserId)
-                        //var myUser = response.data.appUserId;
-                        alert('This student\'s overall average is ' + myPercentage + '%')}
-                        logit();
                     })
                     .catch(error => {
                         this.loading = false;

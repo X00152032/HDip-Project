@@ -1,5 +1,5 @@
 <template>
-<table class="table table-sm table-light table-hover bg-light">
+<table class="table table-sm table-light table-hover bg-light" id="myTable">
     <thead class="table-danger" id="myTable">
         <tr> <!--rows of headings in the table -->
             <th>Email</th>
@@ -72,11 +72,8 @@
                 <button class="btn btn-danger" v-on:click="resetSearch">Reset</button>
             </td>
             <td>
-                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="clickButton(row)">Average</button>
+                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="calcAverage">Average</button>
             </td>
-       <!--  <th>
-                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="findAverage2">Average</button>
-            </th> -->
         </tr>
     </thead>
     <tbody> <!--rows of values in the table -->
@@ -95,18 +92,11 @@
             <th>
                 &nbsp;
             </th>
-         <!--   <th>
-                <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="clickButton(row)">Average</button>
-            </th>  -->
             <th class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
                     <font-awesome-icon icon="minus-circle" />
                 </a>
             </th>
-   <!--         <th class="btn btn primary" role="button" aria-pressed="true">
-                <a href="javascript:;" v-on:click="deleteAssessment($event, row)">
-                </a>
-            </th> -->
         </tr>
     </tbody>
 </table>
@@ -248,73 +238,32 @@ export default {
         this.search.descriptor.criteria = "";
         this.$parent.getData();
         },
-
-        //just some test code for moment - creates random number 35 to 100%
-        findAverage() {
-               var x = Math.floor(Math.random() * 67)+35;
-               alert ("This student's average score for this subject is: " + x +"%.");
-        },
-
-//trying code to get average of html table
-        myFunction() {
-        var table = document.getElementById("myTable");
-        var rows = table.rows;
-
-        for (var i = 1; i < rows.length; i++) {
-            var cells = rows[i].cells;
-            var sum = 0;
-            var numbers = 0;
-        for (var x = 2; x < (cells.length -1); x++) {
-            var cell = cells[x];
-            var addme = parseInt(cell.innerHTML);
-        if(!isNaN(addme)) {       
-            sum += addme;
-            numbers++;
-       }
-        }
-       var average = sum / numbers;
-        alert ("Student's average score for this Subject is: " + Math.round(average) +"%.");
-        }}
-    },
-
-            findAverage3() {
-                let newAverage = {
-                appUserId: this.Model.appUserId,
-                totalAv: this.model.totalAv,
-        };
-                this.$parent.findAverage3(newAverage);
-        },
-
  
-
-            findAverage2() {
-            const grades = [80, 77, 88, 95, 68];
-            const total = grades.reduce((acc, c) => acc + c, 0);
-            const answer = total / grades.length;
-            alert ("This student's average score is: " + answer +"%.");
-            },
-
-
-
-
-
-        GetCellValues() {
-        var table = document.getElementById('mytable');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-        for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-            alert(table.rows[r].cells[c].innerHTML);
+        //function to calculate average from dynamic table
+        //gets contents of percentage column and checks each row to finally calculate and round average
+        calcAverage() {    
+        var tbl = document.getElementById('myTable');
+        var count = 0;
+        var total = 0;
+            for(var i= 2; i<tbl.rows.length; i++){
+                var num = Number(tbl.rows[i].cells[5].innerHTML);
+                total += num;
+                count++;
         }
-    }
+        console.log(total/count);
+        var average = total/count;
+        var rounded = Math.round(average * 10) / 10
+        alert("Student's average score is: " + rounded +"%.")
 },
 
 
         deleteAssessment(event, row) {
-            // stop showing content if deleted
-            event.stopPropagation();
-            if (confirm(`Are you sure you want to delete the Assessment "${row.assessmentName}"?`)) {
-                this.$parent.deleteAssessment(row.id);
-            }
+        // stop showing content if deleted
+        event.stopPropagation();
+        if (confirm(`Are you sure you want to delete the Assessment "${row.assessmentName}"?`)) {
+            this.$parent.deleteAssessment(row.id);
+        }
         },
-}
+}}
 </script>
 
