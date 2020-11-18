@@ -15,12 +15,12 @@
             <label for="yearGroup"><b>Year Group</b></label> <!-- drop-down box option -->
             <span class="form-inline" style="display:flex;">
                 <select class="form-control" style="flex-grow:1;" id="yearGroup" v-model="model.yearGroup">
-                    <option value="First Year">First Year</option>
-                    <option value="Second Year">Second Year</option>
-                    <option value="Third Year">Third Year</option>
-                    <option value="Fourth Year">Fourth Year</option>
-                    <option value="Fifth Year">Fifth Year</option>
-                    <option value="Sixth Year">Sixth Year</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                 <!--  <option v-for="option in assessments" :value="option.id" v-bind:key="option.id">{{ option.descriptor }}</option> -->
                 </select>
             </span>
