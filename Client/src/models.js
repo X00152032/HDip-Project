@@ -50,10 +50,7 @@ let models = {
         // used for display
         isHigher: false,
         isOrdinary: false,
-        isFoundation: false,
-        isHigher2: false,
-        isOrdinary2: false,
-        isFoundation2: false, 
+        isFoundation: false, 
         isTest: false,
         isCBA: false,       
         // model

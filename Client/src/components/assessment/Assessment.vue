@@ -140,22 +140,23 @@ export default {
                             this.assessmentModel.isCBA = true;   }
                         this.assessmentModel.subjectLevel = response.data.subjectLevel;
                         if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'Test')){
-                                ((this.assessmentModel.isHigher = true) && (this.assessmentModel.isHigher2 = false));
+                                (this.assessmentModel.isHigher = true);
                         }
                         else if ((this.assessmentModel.subjectLevel === 'Higher') && (this.assessmentModel.subjectType === 'CBA')){
-                                ((this.assessmentModel.isHigher = false) && (this.assessmentModel.isHigher2 = true));
+                                (this.assessmentModel.isHigher = false);
                         }
                         else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'Test')){
-                                ((this.assessmentModel.isOrdinary = true) && (this.assessmentModel.isOrdinary2 = false));
+                                (this.assessmentModel.isOrdinary = true);
                         }
                         else if ((this.assessmentModel.subjectLevel === 'Ordinary') && (this.assessmentModel.subjectType === 'CBA')){
-                                ((this.assessmentModel.isOrdinary = false) && (this.assessmentModel.isOrdinary2 = true));
+                                (this.assessmentModel.isOrdinary = false);
                         }
                         else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'Test')){
-                                ((this.assessmentModel.isFoundation = true) && (this.assessmentModel.isFoundation2 = false));
+                                (this.assessmentModel.isFoundation = true);
                         }
                         else if ((this.assessmentModel.subjectLevel === 'Foundation') && (this.assessmentModel.subjectType === 'CBA')){
-                                ((this.assessmentModel.isFoundation = false) && (this.assessmentModel.isFoundation2 = true));}
+                                (this.assessmentModel.isFoundation = false);
+                        }
                         this.assessmentModel.percentage = response.data.percentage;
                         this.assessmentModel.grade = response.data.grade;
                         this.assessmentModel.descriptor = response.data.descriptor;
