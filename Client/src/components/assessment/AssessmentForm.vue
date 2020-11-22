@@ -210,6 +210,8 @@ export default {
       getHPercentage(){
       if (document.getElementById('subjectLevelHigher').checked) {
         var grade = document.getElementById('percentage').value;
+        this.model.subjectLevel = "Higher";
+
       } 
         //alert("Your percentage is : " + grade );
         switch (true) {
@@ -246,6 +248,8 @@ export default {
       getOPercentage(){
       if (document.getElementById('subjectLevelOrdinary').checked) {
         var grade = document.getElementById('percentage').value;
+        this.model.subjectLevel = "Ordinary";
+
       } 
         //alert("Your percentage is : " + grade );
         switch (true) {
@@ -282,6 +286,8 @@ export default {
       getFPercentage(){
       if (document.getElementById('subjectLevelFoundation').checked) {
         var grade = document.getElementById('percentage').value;
+        this.model.subjectLevel = "Foundation";
+
       } 
         //alert("Your percentage is : " + grade );
         switch (true) {
