@@ -49,13 +49,13 @@
                   
                   <div class="form-group">
                     <label for="percentage"><b>Enter score as a %</b></label>
-                      <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" :class="{ error : errorName }">
+                      <input class="form-control" placeholder="Percentage" id="percentage" v-model="model.percentage" v-on:change="getHPercentage()">
                   </div>
               
          
           <div class="form-group" id="checkboxes">
               <b>Please Choose a Subject Level</b><br>
-                <input type="radio" name="radio" id="subjectLevelHigher" v-model="model.isHigher">
+                <input type="radio" name="radio" id="subjectLevelHigher" v-model="model.isHigher" @change="getHPercentage()">
                   <label>Higher Level</label>
                       <div class="reveal-if-active">
                         <label>Grade</label> <!-- drop-down box option -->
@@ -76,7 +76,7 @@
             </div>
 
               <div class="form-group" id="checkboxes">
-                <input type="radio" name="radio" id="subjectLevelOrdinary" v-model="model.isOrdinary">
+                <input type="radio" name="radio" id="subjectLevelOrdinary" v-model="model.isOrdinary" @change="getOPercentage()">
                     <label>Ordinary Level</label>
                         <div class="reveal-if-active">
                           <label>Grade</label> <!-- drop-down box option -->
@@ -97,7 +97,7 @@
                 </div>
                             
               <div class="form-group" id="checkboxes">
-                <input type="radio" name="radio" id="subjectLevelFoundation" v-model="model.isFoundation">
+                <input type="radio" name="radio" id="subjectLevelFoundation" v-model="model.isFoundation" @change="getFPercentage()">
                     <label>Foundation Level</label>
                         <div class="reveal-if-active">
                           <label>Grade</label> <!-- drop-down box option -->
@@ -107,7 +107,11 @@
                                 <option value="F1">F1</option>
                                 <option value="F2">F2</option>
                                 <option value="F3">F3</option>
-                                <option value="F4">F4</option>                                        
+                                <option value="F4">F4</option>  
+                                <option value="F5">F5</option>
+                                <option value="F6">F6</option>
+                                <option value="F7">F7</option>
+                                <option value="F8">F8</option>                                          
                               </select>
                             </span>
                         </div>
@@ -193,7 +197,7 @@ export default {
       this.model.isCBA = false;
       },
 
-     //use this to clear the fields in other assessment type if type is changed/selected
+           //use this to clear the fields in other assessment type if type is changed/selected
     CbaSelected(){
       this.model.subjectLevel = null;
       this.model.percentage = null;
@@ -203,6 +207,113 @@ export default {
       this.model.isCBA = true;
     },
 
+      getHPercentage(){
+      if (document.getElementById('subjectLevelHigher').checked) {
+        var grade = document.getElementById('percentage').value;
+      } 
+        //alert("Your percentage is : " + grade );
+        switch (true) {
+        case (grade >= 90 && grade <= 100):
+          this.model.grade = "H1";
+          break;
+        case (grade >= 80 && grade <= 89):
+          this.model.grade = "H2";
+          break;
+        case (grade >= 70 && grade <= 79):
+          this.model.grade = "H3";
+          break;
+        case (grade >= 60 && grade <= 69):
+          this.model.grade = "H4";
+          break;
+        case (grade >= 50 && grade <= 59):
+          this.model.grade = "H5";
+          break;
+        case (grade >= 40 && grade <= 49):
+          this.model.grade = "H6";
+          break;
+        case (grade >= 30 && grade <= 39):
+          this.model.grade = "H7";
+          break;
+        case (grade >= 0 && grade <= 29):
+          this.model.grade = "H8";
+          break;
+        default:
+          this.model.grade = "";
+          break;
+        }       
+      },
+
+      getOPercentage(){
+      if (document.getElementById('subjectLevelOrdinary').checked) {
+        var grade = document.getElementById('percentage').value;
+      } 
+        //alert("Your percentage is : " + grade );
+        switch (true) {
+        case (grade >= 90 && grade <= 100):
+          this.model.grade = "O1";
+          break;
+        case (grade >= 80 && grade <= 89):
+          this.model.grade = "O2";
+          break;
+        case (grade >= 70 && grade <= 79):
+          this.model.grade = "O3";
+          break;
+        case (grade >= 60 && grade <= 69):
+          this.model.grade = "O4";
+          break;
+        case (grade >= 50 && grade <= 59):
+          this.model.grade = "O5";
+          break;
+        case (grade >= 40 && grade <= 49):
+          this.model.grade = "O6";
+          break;
+        case (grade >= 30 && grade <= 39):
+          this.model.grade = "O7";
+          break;
+        case (grade >= 0 && grade <= 29):
+          this.model.grade = "O8";
+          break;
+        default:
+          this.model.grade = "";
+          break;
+      }       
+      },
+
+      getFPercentage(){
+      if (document.getElementById('subjectLevelFoundation').checked) {
+        var grade = document.getElementById('percentage').value;
+      } 
+        //alert("Your percentage is : " + grade );
+        switch (true) {
+        case (grade >= 90 && grade <= 100):
+          this.model.grade = "F1";
+          break;
+        case (grade >= 80 && grade <= 89):
+          this.model.grade = "F2";
+          break;
+        case (grade >= 70 && grade <= 79):
+          this.model.grade = "F3";
+          break;
+        case (grade >= 60 && grade <= 69):
+          this.model.grade = "F4";
+          break;
+        case (grade >= 50 && grade <= 59):
+          this.model.grade = "F5";
+          break;
+        case (grade >= 40 && grade <= 49):
+          this.model.grade = "F6";
+          break;
+        case (grade >= 30 && grade <= 39):
+          this.model.grade = "F7";
+          break;
+        case (grade >= 0 && grade <= 29):
+          this.model.grade = "F8";
+          break;
+        default:
+          this.model.grade = "";
+          break;
+      }
+      },
 
     addAssessment() {
       if (!this.validate()) {
