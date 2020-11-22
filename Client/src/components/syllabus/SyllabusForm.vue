@@ -46,7 +46,7 @@
         <div class="form-group"> <!-- main buttons to run add, update, reset -->
             <button class="btn btn-primary" v-on:click="addContent" :disabled="!model.isValid">Add</button>
             <button class="btn btn-primary" v-on:click="updateContent" :disabled="!model.isValid">Update</button>
-            <button class="btn btn-secondary" v-on:click="resetContent">Reset</button>
+            <button class="btn btn-danger" v-on:click="resetContent">Reset</button>
         </div>
     </form>
 </div>

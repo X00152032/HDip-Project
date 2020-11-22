@@ -23,11 +23,20 @@
       />
     </div>
     <div class="form-group">
+      <label for="YearGroupId">Year </label>
+      <input
+        class="form-control"
+        placeholder="e.g. 1"
+        id="yearGroupId"
+        v-model="model.yearGroupId"
+      />
+    </div>
+    <div class="form-group">
       <label for="email">Email *</label>
       <input
         type="email"
         class="form-control"
-        placeholder="Email"
+        placeholder="firstname.lastname@school.ie"
         id="email"
         v-model="model.email"
         :class="{ error : errorEmail }"
@@ -47,17 +56,17 @@
       />
     </div>
     <div class="form-group" id="checkboxes">
-      <input type="checkbox" id="role" v-model="model.isAdmin" />
+      <input type="checkbox" id="adminRole" name="role" v-model="model.isAdmin" @change="getAdminRole()" />
       <label for="role">Admin</label>
-      <input type="checkbox" id="role" v-model="model.isStaff" />
+      <input type="checkbox" id="staffRole" name="role" v-model="model.isStaff" @change="getStaffRole()" />
       <label for="role">Staff</label>
-      <input type="checkbox" id="role" v-model="model.isStudent" />
+      <input type="checkbox" id="studentRole" name="role" v-model="model.isStudent" @change="getStudentRole()" />
       <label for="role">Student</label>
     </div>
     <div class="form-group">
       <button class="btn btn-primary" v-on:click="addUser" :disabled="!model.isValid">Add</button>
       <button class="btn btn-primary" v-on:click="updateUser" :disabled="!model.isValid">Update</button>
-      <button class="btn btn-secondary" v-on:click="resetUser">Reset</button>
+      <button class="btn btn-danger" v-on:click="resetUser">Reset</button>
     </div>
   </form>
 </template>
@@ -124,11 +133,11 @@ export default {
         return; // Not valid no more processing
       }
       if (this.model.isAdmin) {
-        this.model.role = "admin";
+        this.model.role = "Admin";
       } else if (this.model.isStaff) {
-        this.model.role = "staff";
+        this.model.role = "Staff";
       } else if (this.model.isStudent) {
-        this.model.role = "student";
+        this.model.role = "Student";
       } else {
         alert('Please select a user type')
         return;
@@ -136,6 +145,7 @@ export default {
       let newUser = {
         firstName: this.model.firstName,
         lastName: this.model.lastName,
+        yearGroupId: this.model.yearGroupId,
         email: this.model.email,
         password: this.model.password,
         role: this.model.role,
@@ -153,11 +163,11 @@ export default {
         return; // Not valid no more processing
       }
       if (this.model.isAdmin) {
-        this.model.role = "admin";
+        this.model.role = "Admin";
       } else if (this.model.isStaff) {
-        this.model.role = "staff";
+        this.model.role = "Staff";
       } else if (this.model.isStudent) {
-        this.model.role = "student";
+        this.model.role = "Student";
       } else {
         alert('Please select a user type')
         return;      }
@@ -165,6 +175,7 @@ export default {
         id: this.model.id,
         firstName: this.model.firstName,
         lastName: this.model.lastName,
+        yearGroupId: this.model.yearGroupId,
         email: this.model.email,
         password: this.model.password,
         role: this.model.role,
@@ -178,6 +189,7 @@ export default {
       this.model.id = null;
       this.model.firstName = null;
       this.model.lastName = null;
+      this.model.yearGroupId = null;
       this.model.email = null;
       this.model.password = null;
       this.model.role = null;
@@ -185,7 +197,26 @@ export default {
       this.model.isStaff = false;
       this.model.isStudent = false;
     },
-  },
+
+    getAdminRole(){
+    this.model.isAdmin = true;
+    this.model.isStaff = false;
+    this.model.isStudent = false;
+    },
+
+    getStaffRole(){
+    this.model.isAdmin = false;
+    this.model.isStaff = true;
+    this.model.isStudent = false;
+    },  
+
+    getStudentRole(){
+    this.model.isAdmin = false;
+    this.model.isStaff = false;
+    this.model.isStudent = true;   
+    }
+  }
+  
 };
 </script>
 

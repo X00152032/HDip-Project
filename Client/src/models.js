@@ -38,6 +38,7 @@ let models = {
         id: null,
         firstName: null,
         lastName: null,
+        yearGroupId: null,
         email: null,
         password: null,
         role: null,

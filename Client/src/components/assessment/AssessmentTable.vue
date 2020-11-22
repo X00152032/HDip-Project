@@ -19,6 +19,9 @@
             <th>
                 &nbsp;
             </th>
+            <th>
+                &nbsp;
+            </th>
         </tr>
     </thead>
     <thead class="table-danger">
@@ -74,6 +77,9 @@
             <td>
                 <button class="btn btn-success" role="button" aria-pressed="true" v-on:click="calcAverage">Average</button>
             </td>
+            <td>
+                <button class="btn btn-warning" role="button" aria-pressed="true" v-on:click="calcPoints()">Points</button>
+            </td>
         </tr>
     </thead>
     <tbody> <!--rows of values in the table -->
@@ -86,6 +92,9 @@
             <td>{{ row.percentage }}</td>
             <td>{{ row.grade }}</td>
             <td>{{ row.descriptor }}</td>
+            <th>
+                &nbsp;
+            </th>
             <th>
                 &nbsp;
             </th>
@@ -258,9 +267,105 @@ export default {
         if (isNaN(rounded))         //code to catch NaN and display a user-friendly alert.
             alert("Please see the CBA descriptor column for CBA results.");
         else
-            alert("Student's average test score is: " + rounded +"%.")
+            alert("This student's average test score is: " + rounded +"%.")
 },
 
+        //function to calculate average from dynamic table
+        //gets contents of percentage column and checks each row to finally calculate and round average
+        
+        calcPoints() {    
+        var tbl = document.getElementById('myTable');
+        const arr= [];
+        var score = 0;
+
+            for(var i= 2; i<tbl.rows.length; i++){
+                arr.push(tbl.rows[i].cells[6].innerHTML); }
+                console.log(arr)
+                arr.forEach(element => (element));
+            
+                for (i = 0; i < arr.length; i++) {
+                if (arr[i] =="H1") {
+                    score = score + 100;
+        }       else if (arr[i] == "H2") {
+                    score = score + 88;
+        }       else if (arr[i] == "H3") {
+                    score = score + 77;
+        }       else if (arr[i] == "H4") {
+                    score = score + 66;
+        }       else if (arr[i] == "H5") {
+                    score = score + 56;
+        }       else if (arr[i] == "H6") {
+                    score = score + 46;
+        }       else if (arr[i] == "H7") {
+                    score = score + 37;
+        }       else if (arr[i] == "H8") {
+                    score = score + 0;
+        }       else if (arr[i] =="O1") {
+                    score = score + 56;
+        }       else if (arr[i] == "O2") {
+                    score = score + 46;
+        }       else if (arr[i] == "O3") {
+                    score = score + 37;
+        }       else if (arr[i] == "O4") {
+                    score = score + 28;
+        }       else if (arr[i] == "O5") {
+                    score = score + 12;
+        }       else if (arr[i] == "O6") {
+                    score = score + 0;
+        }       else if (arr[i] == "O7") {
+                    score = score + 0;
+        }       else if (arr[i] == "O8") {
+                    score = score + 0;
+        }       else if (arr[i] == "F1") {
+                    score = score + 20;
+        }       else if (arr[i] == "F2") {
+                    score = score + 12;
+        }}
+
+//look up yearGroup and see if it's Senior Cycle or not. Give appropriate message.
+    for(i= 2; i<tbl.rows.length; i++){
+            var year = Number(tbl.rows[i].cells[2].innerHTML); }
+        console.log(year)
+    if (year <= 4)
+        alert("Sorry, no points available.\nThis student is in Year " + year + ", and not in Senior Cycle.")
+    
+    if (year >= 4.5){  //look up Maths and see if it's honours, then add 25 points if it is.
+        for(i= 2; i<tbl.rows.length; i++){
+            var subject = (tbl.rows[i].cells[1].innerHTML); }
+            if (subject == "Maths")
+                for(i= 2; i<tbl.rows.length; i++){
+                var mathsLevel = (tbl.rows[i].cells[3].innerHTML); }
+                    if (mathsLevel == "Higher"){
+                        score = score + 25;
+                         alert("This student has scored " + score + " points at Senior Cycle.\n25 bonus points for Higher-level Maths have been included." )}
+                    else
+                         alert("This student has scored " + score + " points at Senior Cycle." )
+        }},
+
+        //loop through the array of LetterGrade and add points together
+   //     gradeToPoints(arr) {
+  //      var score = 0;
+  //  for (var i = 0; i < arr.length; i++) {
+  //      if (arr[i] =="H1") {
+  //          score = score + 100;
+  //      } else if (arr[i] == "H2") {
+  //          score = score + 90;
+  //      } else if (arr[i] == "H3") {
+  //          score = score + 80;
+  //      } else if (arr[i] == "H4") {
+  //          score = score + 70;
+  //      } else if (arr[i] == "H5") {
+  //          score = score + 60;
+  //      } else if (arr[i] == "H6") {
+  //          score = score + 50;
+  //      } else if (arr[i] == "H7") {
+  //          score = score + 40;
+  //      } else if (arr[i] == "H8") {
+  //          score = score + 30;
+  //  }}
+  //  alert("Students score is ", + score + " points." )
+  //  return score;
+//},
 
         deleteAssessment(event, row) {
         // stop showing content if deleted

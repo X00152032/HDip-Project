@@ -14,6 +14,10 @@
                 <font-awesome-icon v-show="sortItem.column === 'lastName'" v-if="sortItem.direction === 'asc'" icon="sort-up" />
                 <font-awesome-icon v-show="sortItem.column === 'lastName'" v-else-if="sortItem.direction === 'desc'" icon="sort-down" />
             </th>
+            <th class="sort" v-on:click="sortClick('yearGroupId')">Year
+                <font-awesome-icon v-show="sortItem.column === 'yearGroupId'" v-if="sortItem.direction === 'asc'" icon="sort-up" />
+                <font-awesome-icon v-show="sortItem.column === 'yearGroupId'" v-else-if="sortItem.direction === 'desc'" icon="sort-down" />
+            </th>
             <th class="sort" v-on:click="sortClick('email')">Email
                 <font-awesome-icon v-show="sortItem.column === 'email'" v-if="sortItem.direction === 'asc'" icon="sort-up" />
                 <font-awesome-icon v-show="sortItem.column === 'email'" v-else-if="sortItem.direction === 'desc'" icon="sort-down" />
@@ -25,6 +29,9 @@
             <th>
                 &nbsp;
             </th>
+            <th>
+                &nbsp;
+            </th>
         </tr>
     </thead>
         <thead>
@@ -32,10 +39,14 @@
             <th><input class="form-control search-small" placeholder="Id" v-model="search.id.criteria"></th>
             <th><input class="form-control" placeholder="First Name" v-model="search.firstName.criteria"></th>
             <th><input class="form-control" placeholder="Last Name" v-model="search.lastName.criteria"></th>
+            <th><input class="form-control" placeholder="Year" v-model="search.yearGroupId.criteria"></th>
             <th><input class="form-control search-small" placeholder="Email" v-model="search.email.criteria"></th>
             <th><input class="form-control search-small" placeholder="Role" v-model="search.role.criteria"></th>
             <th>
-                <button class="btn btn-primary" v-on:click="getUsers">Find</button>
+                <button class="btn btn-primary" v-on:click="getUsers">Search</button>
+            </th>
+            <th>
+                <button class="btn btn-danger" v-on:click="resetSearch">Reset</button>
             </th>
         </tr>
     </thead>
@@ -44,8 +55,12 @@
             <td>{{ row.id }}</td>
             <td>{{ row.firstName }}</td>
             <td>{{ row.lastName }}</td>
+            <td>{{ row.yearGroupId }}</td>
             <td>{{ row.email }}</td>
             <td>{{ row.role }}</td>
+            <th>
+                &nbsp;
+            </th>
             <td class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteUser($event, row)">
                     <font-awesome-icon icon="minus-circle" />
@@ -76,6 +91,11 @@ export default {
                 },
                 lastName: {
                     column: 'lastName',
+                    operator: '=',
+                    criteria: null
+                },
+                yearGroupId: {
+                    column: 'yearGroupId',
                     operator: '=',
                     criteria: null
                 },
@@ -125,6 +145,16 @@ export default {
             if (confirm(`Are you sure you want to do delete the user "${row.firstName} ${row.lastName} (${row.email})"?`)) {
                 this.$parent.deleteUser(row.id);
             }
+        },
+              //added after request from a teacher - beta tester in school - resets table data and search boxes 
+        resetSearch() {
+        this.search.id.criteria = "";
+        this.search.firstName.criteria = "";
+        this.search.lastName.criteria = "";
+        this.search.yearGroupId.criteria = "";
+        this.search.email.criteria = "";
+        this.search.role.criteria = "";
+        this.$parent.getUsers();
         },
     },
 }

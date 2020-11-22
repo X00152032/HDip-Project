@@ -143,7 +143,7 @@
             <button class="btn btn-primary" v-on:click="updateAssessment" :disabled="!model.isValid">Update</button>
             <button class="btn btn-danger" v-on:click="resetAssessment">Reset</button>
         </div>
-        <div> <h4><b>Choose the criteria required in Search, and then press Average</b></h4> </div>
+        <div> <h4><b>Choose the criteria required in Search, and then press Average and/or Points.</b></h4> </div>
     </form>
 </div>
 </template>

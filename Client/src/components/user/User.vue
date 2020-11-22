@@ -103,14 +103,15 @@ export default {
                     this.userModel.id = response.data.id;
                     this.userModel.firstName = response.data.firstName;
                     this.userModel.lastName = response.data.lastName;
+                    this.userModel.yearGroupId = response.data.yearGroupId;
                     this.userModel.email = response.data.email;
                     this.userModel.password = response.data.password;
                     this.userModel.role = response.data.role;
-                        if (this.userModel.role === 'admin') {
+                        if (this.userModel.role === 'Admin') {
                         this.userModel.isAdmin = true;
-                        }else if (this.userModel.role === 'staff') {
+                        }else if (this.userModel.role === 'Staff') {
                         this.userModel.isStaff = true;
-                        }else if (this.userModel.role === 'student') {
+                        }else if (this.userModel.role === 'Student') {
                         this.userModel.isStudent = true;
                     }
                     console.log('promise has resolved', response.data);
@@ -171,13 +172,13 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.users = response.data.map((user) => {
-                        if (user.role === 'admin') {
+                        if (user.role === 'Admin') {
                             user.isAdmin = true;
 
-                        }else if (user.role === 'staff') {
+                        }else if (user.role === 'Staff') {
                             user.isStaff = true;
                         
-                        }else if (user.role === 'student') {
+                        }else if (user.role === 'Student') {
                             user.isStudent = true;}
                         return user;
                     });

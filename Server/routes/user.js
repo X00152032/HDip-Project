@@ -21,9 +21,9 @@ const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.AppUser WHERE id = @id for json path
 const SQL_SELECT_BY_EMAIL = 'SELECT * FROM dbo.AppUser WHERE email = @email;';
 
 // Second statement (Select...) returns inserted record identified by id = SCOPE_IDENTITY()
-const SQL_INSERT = 'INSERT INTO dbo.AppUser (firstName, lastName, email, password, role) VALUES (@firstName, @lastName, @email, @password, @role); SELECT * from dbo.AppUser WHERE id = SCOPE_IDENTITY();';
+const SQL_INSERT = 'INSERT INTO dbo.AppUser (firstName, lastName, yearGroupId, email, password, role) VALUES (@firstName, @lastName, @yearGroupId, @email, @password, @role); SELECT * from dbo.AppUser WHERE id = SCOPE_IDENTITY();';
 
-const SQL_UPDATE = 'UPDATE dbo.AppUser SET firstName = @firstName, lastName = @lastName, email = @email, password = @password, role = @role WHERE id = @id; SELECT * FROM dbo.AppUser WHERE id = @id;';
+const SQL_UPDATE = 'UPDATE dbo.AppUser SET firstName = @firstName, lastName = @lastName, yearGroupId = @yearGroupId, email = @email, password = @password, role = @role WHERE id = @id; SELECT * FROM dbo.AppUser WHERE id = @id;';
 
 const SQL_DELETE = 'DELETE FROM dbo.AppUser WHERE id = @id';
 
@@ -182,6 +182,7 @@ router.post('/', async (req, res) => {
             // set parameter(s) in query
             .input('firstName', sql.NVarChar, validator.escape(req.body.firstName))
             .input('lastName', sql.NVarChar, validator.escape(req.body.lastName))
+            .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('email', sql.NVarChar, validator.escape(req.body.email))
             .input('password', sql.NVarChar, validator.escape(req.body.password))
             .input('role', sql.NVarChar, (req.body.role))
@@ -222,6 +223,7 @@ router.put('/', async (req, res) => {
             // set parameter(s) in query
             .input('firstName', sql.NVarChar, validator.escape(req.body.firstName))
             .input('lastName', sql.NVarChar, validator.escape(req.body.lastName))
+            .input('yearGroupId', sql.Int, req.body.yearGroupId)
             .input('email', sql.NVarChar, validator.escape(req.body.email))
             .input('password', sql.NVarChar, validator.escape(req.body.password))
             .input('role', sql.NVarChar, (req.body.role))

@@ -41,10 +41,10 @@
                 </select>
             </th>
             <th>
-                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getContents">Find</button>
+                <button class="btn btn-primary" role="button" aria-pressed="true" v-on:click="getContents">Search</button>
             </th>
             <th>
-                &nbsp;
+                <button class="btn btn-danger" role="button" aria-pressed="true" v-on:click="resetSearch">Reset</button>
             </th>
             <th>
                 &nbsp;
@@ -57,11 +57,17 @@
             <td>{{ row.description }}</td>
             <td>{{ row.text }}</td>
             <td>{{ getSubjectName(row.subjectId) }}</td>
+            <th>
+                &nbsp;
+            </th>
             <td class="delete-icon">
                 <a href="javascript:;" v-on:click="deleteContent($event, row)"> <!--add delete pic needed too? -->
                     <font-awesome-icon icon="minus-circle" />
                 </a>
             </td>
+            <th>
+                &nbsp;
+            </th>
         </tr>
     </tbody>
 </table>
@@ -129,6 +135,14 @@ export default {
                 this.$parent.deleteContent(row.id);
             }
         },
+              //added after request from a teacher - beta tester in school - resets table data and search boxes 
+        resetSearch() {
+        this.search.contentName.criteria = "";
+        this.search.description.criteria = "";
+        this.search.text.criteria = "";
+        this.search.subject.criteria = "";
+        this.$parent.getData();
+        }
     },
 }
 </script>
