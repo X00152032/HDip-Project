@@ -276,6 +276,7 @@ export default {
         calcPoints() {    
         var tbl = document.getElementById('myTable');
         const arr= [];
+        const pointsArr= [];
         var score = 0;
 
             for(var i= 2; i<tbl.rows.length; i++){
@@ -285,47 +286,71 @@ export default {
             
                 for (i = 0; i < arr.length; i++) {
                 if (arr[i] =="H1") {
-                    score = score + 100;
+                    pointsArr.push(100);
+                   // score = score + 100;
         }       else if (arr[i] == "H2") {
-                    score = score + 88;
+                    pointsArr.push(88);
+                   // score = score + 88;
         }       else if (arr[i] == "H3") {
-                    score = score + 77;
+                    pointsArr.push(77);
+                   // score = score + 77;
         }       else if (arr[i] == "H4") {
-                    score = score + 66;
+                    pointsArr.push(66);
+                  //  score = score + 66;
         }       else if (arr[i] == "H5") {
-                    score = score + 56;
+                     pointsArr.push(56);
+                   // score = score + 56;
         }       else if (arr[i] == "H6") {
-                    score = score + 46;
+                    pointsArr.push(46);
+                  //  score = score + 46;
         }       else if (arr[i] == "H7") {
-                    score = score + 37;
+                    pointsArr.push(37);
+                  //  score = score + 37;
         }       else if (arr[i] == "H8") {
-                    score = score + 0;
+                    pointsArr.push(0);
+                  //  score = score + 0;
         }       else if (arr[i] =="O1") {
-                    score = score + 56;
+                    pointsArr.push(56);
+               //     score = score + 56;
         }       else if (arr[i] == "O2") {
-                    score = score + 46;
+                    pointsArr.push(46);
+                  //  score = score + 46;
         }       else if (arr[i] == "O3") {
-                    score = score + 37;
+                    pointsArr.push(37);
+                 //   score = score + 37;
         }       else if (arr[i] == "O4") {
-                    score = score + 28;
+                    pointsArr.push(28);
+                 //   score = score + 28;
         }       else if (arr[i] == "O5") {
-                    score = score + 12;
+                    pointsArr.push(12);
+                  //  score = score + 12;
         }       else if (arr[i] == "O6") {
-                    score = score + 0;
+                    pointsArr.push(0);
+                 //   score = score + 0;
         }       else if (arr[i] == "O7") {
-                    score = score + 0;
+                    pointsArr.push(0);
+                //    score = score + 0;
         }       else if (arr[i] == "O8") {
-                    score = score + 0;
+                    pointsArr.push(0);                   
+                 //  score = score + 0;
         }       else if (arr[i] == "F1") {
-                    score = score + 20;
+                    pointsArr.push(20);
+                    //   score = score + 20;
         }       else if (arr[i] == "F2") {
-                    score = score + 12;
+                    pointsArr.push(12);
+               //     score = score + 12;
         }}
+             pointsArr.sort(function(a, b){return b-a});
+  //           console.log(pointsArr)
+            pointsArr.length = 6;
+//            console.log(pointsArr)
+// sort the points array to order low to high and then remove some to leave top 6 points
+score = pointsArr.reduce((a, b) => a + b, 0) //add up array and set score to array
 
 //look up yearGroup and see if it's Senior Cycle or not. Give appropriate message.
     for(i= 2; i<tbl.rows.length; i++){
             var year = Number(tbl.rows[i].cells[2].innerHTML); }
-        console.log(year)
+   //     console.log(year)
     if (year <= 4)
         alert("Sorry, no points available.\nThis student is in Year " + year + ", and not in Senior Cycle.")
     
@@ -342,30 +367,6 @@ export default {
                          alert("This student has scored " + score + " points at Senior Cycle." )
         }},
 
-        //loop through the array of LetterGrade and add points together
-   //     gradeToPoints(arr) {
-  //      var score = 0;
-  //  for (var i = 0; i < arr.length; i++) {
-  //      if (arr[i] =="H1") {
-  //          score = score + 100;
-  //      } else if (arr[i] == "H2") {
-  //          score = score + 90;
-  //      } else if (arr[i] == "H3") {
-  //          score = score + 80;
-  //      } else if (arr[i] == "H4") {
-  //          score = score + 70;
-  //      } else if (arr[i] == "H5") {
-  //          score = score + 60;
-  //      } else if (arr[i] == "H6") {
-  //          score = score + 50;
-  //      } else if (arr[i] == "H7") {
-  //          score = score + 40;
-  //      } else if (arr[i] == "H8") {
-  //          score = score + 30;
-  //  }}
-  //  alert("Students score is ", + score + " points." )
-  //  return score;
-//},
 
         deleteAssessment(event, row) {
         // stop showing content if deleted

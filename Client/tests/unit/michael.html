@@ -1,0 +1,104 @@
+<!-- All Tickets Page -->
+<template>
+    <div class="row main">
+    <div class="col-sm-12 col-md-12 whiteBackground">
+    <!-- Unauthorized message displayed if user role does not meet requirements -->
+    <Unauthorized v-if="notAuthorized"></Unauthorized>
+    <div v-else class="whiteBackground">
+    <h1>All Tickets</h1>
+    <hr />
+    <p>Use the search box to find a student</p>
+    <p>Click on a ticket for more information</p>
+    <hr />
+    <!-- Datatable component. Required model, headers and role passed as props -->
+    <DataTable :propData="tickets" :headers="headers" role="Staff"></DataTable>
+    <br>
+    <br>
+    </div>
+    </div>
+    </div>
+    </template>
+    <!-- Scripting -->
+    <script>
+    "use strict";
+    //Import dependiencies
+    import axios from "axios";
+    import serverDetails from "../constants";
+    // Component imports
+    import DataTable from "@/components/DataTable.vue";
+    import Unauthorized from "@/components/login/Unauthorized.vue";
+    export default {
+    name: "AllTicketsPage",
+    //Add components
+    components: {
+    Unauthorized,
+    DataTable,
+    },
+    //Add data
+    data() {
+    return {
+    //For the tickets list from serve
+    tickets: [],
+    //Headers for Datatable
+    headers: [
+    { text: "Ticket #", value: "ticketID" },
+    { text: "Name", value: "name" },
+    { text: "Year Group", value: "year" },
+    { text: "Description of Problem", value: "description" },
+    { text: "Time Ticket Raised", value: "submitTime" },
+    { text: "Resolved?", value: "closed" },
+    ],
+    //Boolean for if user not authorized
+    notAuthorized: null,
+    };
+    },
+    //When the component is first created, call method
+    created() {
+    this.getTickets();
+    },
+    //Methods
+    methods: {
+    getTickets() {
+    //Retrives idToken from local storage for sending to the server
+    let idToken = localStorage.getItem("id_token");
+    this.error = null;
+    //Sets parameters from external file
+    let url = serverDetails.url;
+    let params = { ...serverDetails.params };
+    //GET request for all tickets
+    axios
+    .get(`${url}tickets/?token=${idToken}`, {
+    params,
+    })
+    //On success save response in tickets variable and authorize user to see data
+    .then((response) => {
+    this.tickets = response.data;
+    this.notAuthorized = false;
+    console.log("Tickets found: ", response.data);
+    })
+    //Catch and display any errors
+    .catch((error) => {
+    //If error "Forbidden" (403) is returned to the server display unauthorized error message...
+    if (error.response.status == 403) {
+    this.notAuthorized = true;
+    }
+    //...otherwise log error
+    this.error = error.toString();
+    console.log("Error retriving all tickets: " + error);
+    });
+    },
+    },
+    };
+    </script>
+    <!-- Styling -->
+    <style scoped>
+    h1 {
+    padding: 1%;
+    color: black;
+    text-align: center;
+    }
+    p {
+    color: black;
+    text-align: center;
+    }
+    </style>

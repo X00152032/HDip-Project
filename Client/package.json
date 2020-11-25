@@ -2,12 +2,14 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest --collectCoverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -39,7 +41,22 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
+    "jest": "^26.6.3",
+    "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.12"
+  },
+
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      ".*\\.(vue)$": "vue-jest"
+    }
   },
   "eslintConfig": {
     "root": true,
@@ -58,7 +75,8 @@
       {
         "files": [
           "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+          "**/tests/unit/**/*.spec.{j,t}s?(x)",
+          "**.test.js"
         ],
         "env": {
           "jest": true
@@ -69,8 +87,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "jest": {
-    "preset": "@vue/cli-plugin-unit-jest"
-  }
+  ]
 }
