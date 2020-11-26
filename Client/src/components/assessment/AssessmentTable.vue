@@ -270,97 +270,97 @@ export default {
             alert("This student's average test score is: " + rounded +"%.")
 },
 
-        //function to calculate average from dynamic table
-        //gets contents of percentage column and checks each row to finally calculate and round average
+        //function to calculate points from dynamic table
+        //gets contents of subjects column, level and grade and makes arrays
         
         calcPoints() {    
         var tbl = document.getElementById('myTable');
         const arr= [];
         const pointsArr= [];
+        const subjectsArr =[];
+        const subjectLevelArr= [];
         var score = 0;
 
+            // array to get Subject Name
+            for(var m= 2; m<tbl.rows.length; m++){
+                subjectsArr.push(tbl.rows[m].cells[1].innerHTML); }
+                // subjectsArr.forEach(element => (element))
+             //   console.log(subjectsArr)
+                //find index of "Maths" and then use to find Higher or Ord in subject array, e.g. 7
+                const mathsIndex = (element) => element == 'Maths';        
+
+            // array to get Higher or Ordinary Level
+            for(var k= 2; k<tbl.rows.length; k++){
+                subjectLevelArr.push(tbl.rows[k].cells[3].innerHTML); }
+                subjectLevelArr.forEach(element => (element));
+            // get value of level at index ('Maths') directly using results of mathsIndex
+            var valueAtIndex = subjectLevelArr[subjectsArr.findIndex(mathsIndex)];
+           // console.log(valueAtIndex)
+
+
+            // array to get grade (H1, etc)
             for(var i= 2; i<tbl.rows.length; i++){
                 arr.push(tbl.rows[i].cells[6].innerHTML); }
-                console.log(arr)
+            //    console.log(arr)
                 arr.forEach(element => (element));
-            
+               
+            //create array (called pointsArr) to hold points for each grade in the grade array (arr)
                 for (i = 0; i < arr.length; i++) {
                 if (arr[i] =="H1") {
                     pointsArr.push(100);
-                   // score = score + 100;
         }       else if (arr[i] == "H2") {
                     pointsArr.push(88);
-                   // score = score + 88;
         }       else if (arr[i] == "H3") {
                     pointsArr.push(77);
-                   // score = score + 77;
         }       else if (arr[i] == "H4") {
                     pointsArr.push(66);
-                  //  score = score + 66;
         }       else if (arr[i] == "H5") {
                      pointsArr.push(56);
-                   // score = score + 56;
         }       else if (arr[i] == "H6") {
                     pointsArr.push(46);
-                  //  score = score + 46;
         }       else if (arr[i] == "H7") {
                     pointsArr.push(37);
-                  //  score = score + 37;
         }       else if (arr[i] == "H8") {
                     pointsArr.push(0);
-                  //  score = score + 0;
         }       else if (arr[i] =="O1") {
                     pointsArr.push(56);
-               //     score = score + 56;
         }       else if (arr[i] == "O2") {
                     pointsArr.push(46);
-                  //  score = score + 46;
         }       else if (arr[i] == "O3") {
                     pointsArr.push(37);
-                 //   score = score + 37;
         }       else if (arr[i] == "O4") {
                     pointsArr.push(28);
-                 //   score = score + 28;
         }       else if (arr[i] == "O5") {
                     pointsArr.push(12);
-                  //  score = score + 12;
         }       else if (arr[i] == "O6") {
                     pointsArr.push(0);
-                 //   score = score + 0;
         }       else if (arr[i] == "O7") {
                     pointsArr.push(0);
-                //    score = score + 0;
         }       else if (arr[i] == "O8") {
                     pointsArr.push(0);                   
-                 //  score = score + 0;
         }       else if (arr[i] == "F1") {
                     pointsArr.push(20);
-                    //   score = score + 20;
         }       else if (arr[i] == "F2") {
                     pointsArr.push(12);
-               //     score = score + 12;
         }}
+         
+        // sort the points array to order low to high and then remove some to leave top 6 points
              pointsArr.sort(function(a, b){return b-a});
   //           console.log(pointsArr)
             pointsArr.length = 6;
 //            console.log(pointsArr)
-// sort the points array to order low to high and then remove some to leave top 6 points
 score = pointsArr.reduce((a, b) => a + b, 0) //add up array and set score to array
 
 //look up yearGroup and see if it's Senior Cycle or not. Give appropriate message.
     for(i= 2; i<tbl.rows.length; i++){
             var year = Number(tbl.rows[i].cells[2].innerHTML); }
    //     console.log(year)
-    if (year <= 4)
+    if (year <= 4) // 4th year or less get no points
         alert("Sorry, no points available.\nThis student is in Year " + year + ", and not in Senior Cycle.")
     
     if (year >= 4.5){  //look up Maths and see if it's honours, then add 25 points if it is.
-        for(i= 2; i<tbl.rows.length; i++){
-            var subject = (tbl.rows[i].cells[1].innerHTML); }
-            if (subject == "Maths")
-                for(i= 2; i<tbl.rows.length; i++){
-                var mathsLevel = (tbl.rows[i].cells[3].innerHTML); }
-                    if (mathsLevel == "Higher"){
+      // take valueatIndex from above (Higher, Ordinary or foundation) - if Higher then add 25.
+                    if (valueAtIndex == "Higher"){
                         score = score + 25;
                          alert("This student has scored " + score + " points at Senior Cycle.\n25 bonus points for Higher-level Maths have been included." )}
                     else
